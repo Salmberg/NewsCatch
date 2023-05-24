@@ -16,20 +16,22 @@ struct Article : Codable, Identifiable, Hashable{
     var heading: String
     var content: String
     //var picture: UIImage? // Temporarily commented out to conform to "codable"
-    
+    var category: Category?
+        
     func hash(into hasher: inout Hasher) {
-           hasher.combine(heading)
-       }
-    
-    
+        hasher.combine(heading)
+    }
+        
     private var unformattedDate = Date()
-    //private let dateFormatter = DateFormatter() // Temporarily commented out to conform to "codable"
-    
-    init(heading: String, content: String, picture: UIImage? = nil) {
+        
+        
+    //init with category
+    init(heading: String, content: String, category: Category?, picture: UIImage? = nil) {
         self.heading = heading
         self.content = content
+        self.category = category ?? Category.unspecified
         //self.picture = picture // Temporarily commented out to conform to "codable"
-        let dateFormatter = DateFormatter() // Temporarily moved here to conform to "codable"
+        let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
     }
     
