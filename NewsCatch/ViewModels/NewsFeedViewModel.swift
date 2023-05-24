@@ -13,6 +13,7 @@ class NewsFeedViewModel : ObservableObject {
     let db = Firestore.firestore()
     @Published var heading = ""
     @Published var content = ""
+    @Published var category = ""
     @Published var image = UIImage?.self
     @Published var articles: [Article] = []  //En tom lista som håller artiklarna
     

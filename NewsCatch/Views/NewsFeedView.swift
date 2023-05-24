@@ -1,8 +1,8 @@
 //
 //  NewsFeedView.swift
-//  NewsCatch
+//  NewsApp
 //
-//  Created by David Salmberg on 2023-05-22.
+//  Created by David Salmberg on 2023-05-15.
 //
 
 import SwiftUI
@@ -14,8 +14,9 @@ struct NewsFeedView: View {
     @State private var menuOffset: CGFloat = -UIScreen.main.bounds.width
     @State private var latestNewsSelected = false
     @State private var allNewsSelected = false
-    @State private var selectedArticle: Article? = nil
-
+    @State var amusementView = false
+    @State var sportsView = false
+    @State var foreignView = false
     
     var body: some View {
         NavigationView {
@@ -75,45 +76,31 @@ struct NewsFeedView: View {
                     }
                     .background(Color.gray)
                     
-                    NavigationView {
-                        VStack {
-                            ScrollView {
-                                VStack(spacing: 0) {
-                                    ForEach(viewModel.articles, id: \.heading) { article in
-                                        NavigationLink(
-                                            destination: ArticleView(article: article),
-                                            tag: article,
-                                            selection: $selectedArticle
-                                        ) {
-                                            HStack {
-                                                Text(article.heading)
-                                                    .font(.title)
-                                                    .bold()
-                                                    .padding(.leading, 10)
-                                                
-                                                Spacer()
-                                                
-                                                Image("Image")
-                                                    .resizable()
-                                                    .frame(width: 50, height: 50)
-                                                    .padding(10)
-                                            }
-                                        }
-                                        .buttonStyle(PlainButtonStyle())
+                    VStack {
+                        ScrollView {
+                            VStack {
+                                ForEach(viewModel.articles, id: \.heading) { article in
+                                    HStack {
+                                        Text(article.heading)
+                                            .font(.title)
+                                            .bold()
+                                            .padding(.leading, 10)
                                         
-                                        Divider()
-                                        .padding(.horizontal, 10)
+                                        Spacer()
+                                        
+                                        Image("Image")
+                                            .resizable()
+                                            .frame(width: 50, height: 50)
+                                            .padding(10)
                                     }
                                 }
                             }
-                            .frame(maxHeight: .infinity)
-                            
-                            Spacer()
                         }
-                        .navigationBarTitle("", displayMode: .inline)
+                        .frame(maxHeight: .infinity) // Occupy the remaining available space
+                        
+                        Spacer() // Add a spacer to push the content above the toolbar
                     }
                 }
-
                 
                 // Menu view
                 MenuView(isMenuActive: $isMenuActive)
@@ -166,81 +153,84 @@ struct MenuView: View {
     @State private var isProfileActive = false
     
     var body: some View {
-        ZStack {
-            Color.gray
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 20) {
-                Button(action: {
-                    isProfileActive = true
-                    isMenuActive = false // Close the menu
-                }) {
-                    Image(systemName: "person.crop.circle.fill")
-                        .font(.title)
-                        .foregroundColor(.white)
-                }
-                .padding()
-                .background(Color.gray)
-                .cornerRadius(10)
-                .padding(.horizontal, 20)
-                .onTapGesture {
-                    isProfileActive = true // Activate the profile view
-                }
+        NavigationView{
+            ZStack {
+                Color.gray
+                    .edgesIgnoringSafeArea(.all)
                 
-                Button(action: {
-                    // Handle action for "Senaste nyheterna"
-                }) {
-                    Text("Senaste nyheterna")
-                        .font(.title)
-                        .foregroundColor(.white)
-                }
-                
-                Button(action: {
-                    // Handle action for "Sport"
-                }) {
-                    Text("Sport")
-                        .font(.title)
-                        .foregroundColor(.white)
-                }
-                
-                Button(action: {
-                    // Handle action for "Kultur"
-                }) {
-                    Text("Kultur")
-                        .font(.title)
-                        .foregroundColor(.white)
-                }
-                
-                Button(action: {
-                    isMenuActive = false // Close the menu
-                }) {
-                    Image(systemName: "xmark.circle")
-                        .font(.title)
-                        .padding()
-                        .background(Color.gray)
-                        .foregroundColor(.black)
-                        .cornerRadius(10)
-                        .padding(.top, 80)
-                }
-            }
-            .padding()
-        }
-        .fullScreenCover(isPresented: $isProfileActive) {
-            NavigationView {
-                ProfileView()
-                    .navigationBarItems(leading: Button(action: {
-                        isProfileActive = false // Dismiss the profile view
+                VStack(spacing: 20) {
+                    Button(action: {
+                        isProfileActive = true
+                        isMenuActive = false // Close the menu
                     }) {
-                        Image(systemName: "chevron.left")
+                        Image(systemName: "person.crop.circle.fill")
                             .font(.title)
-                            .foregroundColor(.black)
-                    })
+                            .foregroundColor(.white)
+                            .font(.title)
+                    }
+                    .padding()
+                    .background(Color.gray)
+                    .cornerRadius(10)
+                    .padding(.horizontal, 20)
+                    .onTapGesture {
+                        isProfileActive = true // Activate the profile view
+                    }
+                    VStack{
+           
+                        NavigationLink(destination: AmusementView()){
+                            Text("Nöje")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                                .padding(.vertical, 20)
+                    }
+                            
+                    VStack{
+                        NavigationLink(destination: SportsView()){
+                            Text("Sport")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                    }
+                            
+                    VStack{
+                        NavigationLink(destination: ForeignView()){
+                            Text("Utrikes")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                            }
+                                Button(action: {
+                                    isMenuActive = false // Close the menu
+                                }) {
+                                    Image(systemName: "xmark.circle")
+                                        .font(.title)
+                                        .padding()
+                                        .background(Color.gray)
+                                        .foregroundColor(.black)
+                                        .cornerRadius(10)
+                                        .padding(.top, 80)
+                                }
+                            }
+                            .padding()
+                        }
+                        .fullScreenCover(isPresented: $isProfileActive) {
+                            NavigationView {
+                                ProfileView()
+                                    .navigationBarItems(leading: Button(action: {
+                                        isProfileActive = false // Dismiss the profile view
+                                    }) {
+                                        Image(systemName: "chevron.left")
+                                            .font(.title)
+                                            .foregroundColor(.black)
+                                    })
+                            }
+                        }
+                    }
+                }
+                
             }
+            
         }
     }
 }
-
-
 
 
 
@@ -250,4 +240,5 @@ struct NewsFeedView_Previews: PreviewProvider {
         NewsFeedView()
     }
 }
+
 
