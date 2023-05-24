@@ -9,26 +9,29 @@ import SwiftUI
 
 struct ArticleView: View {
     var article: Article
-    @Environment(\.presentationMode) var presentationMode // Access the presentation mode
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack {
-            Text(article.heading)
-                .font(.title)
-                .padding()
             
-            Text(article.content)
-                .padding()
+            ScrollView {
+                Text(article.heading)
+                    .font(.title)
+                    .padding()
+                
+                Text(article.content)
+                    .padding()
+            }
             
             Spacer()
         }
-        .navigationBarBackButtonHidden(true) // Hide the default back button
-        .navigationBarItems(leading: // Add a custom back button
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading:
             Button(action: {
-                presentationMode.wrappedValue.dismiss() // Dismiss the ArticleView
+                presentationMode.wrappedValue.dismiss() 
             }) {
                 Image(systemName: "chevron.left")
-                    .foregroundColor(.black) // Set the color of the back arrow
+                    .foregroundColor(.black)
             }
         )
     }
