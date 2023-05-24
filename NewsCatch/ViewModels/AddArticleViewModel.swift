@@ -14,12 +14,23 @@ class AddArticleViewModel: ObservableObject{
     @Published var articles = [Article]()
     @Published var titleContent : String = "Enter Title..."
     @Published var textContent : String = "Enter your article text here..."
-    @Published var categoryContent : Category = Category.unspecified
+    @Published var categoryContent : Category = Category.unspecified // Actual category
+    @Published var categoryString : String = "Unspecified" // String for drop-down menu
     
     //Message for the posting alert pop-up
     let alertMessage = "Thank you for your submission. Your article will soon be inspected by an admin. If approved, it will be published for other users to see."
     
     init(){}
+    
+    func setCategory(cat: Category){
+        categoryContent = cat
+        if(cat == Category.tech){categoryString = "Tech" }
+        if(cat == Category.sports){categoryString = "Sports" }
+        if(cat == Category.economy){categoryString = "Economy" }
+        if(cat == Category.world){categoryString = "World" }
+        if(cat == Category.politics){categoryString = "Politics" }
+        if(cat == Category.entertainment){categoryString = "Entertainment" }
+    }
     
     func requestArticle(){
         let newArticle = Article(heading:titleContent, content: textContent, category: categoryContent)

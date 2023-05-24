@@ -9,6 +9,6 @@ import Foundation
 
 enum Category : Codable{
     
-    case world, economy, sports, tech, politics, unspecified
+    case world, economy, sports, tech, politics, entertainment, unspecified
     
 }
