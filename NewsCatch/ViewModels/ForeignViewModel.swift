@@ -17,7 +17,7 @@ class ForeignViewModel: ObservableObject{
 
     func getArticlesFromDb(){
         foreignArticles.removeAll()
-        db.collection("PublishedArticles").whereField("category", isEqualTo: "foreign").addSnapshotListener() {
+        db.collection("PublishedArticles").addSnapshotListener() {
                 snapshot, error in
                 
                 guard let snapshot = snapshot else {return}
@@ -27,7 +27,9 @@ class ForeignViewModel: ObservableObject{
                     for document in snapshot.documents{
                         do{
                             let article = try document.data(as: Article.self)
-                            self.foreignArticles.append(article)
+                            if(article.category == Category.foreign){
+                                self.foreignArticles.append(article)
+                            }
                         }catch{
                             print("Error reading from FireStore")
                         }

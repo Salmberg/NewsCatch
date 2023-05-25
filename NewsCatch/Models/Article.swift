@@ -30,6 +30,7 @@ struct Article : Codable, Identifiable, Hashable{
         self.content = content
         self.category = category ?? Category.unspecified //Unspecified if given nothing
         //self.picture = picture // Temporarily commented out to conform to "codable"
+        let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
     }
     
