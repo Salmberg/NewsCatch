@@ -187,29 +187,41 @@ struct MenuView: View {
                     isProfileActive = true // Activate the profile view
                 }
                 
-                Button(action: {
-                    // Handle action for "Senaste nyheterna"
-                }) {
-                    Text("Senaste nyheterna")
-                        .font(.title)
-                        .foregroundColor(.white)
+                NavigationLink(
+                    destination: AmusementView()
+                ) {
+                    HStack {
+                        Text("Nöje")
+                            .font(.title)
+                            .bold()
+                            .padding(.leading, 10)
+                    }
                 }
+                .buttonStyle(PlainButtonStyle())
                 
-                Button(action: {
-                    // Handle action for "Sport"
-                }) {
-                    Text("Sport")
-                        .font(.title)
-                        .foregroundColor(.white)
+                NavigationLink(
+                    destination: SportsView()
+                ) {
+                    HStack {
+                        Text("Sport")
+                            .font(.title)
+                            .bold()
+                            .padding(.leading, 10)
+                    }
                 }
+                .buttonStyle(PlainButtonStyle())
                 
-                Button(action: {
-                    // Handle action for "Kultur"
-                }) {
-                    Text("Kultur")
-                        .font(.title)
-                        .foregroundColor(.white)
+                NavigationLink(
+                    destination: ForeignView()
+                ) {
+                    HStack {
+                        Text("Utrikes")
+                            .font(.title)
+                            .bold()
+                            .padding(.leading, 10)
+                    }
                 }
+                .buttonStyle(PlainButtonStyle())
                 
                 Button(action: {
                     isMenuActive = false // Close the menu
