@@ -1,45 +1,38 @@
 //
-//  NewsFeedViewModel.swift
-//  NewsCatch
+//  ForeignNewsViewModel.swift
+//  NewsApp
 //
-//  Created by David Salmberg on 2023-05-22.
+//  Created by Linda Bergsängel on 2023-05-23.
 //
 
 import Foundation
-import FirebaseAuth
+import Firebase
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
-class NewsFeedViewModel : ObservableObject {
+class ForeignViewModel: ObservableObject{
+    
     let db = Firestore.firestore()
-    @Published var heading = ""
-    @Published var content = ""
-    @Published var category = ""
-    @Published var image = UIImage?.self
-    @Published var articles: [Article] = []  //En tom lista som håller artiklarna
-    
-    
-   
-    
-    func getArticleFeed() {
-      
-        db.collection("PublishedArticles").addSnapshotListener() {
+    @Published var foreignArticles = [Article]()
+
+    func getArticlesFromDb(){
+        foreignArticles.removeAll()
+        db.collection("PublishedArticles").whereField("category", isEqualTo: "foreign").addSnapshotListener() {
                 snapshot, error in
                 
                 guard let snapshot = snapshot else {return}
                 if let error = error {
                     print("Error listning to FireStore \(error)")
                 }else{
-                    self.articles.removeAll()
                     for document in snapshot.documents{
                         do{
                             let article = try document.data(as: Article.self)
-                            self.articles.append(article)
+                            self.foreignArticles.append(article)
                         }catch{
                             print("Error reading from FireStore")
                         }
                     }
                     
                 }
-            }
-    }
+            }    }
 }

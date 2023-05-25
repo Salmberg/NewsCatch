@@ -1,39 +1,31 @@
 //
-//  NewsFeedViewModel.swift
-//  NewsCatch
+//  AmusementNewsViewModel.swift
+//  NewsApp
 //
-//  Created by David Salmberg on 2023-05-22.
+//  Created by Linda Bergsängel on 2023-05-23.
 //
 
 import Foundation
-import FirebaseAuth
-import FirebaseFirestore
+import Firebase
 
-class NewsFeedViewModel : ObservableObject {
+class AmusementViewModel: ObservableObject{
+    
     let db = Firestore.firestore()
-    @Published var heading = ""
-    @Published var content = ""
-    @Published var category = ""
-    @Published var image = UIImage?.self
-    @Published var articles: [Article] = []  //En tom lista som håller artiklarna
+    @Published var amusementArticles = [Article]()
     
-    
-   
-    
-    func getArticleFeed() {
-      
-        db.collection("PublishedArticles").addSnapshotListener() {
+    func getArticlesFromDb(){
+        amusementArticles.removeAll()
+        db.collection("PublishedArticles").whereField("category", isEqualTo: "amusement").addSnapshotListener() {
                 snapshot, error in
                 
                 guard let snapshot = snapshot else {return}
                 if let error = error {
                     print("Error listning to FireStore \(error)")
                 }else{
-                    self.articles.removeAll()
                     for document in snapshot.documents{
                         do{
                             let article = try document.data(as: Article.self)
-                            self.articles.append(article)
+                            self.amusementArticles.append(article)
                         }catch{
                             print("Error reading from FireStore")
                         }

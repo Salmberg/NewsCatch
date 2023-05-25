@@ -14,6 +14,7 @@ class AddArticleViewModel: ObservableObject{
     @Published var articles = [Article]()
     @Published var titleContent : String = "Enter Title..."
     @Published var textContent : String = "Enter your article text here..."
+    @Published var articleCategory : String = "foreign"
     
     //Message for the posting alert pop-up
     let alertMessage = "Thank you for your submission. Your article will soon be inspected by an admin. If approved, it will be published for other users to see."
@@ -21,7 +22,7 @@ class AddArticleViewModel: ObservableObject{
     init(){}
     
     func requestArticle(){
-        let newArticle = Article(heading:titleContent, content: textContent)
+        let newArticle = Article(heading:titleContent, content: textContent, category: articleCategory)
         //upload to firebase
         do{
             try db.collection("RequestedArticles").addDocument(from: newArticle)
