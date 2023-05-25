@@ -13,37 +13,25 @@ class SportsViewModel: ObservableObject{
     let db = Firestore.firestore()
     @Published var sportsArticles = [Article]()
     
-    /*
-    func articleMockData() {
-        let article1 = Article(heading: "SportsArticle 1", content: "This is the content of sports article 1.", category: "Sports")
-        let article2 = Article(heading: "SportsArticle 2", content: "This is the content of sports article 2.", category: "Sports")
-        let article3 = Article(heading: "SportsArticle 3", content: "This is the content of sports article 3.", category: "Sports")
-
-        sportsArticles = [article1, article2, article3]
-        }
-    */
-    
     func getArticlesFromDb(){
         sportsArticles.removeAll()
-        db.collection("PublishedArticles").getDocuments{ (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                do {
-                    guard let querySnapshot = querySnapshot else {
-                        print("No documents found")
-                        return
+        db.collection("PublishedArticles").whereField("category", isEqualTo: "sports").addSnapshotListener() {
+                snapshot, error in
+                
+                guard let snapshot = snapshot else {return}
+                if let error = error {
+                    print("Error listning to FireStore \(error)")
+                }else{
+                    for document in snapshot.documents{
+                        do{
+                            let article = try document.data(as: Article.self)
+                            self.sportsArticles.append(article)
+                        }catch{
+                            print("Error reading from FireStore")
+                        }
                     }
                     
-                    for document in querySnapshot.documents {
-                        let article = try document.data(as: Article.self)
-                        self.sportsArticles.append(article)
-                        
-                    }
-                } catch {
-                    print("Error decoding documents: \(error)")
                 }
             }
-        }
     }
 }
