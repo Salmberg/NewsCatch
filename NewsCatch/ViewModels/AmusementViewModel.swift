@@ -13,6 +13,7 @@ class AmusementViewModel: ObservableObject{
     let db = Firestore.firestore()
     @Published var amusementArticles = [Article]()
     
+    /*
     func articleMockData() {
         let article1 = Article(heading: "AmusementArticle 1", content: "This is the content of foreign article 1.", category: "Amusement")
         let article2 = Article(heading: "AmusementArticle 2", content: "This is the content of foreign article 2.", category: "Amusement")
@@ -20,7 +21,7 @@ class AmusementViewModel: ObservableObject{
 
         amusementArticles = [article1, article2, article3]
         }
-    
+    */
     
     func getArticlesFromDb(){
         amusementArticles.removeAll()

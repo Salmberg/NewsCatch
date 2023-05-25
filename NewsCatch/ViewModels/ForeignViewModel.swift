@@ -14,7 +14,7 @@ class ForeignViewModel: ObservableObject{
     
     let db = Firestore.firestore()
     @Published var foreignArticles = [Article]()
-    
+  /*
     func articleMockData() {
         let article1 = Article(heading: "ForeignArticle 1", content: "This is the content of foreign article 1.", category: "foreign")
         let article2 = Article(heading: "ForeignArticle 2", content: "This is the content of foreign article 2.", category: "foreign")
@@ -22,7 +22,7 @@ class ForeignViewModel: ObservableObject{
         
         foreignArticles = [article1, article2, article3]
     }
-    
+    */
     
     func getArticlesFromDb(){
         foreignArticles.removeAll()

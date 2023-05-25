@@ -13,6 +13,7 @@ class SportsViewModel: ObservableObject{
     let db = Firestore.firestore()
     @Published var sportsArticles = [Article]()
     
+    /*
     func articleMockData() {
         let article1 = Article(heading: "SportsArticle 1", content: "This is the content of sports article 1.", category: "Sports")
         let article2 = Article(heading: "SportsArticle 2", content: "This is the content of sports article 2.", category: "Sports")
@@ -20,7 +21,7 @@ class SportsViewModel: ObservableObject{
 
         sportsArticles = [article1, article2, article3]
         }
-    
+    */
     
     func getArticlesFromDb(){
         sportsArticles.removeAll()
