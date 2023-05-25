@@ -87,10 +87,17 @@ struct NewsFeedView: View {
                                         selection: $selectedArticle
                                     ) {
                                         HStack {
-                                            Text(article.heading)
-                                                .font(.title)
-                                                .bold()
-                                                .padding(.leading, 10)
+                                            VStack{
+                                                Text(article.heading)
+                                                    .font(.title)
+                                                    .bold()
+                                                    .padding(.leading, 10)
+                                                
+                                                Text(article.relativeDate)
+                                                    .padding(.trailing, 130)
+
+
+                                            }
 
                                             Spacer()
 

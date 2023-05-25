@@ -11,16 +11,27 @@ struct ArticleView: View {
     var article: Article
     @Environment(\.presentationMode) var presentationMode
     
+//    private let dateFormatter: DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.dateStyle = .medium
+//        formatter.timeStyle = .medium
+//        return formatter
+//    }()
+    
     var body: some View {
         VStack {
-            
             ScrollView {
                 Text(article.heading)
                     .font(.title)
                     .padding()
                 
+                Text(Article.dateFormatter.string(from: article.date))
+                    .padding()
+                
                 Text(article.content)
                     .padding()
+                
+               
             }
             
             Spacer()
@@ -28,7 +39,7 @@ struct ArticleView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
             Button(action: {
-                presentationMode.wrappedValue.dismiss() 
+                presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: "chevron.left")
                     .foregroundColor(.black)
@@ -36,6 +47,7 @@ struct ArticleView: View {
         )
     }
 }
+
 
 struct ArticleView_Previews: PreviewProvider {
     static var previews: some View {
