@@ -10,6 +10,7 @@ import SwiftUI
 struct SportsView: View {
     @StateObject var viewModel = SportsViewModel()
     @State private var isMenuActive: Bool = false
+    @State private var selectedArticle: Article? = nil
     
     var body: some View {
         NavigationView {
@@ -18,7 +19,7 @@ struct SportsView: View {
                     ZStack {
                         Color.black
                             .frame(height: 110) // Adjust the height as needed
-                        Text("Utrikes")
+                        Text("Sport")
                             .font(.system(size: 20))
                             .foregroundColor(.white)
                             .bold()
@@ -35,19 +36,29 @@ struct SportsView: View {
                         ScrollView {
                             VStack {
                                 ForEach(viewModel.sportsArticles, id: \.heading) { article in
-                                    HStack {
-                                        Text(article.heading)
-                                            .font(.title)
-                                            .bold()
-                                            .padding(.leading, 10)
-                                        
-                                        Spacer()
-                                        
-                                        Image("Image")
-                                            .resizable()
-                                            .frame(width: 50, height: 50)
-                                            .padding(10)
+                                    NavigationLink(
+                                        destination: ArticleView(article: article),
+                                        tag: article,
+                                        selection: $selectedArticle
+                                    ) {
+                                        HStack {
+                                            Text(article.heading)
+                                                .font(.title)
+                                                .bold()
+                                                .padding(.leading, 10)
+                                            
+                                            Spacer()
+                                            
+                                            Image("Image")
+                                                .resizable()
+                                                .frame(width: 50, height: 50)
+                                                .padding(10)
+                                        }
                                     }
+                                    .buttonStyle(PlainButtonStyle())
+                                    
+                                    Divider()
+                                    .padding(.horizontal, 10)
                                 }
                             }
                         }

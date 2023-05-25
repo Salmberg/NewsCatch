@@ -10,7 +10,7 @@ import SwiftUI
 struct ForeignView: View {
     @StateObject var viewModel = ForeignViewModel()
     @State private var isMenuActive: Bool = false
-    
+    @State private var selectedArticle: Article? = nil
     
     var body: some View {
         NavigationView {
@@ -35,7 +35,12 @@ struct ForeignView: View {
                     VStack {
                         ScrollView {
                             VStack {
-                                    ForEach(viewModel.foreignArticles, id: \.heading) { article in
+                                ForEach(viewModel.foreignArticles, id: \.heading) { article in
+                                    NavigationLink(
+                                        destination: ArticleView(article: article),
+                                        tag: article,
+                                        selection: $selectedArticle
+                                    ) {
                                         HStack {
                                             Text(article.heading)
                                                 .font(.title)
@@ -49,8 +54,12 @@ struct ForeignView: View {
                                                 .frame(width: 50, height: 50)
                                                 .padding(10)
                                         }
-                                        
                                     }
+                                    .buttonStyle(PlainButtonStyle())
+                                    
+                                    Divider()
+                                    .padding(.horizontal, 10)
+                                }
                                 
                                 
                             }
