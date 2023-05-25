@@ -12,11 +12,10 @@ struct NewsFeedView: View {
     //@State private var isProfileActive: Bool = false
     @State private var isMenuActive: Bool = false
     @State private var menuOffset: CGFloat = -UIScreen.main.bounds.width
-    @State private var latestNewsSelected = false
+    @State private var latestNewsSelected = true
     @State private var allNewsSelected = false
     @State private var selectedArticle: Article? = nil
 
-    
     var body: some View {
         NavigationView {
             ZStack {
@@ -31,90 +30,90 @@ struct NewsFeedView: View {
                     }
                     .edgesIgnoringSafeArea(.top)
                     .frame(height: 110) // Adjust the height as needed
-                    HStack{
-                        ZStack {
-                            Button(action: {
-                                latestNewsSelected.toggle()
-                                allNewsSelected = false // Deselect the "All news" button
-                            }) {
-                                Text("Latest news")
-                                    .font(.title2)
-                                    .bold()
-                                    .padding(.leading, 30)
-                                    .foregroundColor(latestNewsSelected ? .orange : .white)
-                            }
-                            
-                            Rectangle()
-                                .fill(Color.orange)
-                                .frame(height: 2)
-                                .padding(.top, 45) // Adjust the padding to align the thin line with the selected button
-                                .opacity(latestNewsSelected ? 1 : 0)
-                        }
-                        
-                        Spacer()
-                        
-                        ZStack {
-                            Button(action: {
-                                allNewsSelected.toggle()
-                                latestNewsSelected = false // Deselect the "Latest news" button
-                            }) {
-                                Text("All news")
-                                    .font(.title2)
-                                    .bold()
-                                    .padding(10)
-                                    .padding(.trailing, 30)
-                                    .foregroundColor(allNewsSelected ? .orange : .white)
-                            }
-                            
-                            Rectangle()
-                                .fill(Color.orange)
-                                .frame(height: 2)
-                                .padding(.top, 45) // Adjust the padding to align the thin line with the selected button
-                                .opacity(allNewsSelected ? 1 : 0)
-                        }
-                    }
-                    .background(Color.gray)
                     
-                    NavigationView {
-                        VStack {
-                            ScrollView {
-                                VStack(spacing: 0) {
-                                    ForEach(viewModel.articles, id: \.heading) { article in
-                                        NavigationLink(
-                                            destination: ArticleView(article: article),
-                                            tag: article,
-                                            selection: $selectedArticle
-                                        ) {
-                                            HStack {
-                                                Text(article.heading)
-                                                    .font(.title)
-                                                    .bold()
-                                                    .padding(.leading, 10)
-                                                
-                                                Spacer()
-                                                
-                                                Image("Image")
-                                                    .resizable()
-                                                    .frame(width: 50, height: 50)
-                                                    .padding(10)
-                                            }
-                                        }
-                                        .buttonStyle(PlainButtonStyle())
-                                        
-                                        Divider()
-                                        .padding(.horizontal, 10)
-                                    }
+                 
+                        HStack{
+                            ZStack {
+                                Button(action: {
+                                    latestNewsSelected.toggle()
+                                    allNewsSelected = false // Deselect the "All news" button
+                                }) {
+                                    Text("Latest news")
+                                        .font(.title2)
+                                        .bold()
+                                        .padding(.leading, 30)
+                                        .foregroundColor(latestNewsSelected ? .orange : .white)
                                 }
+                                
+                                Rectangle()
+                                    .fill(Color.orange)
+                                    .frame(height: 2)
+                                    .padding(.top, 45) // Adjust the padding to align the thin line with the selected button
+                                    .opacity(latestNewsSelected ? 1 : 0)
                             }
-                            .frame(maxHeight: .infinity)
                             
                             Spacer()
+                            
+                            ZStack {
+                                Button(action: {
+                                    allNewsSelected.toggle()
+                                    latestNewsSelected = false // Deselect the "Latest news" button
+                                }) {
+                                    Text("All news")
+                                        .font(.title2)
+                                        .bold()
+                                        .padding(10)
+                                        .padding(.trailing, 30)
+                                        .foregroundColor(allNewsSelected ? .orange : .white)
+                                }
+                                
+                                Rectangle()
+                                    .fill(Color.orange)
+                                    .frame(height: 2)
+                                    .padding(.top, 45) // Adjust the padding to align the thin line with the selected button
+                                    .opacity(allNewsSelected ? 1 : 0)
+                            }
                         }
-                        .navigationBarTitle("", displayMode: .inline)
+                        .background(Color.gray)
+                    
+
+                    VStack { // Move the NavigationView inside a VStack
+                        ScrollView {
+                            VStack(spacing: 0) {
+                                ForEach(viewModel.articles, id: \.heading) { article in
+                                    NavigationLink(
+                                        destination: ArticleView(article: article),
+                                        tag: article,
+                                        selection: $selectedArticle
+                                    ) {
+                                        HStack {
+                                            Text(article.heading)
+                                                .font(.title)
+                                                .bold()
+                                                .padding(.leading, 10)
+
+                                            Spacer()
+
+                                            Image("Image")
+                                                .resizable()
+                                                .frame(width: 50, height: 50)
+                                                .padding(10)
+                                        }
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+
+                                    Divider()
+                                        .padding(.horizontal, 10)
+                                }
+                            }
+                        }
+                        .frame(maxHeight: .infinity)
+
+                        Spacer()
                     }
+                    .navigationBarTitle("", displayMode: .inline)
                 }
 
-                
                 // Menu view
                 MenuView(isMenuActive: $isMenuActive)
                     .frame(width: UIScreen.main.bounds.width * 1) // Adjust the width as needed
@@ -140,6 +139,7 @@ struct NewsFeedView: View {
         }
     }
 }
+
 
 struct InitialMenuActivationModifier: ViewModifier {
     @Binding var isMenuActive: Bool
