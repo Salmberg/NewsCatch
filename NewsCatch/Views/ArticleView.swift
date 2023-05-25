@@ -11,12 +11,6 @@ struct ArticleView: View {
     var article: Article
     @Environment(\.presentationMode) var presentationMode
     
-//    private let dateFormatter: DateFormatter = {
-//        let formatter = DateFormatter()
-//        formatter.dateStyle = .medium
-//        formatter.timeStyle = .medium
-//        return formatter
-//    }()
     
     var body: some View {
         VStack {
