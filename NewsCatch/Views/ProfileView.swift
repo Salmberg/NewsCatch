@@ -26,7 +26,6 @@ struct ProfileView: View {
                         .cornerRadius(20)
                 })
                 .offset(x: -130, y: -200)
-                .navigationBarTitle("Add article")
                 .sheet(isPresented: $isAddArticle){
                     AddArticleView()
                 }
@@ -44,7 +43,7 @@ struct ProfileView: View {
                 Text("Logout")
             }
         }
-        }
+    }
 }
 
 struct ProfileView_Previews: PreviewProvider {

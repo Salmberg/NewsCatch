@@ -10,7 +10,6 @@ import SwiftUI
 struct LoginView: View {
     @StateObject var viewModel = LoginViewModel()
     @State var isAdmin = false
-    
     var body: some View {
         
         NavigationView{
@@ -45,7 +44,7 @@ struct LoginView: View {
                     }
                     .navigationBarTitle("Admin View")
                     .fullScreenCover(isPresented: $isAdmin) {
-                        AdminView()
+                        AdminView(logInVm: viewModel, isAdmin: $isAdmin)
                     }
                     
                     
@@ -62,9 +61,9 @@ struct LoginView: View {
             
             
         }
-            
-        }
+        
     }
+}
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
