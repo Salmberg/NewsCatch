@@ -13,7 +13,8 @@ struct Article: Codable, Identifiable, Hashable {
     @DocumentID var id: String?
     var heading: String
     var content: String
-    var category: String
+    var category: Category?
+    //var picture: UIImage? // Temporarily commented out to conform to "codable"
     var date: Date // Add a property to store the creation date and time
     
     func hash(into hasher: inout Hasher) {
@@ -27,6 +28,7 @@ struct Article: Codable, Identifiable, Hashable {
             return formatter
         }()
     
+
     var relativeDate: String {
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .full
@@ -34,10 +36,11 @@ struct Article: Codable, Identifiable, Hashable {
     }
 
     
-    init(heading: String, content: String, picture: UIImage? = nil, category: String) {
+    init(heading: String, content: String, picture: UIImage? = nil, category: Category?) {
         self.heading = heading
         self.content = content
-        self.category = category
+        self.category = category ?? Category.unspecified //Unspecified if given nothing
+        //self.picture = picture // Temporarily commented out to conform to "codable"
         self.date = Date() // Set the current date and time during initialization
     }
 }
