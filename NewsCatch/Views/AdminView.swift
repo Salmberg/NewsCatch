@@ -43,10 +43,13 @@ struct AdminView: View {
                                     .foregroundColor(.white)
                                     .bold()
                             })
+                            .buttonStyle(PlainButtonStyle()) // Add this line to remove the default button style
                             Spacer()
                         }
+                        .contentShape(Rectangle()) // Add this line to set the button's tap area
                         
                     }
+                    .onTapGesture {}
                 }
                 .onDelete() { IndexSet in
                     for index in IndexSet{
