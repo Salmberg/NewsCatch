@@ -7,14 +7,24 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
 
 struct ProfileView: View {
     @State var isAddArticle = false
+    var auth = FirebaseAuth.Auth.self
+    var user = Auth.auth().currentUser
     var body: some View {
         NavigationView{
             VStack{
-                Text("Your Profile")
-                    .font(.system(size: 30))
+                HStack{
+                    Image(systemName: "person.crop.circle.fill")
+                        .font(.system(size: 80))
+                        .padding(.leading, 20)
+                    Spacer()
+                    Text("Your Profile")
+                        .font(.system(size: 30))
+                        .padding(.trailing, 20)
+                }
                 VStack{
                     NavigationLink(
                         destination: MyFavouriteArticles()
