@@ -36,7 +36,7 @@ struct ProfileView: View {
                                 .padding(.leading, 10)
                         }
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(BorderedProminentButtonStyle())
                     
                     NavigationLink(
                         destination: MyFavouriteAuthors()
@@ -48,7 +48,7 @@ struct ProfileView: View {
                                 .padding(.leading, 10)
                         }
                     }
-                    .buttonStyle(PlainButtonStyle())
+                    .buttonStyle(BorderedProminentButtonStyle())
                 }
                 
                 NavigationLink(
@@ -61,25 +61,29 @@ struct ProfileView: View {
                             .padding(.leading, 10)
                     }
                 }
-                .buttonStyle(PlainButtonStyle())
+                .buttonStyle(BorderedProminentButtonStyle())
                 
-                
-                Spacer()
                 HStack{
                     Button(action: {
                         isAddArticle = true
                     }, label: {
-                        Text("Add article")
-                            .frame(width: 120, height: 42)
+                        Text("Lägg till artikel")
+                            .frame(width: 220, height: 42)
+                            .font(.title)
+                            .bold()
+                            .padding(.leading, 10)
                             .foregroundColor(.white)
                             .background(Color.blue)
-                            .cornerRadius(20)
+                            .cornerRadius(10)
+                            .buttonStyle(BorderedProminentButtonStyle())
                     })
-                    .offset(x: -130, y: -200)
                     .sheet(isPresented: $isAddArticle){
                         AddArticleView()
                     }
                 }
+                
+                Spacer()
+                
                 Spacer()
                 Button(action: {
                     do{
