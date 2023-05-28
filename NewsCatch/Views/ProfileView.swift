@@ -51,6 +51,18 @@ struct ProfileView: View {
                     .buttonStyle(PlainButtonStyle())
                 }
                 
+                NavigationLink(
+                    destination: MyArticles()
+                ) {
+                    HStack {
+                        Text("Mina artiklar")
+                            .font(.title)
+                            .bold()
+                            .padding(.leading, 10)
+                    }
+                }
+                .buttonStyle(PlainButtonStyle())
+                
                 
                 Spacer()
                 HStack{
