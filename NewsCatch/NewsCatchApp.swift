@@ -16,6 +16,7 @@ struct NewsCatchApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//            ImageView()
 
         }
     }
