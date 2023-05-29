@@ -94,14 +94,23 @@ struct NewsFeedView: View {
                                         selection: $selectedArticle
                                     ) {
                                         HStack {
-                                            VStack(alignment: .leading) {
+                                            VStack(alignment: .leading, spacing: 0) {
+                                                HStack{
+                                                    Image(systemName: "clock")
+                                                        .resizable()
+                                                        .frame(width: 15, height: 15)
+                                                        .foregroundColor(.gray)
+                                                        .padding(.leading, 10)
+                                                    Text(article.relativeDate)
+                                                        .foregroundColor(.gray)
+                                                        
+                                                }
                                                 Text(article.heading)
                                                     .font(.title)
                                                     .bold()
                                                     .padding(.leading, 10)
+                                                    .padding(.bottom, 20)
                                                 
-                                                Text(article.relativeDate)
-                                                    .padding(.leading, 10)
                                             }
 
                                             Spacer()

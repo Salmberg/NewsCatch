@@ -41,17 +41,28 @@ struct SportsView: View {
                                         tag: article,
                                         selection: $selectedArticle
                                     ) {
-                                        VStack {
-                                            Text(article.heading)
-                                                .font(.title)
-                                                .bold()
-                                                .padding(.leading, 10)
+                                        HStack {
+                                            VStack(alignment: .leading, spacing: 0) {
+                                                HStack{
+                                                    Image(systemName: "clock")
+                                                        .resizable()
+                                                        .frame(width: 15, height: 15)
+                                                        .foregroundColor(.gray)
+                                                        .padding(.leading, 10)
+                                                    Text(article.relativeDate)
+                                                        .foregroundColor(.gray)
+                                                        
+                                                }
+                                                Text(article.heading)
+                                                    .font(.title)
+                                                    .bold()
+                                                    .padding(.leading, 10)
+                                                    .padding(.bottom, 20)
+                                                
+                                            }
 
-                                            Text(article.relativeDate)
-                                                .padding(.trailing, 10)
- 
                                             Spacer()
-                                            
+
                                             Image("Image")
                                                 .resizable()
                                                 .frame(width: 50, height: 50)
@@ -59,16 +70,17 @@ struct SportsView: View {
                                         }
                                     }
                                     .buttonStyle(PlainButtonStyle())
-                                    
+
                                     Divider()
-                                    .padding(.horizontal, 10)
+                                        .padding(.horizontal, 10)
                                 }
                             }
                         }
-                        .frame(maxHeight: .infinity) // Occupy the remaining available space
-                        
-                        Spacer() // Add a spacer to push the content above the toolbar
+                        .frame(maxHeight: .infinity)
+
+                        Spacer()
                     }
+                    .navigationBarTitle("", displayMode: .inline)
                 }
                 
                 // Menu view

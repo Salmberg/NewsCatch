@@ -19,11 +19,16 @@ struct ArticleView: View {
                     .font(.title)
                     .padding()
                 
-                Text(Article.dateFormatter.string(from: article.date))
-                    .padding()
-                
                 Text(article.content)
                     .padding()
+                
+                HStack{
+                    Image(systemName: "calendar")
+                    
+                    Text(Article.dateFormatter.string(from: article.date))
+                        .padding()
+                }
+
                 
                
             }
@@ -40,6 +45,7 @@ struct ArticleView: View {
             }
         )
     }
+    
 }
 
 
