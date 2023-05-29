@@ -49,6 +49,10 @@
 		CB7AAA2A2A1BE3950003CB48 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CB7AAA292A1BE3950003CB48 /* FirebaseFirestoreSwift */; };
 		CBE65EDF2A1E15FE003570E1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE65EDE2A1E15FE003570E1 /* RegisterView.swift */; };
 		CBE65EE32A1E190E003570E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EE22A1E190E003570E1 /* GoogleService-Info.plist */; };
+		CBE65EEA2A24EB5C003570E1 /* AoboshiOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EE92A24E9F7003570E1 /* AoboshiOne-Regular.ttf */; };
+		CBE65EEC2A24ECB5003570E1 /* Font-heading.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EE82A24E92A003570E1 /* Font-heading.ttf */; };
+		CBE65EEE2A24EE24003570E1 /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EED2A24EDD8003570E1 /* BebasNeue-Regular.ttf */; };
+		CBE65EF02A24EEDA003570E1 /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EEF2A24EECF003570E1 /* CrimsonText-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +114,11 @@
 		CB7AAA212A1BDEF40003CB48 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CBE65EDE2A1E15FE003570E1 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		CBE65EE22A1E190E003570E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CBE65EE62A24E546003570E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CBE65EE82A24E92A003570E1 /* Font-heading.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font-heading.ttf"; sourceTree = "<group>"; };
+		CBE65EE92A24E9F7003570E1 /* AoboshiOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AoboshiOne-Regular.ttf"; sourceTree = "<group>"; };
+		CBE65EED2A24EDD8003570E1 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
+		CBE65EEF2A24EECF003570E1 /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +181,7 @@
 		CB6952BD2A1BD9E3003D494C /* NewsCatch */ = {
 			isa = PBXGroup;
 			children = (
+				CBE65EEB2A24EBC0003570E1 /* Fonts */,
 				CBE65EE22A1E190E003570E1 /* GoogleService-Info.plist */,
 				CB6953032A1BDC35003D494C /* Views */,
 				CB6952F42A1BDAFA003D494C /* ViewModels */,
@@ -203,6 +213,7 @@
 		CB6952D82A1BD9E4003D494C /* NewsCatchUITests */ = {
 			isa = PBXGroup;
 			children = (
+				CBE65EE62A24E546003570E1 /* Info.plist */,
 				CB6952D92A1BD9E4003D494C /* NewsCatchUITests.swift */,
 				CB6952DB2A1BD9E4003D494C /* NewsCatchUITestsLaunchTests.swift */,
 			);
@@ -274,6 +285,17 @@
 				CB6953152A1BDD8F003D494C /* NAButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		CBE65EEB2A24EBC0003570E1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CBE65EE82A24E92A003570E1 /* Font-heading.ttf */,
+				CBE65EEF2A24EECF003570E1 /* CrimsonText-Regular.ttf */,
+				CBE65EED2A24EDD8003570E1 /* BebasNeue-Regular.ttf */,
+				CBE65EE92A24E9F7003570E1 /* AoboshiOne-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,6 +411,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBE65EF02A24EEDA003570E1 /* CrimsonText-Regular.ttf in Resources */,
+				CBE65EEE2A24EE24003570E1 /* BebasNeue-Regular.ttf in Resources */,
+				CBE65EEA2A24EB5C003570E1 /* AoboshiOne-Regular.ttf in Resources */,
+				CBE65EEC2A24ECB5003570E1 /* Font-heading.ttf in Resources */,
 				CB6952C62A1BD9E4003D494C /* Preview Assets.xcassets in Resources */,
 				CB6952C32A1BD9E4003D494C /* Assets.xcassets in Resources */,
 				CBE65EE32A1E190E003570E1 /* GoogleService-Info.plist in Resources */,
@@ -609,6 +635,10 @@
 				DEVELOPMENT_TEAM = 5A8L7XTFM2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsCatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -638,6 +668,10 @@
 				DEVELOPMENT_TEAM = 5A8L7XTFM2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsCatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -704,6 +738,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5A8L7XTFM2;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsCatchUITests/Info.plist;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.salmberg.NewsCatchUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -722,6 +757,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5A8L7XTFM2;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsCatchUITests/Info.plist;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.salmberg.NewsCatchUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

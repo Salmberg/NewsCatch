@@ -111,6 +111,7 @@ struct NewsFeedView: View {
                                                     .padding(.leading, 10)
                                                     .padding(.bottom, 20)
                                                 
+                                                
                                             }
 
                                             Spacer()
