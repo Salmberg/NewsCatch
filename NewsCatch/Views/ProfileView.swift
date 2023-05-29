@@ -17,27 +17,67 @@ struct ProfileView: View {
         NavigationView{
             VStack{
                 HStack{
-                    Image(systemName: "person.crop.circle.fill")
-                        .font(.system(size: 80))
-                        .padding(.leading, 20)
                     Spacer()
-                    Text("Your Profile")
+                    Text("Hej användarnamn")
                         .font(.system(size: 30))
                         .padding(.trailing, 20)
                 }
-                VStack{
-                    NavigationLink(
-                        destination: MyFavouriteArticles()
-                    ) {
-                        HStack {
-                            Text("Mina favorit artiklar")
-                                .font(.title)
-                                .bold()
-                                .padding(.leading, 10)
-                        }
-                    }
-                    .buttonStyle(BorderedProminentButtonStyle())
+                .background(Color.gray)
+                HStack{
+                    VStack{
+                        Image(systemName: "person.crop.circle.fill")
+                            .font(.system(size: 80))
+                            .padding(.leading, 20)
                     
+                            Button(action: {
+                                do{
+                                    //Method for changing picture
+                                } catch let changeImageError as NSError {
+                                    print("Error changing profile image: %@", changeImageError)
+                                }
+                            }){
+                                Text("Byt bild")
+                            }
+                    }
+                    Spacer()
+                    VStack{
+                        Text("Ditt användarnamn")
+                            .font(.system(size: 20))
+                            .padding(.trailing, 20)
+                        Text("Din epost")
+                            .font(.system(size: 20))
+                            .padding(.trailing, 20)
+                        }
+                    
+                    }
+                    .background(Color.gray)
+                HStack{
+                    
+                    Button(action: {
+                        isAddArticle = true
+                    }, label: {
+                        Image(systemName: "note.text.badge.plus")
+                            .font(.system(size: 35))
+                            .padding(.leading, 25)
+                            .foregroundColor(Color.green)
+                    })
+                    .sheet(isPresented: $isAddArticle){
+                        AddArticleView()
+                    }
+                    
+                    Image(systemName: "heart.text.square.fill")
+                        .font(.system(size: 35))
+                        .padding(.leading, 25)
+                    Image(systemName: "person.text.rectangle.fill")
+                        .font(.system(size: 35))
+                        .padding(.leading, 25)
+                    Image(systemName: "calendar.badge.clock")
+                        .font(.system(size: 35))
+                        .padding(.leading, 25)
+                    
+                }
+                VStack{
+                                       
                     NavigationLink(
                         destination: MyFavouriteAuthors()
                     ) {
@@ -63,6 +103,7 @@ struct ProfileView: View {
                 }
                 .buttonStyle(BorderedProminentButtonStyle())
                 
+                
                 HStack{
                     Button(action: {
                         isAddArticle = true
@@ -82,6 +123,61 @@ struct ProfileView: View {
                     }
                 }
                 
+                VStack{
+                    Text("MINA ARTIKLAR")
+                        .font(.system(size: 30))
+                        .padding(.trailing, 20)
+                    VStack{
+                        Text("MINA FAVORIT SKRIBENTER")
+                            .font(.system(size: 30))
+                            .padding(.trailing, 20)
+                        HStack{
+                            Image(systemName: "person.crop.circle.fill")
+                                .font(.system(size: 80))
+                                .padding(.leading, 20)
+                            Text("Favourite author")
+                                .font(.system(size: 20))
+                                .padding(.leading, 20)
+                            Image(systemName: "person.crop.circle.fill")
+                                .font(.system(size: 80))
+                                .padding(.leading, 20)
+                            Text("Favourite author")
+                                .font(.system(size: 20))
+                                .padding(.leading, 20)
+                            Image(systemName: "person.crop.circle.fill")
+                                .font(.system(size: 80))
+                                .padding(.leading, 20)
+                            Text("Favourite author")
+                                .font(.system(size: 20))
+                                .padding(.leading, 20)
+                        }
+                    }
+                    .padding(.top, 30)
+                    VStack{
+                        Text("FAVORIT ARTIKLAR")
+                            .font(.system(size: 30))
+                            .padding(.trailing, 20)
+                        HStack{
+                            Spacer()
+                            NavigationLink(
+                                destination: MyFavouriteArticles()
+                            ) {
+                                HStack {
+                                    Text("Se fler")
+                                        .font(.title)
+                                        .bold()
+                                        .padding(.leading, 10)
+                                }
+                            }
+                            .buttonStyle(BorderedProminentButtonStyle())
+                            .padding(.trailing, 15)
+                        }
+                        
+                    }
+                }
+                
+                
+                
                 Spacer()
                 
                 Spacer()
@@ -91,8 +187,6 @@ struct ProfileView: View {
                     } catch let signOutError as NSError {
                         print("Error signing out: %@", signOutError)
                     }
-                    
-                    
                 }){
                     Text("Logout")
                 }
