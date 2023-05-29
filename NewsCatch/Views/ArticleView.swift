@@ -16,16 +16,20 @@ struct ArticleView: View {
         VStack {
             ScrollView {
                 Text(article.heading)
+                    .font(.custom("BebasNeue-Regular", size: 30))
+                    .padding()
                     .font(.title)
-                    .padding()
-                
-                Text(Article.dateFormatter.string(from: article.date))
-                    .padding()
                 
                 Text(article.content)
+                    .font(.custom("CrimsonText-Regular", size: 18))
                     .padding()
                 
-               
+                HStack {
+                    Image(systemName: "calendar")
+                    
+                    Text(Article.dateFormatter.string(from: article.date))
+                        .padding()
+                }
             }
             
             Spacer()
