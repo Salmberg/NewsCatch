@@ -104,6 +104,59 @@ struct ProfileView: View {
                                         }
                                     }
                                     .buttonStyle(BorderedProminentButtonStyle())
+                                    .padding(15)
+                                }
+                            }
+                            .background(Color.white)
+                            .cornerRadius(15)
+                            .frame(width: UIScreen.main.bounds.width * 0.9)
+                            
+                        }
+                        .padding(20)
+                        .background(Color.gray)
+                        
+                        ZStack{
+                            VStack{
+                                Text("MINA FAVORIT SKRIBENTER")
+                                    .font(.system(size: 25))
+                                    .padding(15)
+                                HStack{
+                                    VStack{
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .font(.system(size: 80))
+                                            .padding(15)
+                                        Text("Skribent 1")
+                                            .font(.system(size: 15))
+                                    }
+                                    VStack{
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .font(.system(size: 80))
+                                            .padding(15)
+                                        Text("Skribent 2")
+                                            .font(.system(size: 15))
+                                    }
+                                    VStack{
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .font(.system(size: 80))
+                                            .padding(15)
+                                        Text("Skribent 3")
+                                            .font(.system(size: 15))
+                                    }
+                                    
+                                }
+                                HStack{
+                                    Spacer()
+                                    NavigationLink(
+                                        destination: MyFavouriteAuthors()
+                                    ) {
+                                        HStack {
+                                            Text("Se fler")
+                                                .font(.title)
+                                                .bold()
+                                                .padding(.leading, 10)
+                                        }
+                                    }
+                                    .buttonStyle(BorderedProminentButtonStyle())
                                     .padding(.trailing, 15)
                                 }
                             }
@@ -111,55 +164,7 @@ struct ProfileView: View {
                             .cornerRadius(15)
                             .frame(width: UIScreen.main.bounds.width * 0.9)
                         }
-                        .padding(20)
-                        .background(Color.gray)
                         
-                        
-                        VStack{
-                            Text("MINA FAVORIT SKRIBENTER")
-                                .font(.system(size: 25))
-                                .padding(15)
-                            HStack{
-                                VStack{
-                                    Image(systemName: "person.crop.circle.fill")
-                                        .font(.system(size: 80))
-                                        .padding(15)
-                                    Text("Skribent 1")
-                                        .font(.system(size: 15))
-                                }
-                                VStack{
-                                    Image(systemName: "person.crop.circle.fill")
-                                        .font(.system(size: 80))
-                                        .padding(15)
-                                    Text("Skribent 2")
-                                        .font(.system(size: 15))
-                                }
-                                VStack{
-                                    Image(systemName: "person.crop.circle.fill")
-                                        .font(.system(size: 80))
-                                        .padding(15)
-                                    Text("Skribent 3")
-                                        .font(.system(size: 15))
-                                }
-                                
-                            }
-                            HStack{
-                                Spacer()
-                                NavigationLink(
-                                    destination: MyFavouriteAuthors()
-                                ) {
-                                    HStack {
-                                        Text("Se fler")
-                                            .font(.title)
-                                            .bold()
-                                            .padding(.leading, 10)
-                                    }
-                                }
-                                .buttonStyle(BorderedProminentButtonStyle())
-                                .padding(.trailing, 15)
-                            }
-                        }
-                        .padding(20)
                         VStack{
                             Text("FAVORIT ARTIKLAR")
                                 .font(.system(size: 25))
