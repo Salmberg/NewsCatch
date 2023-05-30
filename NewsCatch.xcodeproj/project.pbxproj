@@ -19,6 +19,8 @@
 		5C6412562A2064B500DFCB62 /* MyFavouriteArticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6412552A2064B500DFCB62 /* MyFavouriteArticles.swift */; };
 		5C6412582A20650400DFCB62 /* MyFavouriteAuthors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6412572A20650400DFCB62 /* MyFavouriteAuthors.swift */; };
 		5C8487632A2527DD001312EB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8487622A2527DD001312EB /* ProfileViewModel.swift */; };
+		5C8487872A25D0E6001312EB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8487862A25D0E6001312EB /* Category.swift */; };
+		5C8487892A25F5B5001312EB /* FirebaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8487882A25F5B5001312EB /* FirebaseImage.swift */; };
 		5CA8482B2A22FAE200C88A64 /* MyArticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA8482A2A22FAE200C88A64 /* MyArticles.swift */; };
 		CB6952BF2A1BD9E3003D494C /* NewsCatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6952BE2A1BD9E3003D494C /* NewsCatchApp.swift */; };
 		CB6952C12A1BD9E3003D494C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6952C02A1BD9E3003D494C /* ContentView.swift */; };
@@ -87,6 +89,8 @@
 		5C6412552A2064B500DFCB62 /* MyFavouriteArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavouriteArticles.swift; sourceTree = "<group>"; };
 		5C6412572A20650400DFCB62 /* MyFavouriteAuthors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFavouriteAuthors.swift; sourceTree = "<group>"; };
 		5C8487622A2527DD001312EB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		5C8487862A25D0E6001312EB /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		5C8487882A25F5B5001312EB /* FirebaseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImage.swift; sourceTree = "<group>"; };
 		5CA8482A2A22FAE200C88A64 /* MyArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyArticles.swift; sourceTree = "<group>"; };
 		CB6952BB2A1BD9E3003D494C /* NewsCatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsCatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6952BE2A1BD9E3003D494C /* NewsCatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCatchApp.swift; sourceTree = "<group>"; };
@@ -237,11 +241,11 @@
 		CB6952EB2A1BDA4B003D494C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5C8487862A25D0E6001312EB /* Category.swift */,
 				CB6952EC2A1BDA68003D494C /* User.swift */,
 				CB6952EE2A1BDA81003D494C /* Article.swift */,
 				CB6952F02A1BDAA4003D494C /* ArticleLists.swift */,
 				CB6952F22A1BDADE003D494C /* Location.swift */,
-				7772FAB02A1FAA41000EC50D /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				CB6953152A1BDD8F003D494C /* NAButton.swift */,
+				5C8487882A25F5B5001312EB /* FirebaseImage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 			files = (
 				CB6952ED2A1BDA68003D494C /* User.swift in Sources */,
 				5C64124A2A1E1E3000DFCB62 /* SportsView.swift in Sources */,
+				5C8487892A25F5B5001312EB /* FirebaseImage.swift in Sources */,
 				3309C2262A23CFD10036B1C6 /* ImageView.swift in Sources */,
 				5C6412502A1E1EEC00DFCB62 /* AmusementViewModel.swift in Sources */,
 				CB6952C12A1BD9E3003D494C /* ContentView.swift in Sources */,
@@ -466,7 +472,6 @@
 				5C6412582A20650400DFCB62 /* MyFavouriteAuthors.swift in Sources */,
 				CB6952FA2A1BDB62003D494C /* ContentViewModel.swift in Sources */,
 				5C64124C2A1E1E6200DFCB62 /* ForeignView.swift in Sources */,
-				7772FAB12A1FAA41000EC50D /* Category.swift in Sources */,
 				CB69530F2A1BDD10003D494C /* AddArticleView.swift in Sources */,
 				CB6953112A1BDD29003D494C /* AdminView.swift in Sources */,
 				5C6412542A1E1F9E00DFCB62 /* SportsViewModel.swift in Sources */,
@@ -485,6 +490,7 @@
 				CB69530D2A1BDCF0003D494C /* ArticleView.swift in Sources */,
 				CB69530B2A1BDCCE003D494C /* NewsFeedView.swift in Sources */,
 				CB6952F82A1BDB3E003D494C /* RegisterViewModel.swift in Sources */,
+				5C8487872A25D0E6001312EB /* Category.swift in Sources */,
 				3309C2282A23CFF00036B1C6 /* ImageViewModel.swift in Sources */,
 				5C6412562A2064B500DFCB62 /* MyFavouriteArticles.swift in Sources */,
 				CB6952F32A1BDADE003D494C /* Location.swift in Sources */,

@@ -28,7 +28,7 @@ struct ProfileView: View {
                         .ignoresSafeArea()
                         HStack(){
                             VStack{
-                                Image(systemName: "person.crop.circle.fill")
+                                FirebaseImage(id: "swift.jpg")
                                     .font(.system(size: 80))
                                     .padding(.leading, 20)
                                 
@@ -207,6 +207,7 @@ struct ProfileView: View {
                 }
             }
             .background(Color.gray)
+            .ignoresSafeArea()
         }
     }
 }
