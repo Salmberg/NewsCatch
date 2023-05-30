@@ -13,6 +13,7 @@ class RegisterViewModel: ObservableObject{
     @Published var email = ""
     @Published var name = ""
     @Published var password = ""
+    @Published var username = ""
     
     init() {}
     
@@ -32,6 +33,7 @@ class RegisterViewModel: ObservableObject{
     private func insertUserRecord(id: String) {
         let newUser = User(id: id,
                            name:name,
+                           username:username,
                            email:email,
                            joined: Date().timeIntervalSince1970)
         
@@ -46,6 +48,7 @@ class RegisterViewModel: ObservableObject{
     private func validate() -> Bool {
         guard !name.trimmingCharacters(in: .whitespaces).isEmpty,
               !email.trimmingCharacters(in: .whitespaces).isEmpty,
+              !username.trimmingCharacters(in: .whitespaces).isEmpty,
               !password.trimmingCharacters(in: .whitespaces).isEmpty else {
             return false
         }
@@ -56,6 +59,10 @@ class RegisterViewModel: ObservableObject{
         
         guard password.count >= 6 else {
                 return false
+        }
+        
+        guard username.count >= 3 else {
+            return false
         }
         
         return true

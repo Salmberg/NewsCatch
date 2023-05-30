@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseAuth
 
 class AddArticleViewModel: ObservableObject{
     
@@ -16,11 +17,17 @@ class AddArticleViewModel: ObservableObject{
     @Published var textContent : String = "Enter your article text here..."
     @Published var categoryContent : Category = Category.unspecified // Actual category
     @Published var categoryString : String = "Unspecified" // String for drop-down menu
+    //Current users username
+    var username : String
     
     //Message for the posting alert pop-up
     let alertMessage = "Thank you for your submission. Your article will soon be inspected by an admin. If approved, it will be published for other users to see."
     
-    init(){}
+    init(){
+        //temporarily set as unknown
+        self.username = "unknown"
+        updateUsername()
+    }
     
     func setCategory(cat: Category){
             categoryContent = cat
@@ -30,12 +37,24 @@ class AddArticleViewModel: ObservableObject{
         }
     
     func requestArticle(){
-        let newArticle = Article(heading:titleContent, content: textContent, category: categoryContent)
+        
+        let newArticle = Article(heading:titleContent, content: textContent, writer: username, category: categoryContent)
         //upload to firebase
         do{
             try db.collection("RequestedArticles").addDocument(from: newArticle)
         } catch{
             print("Error sending to Database")
+        }
+    }
+    
+    func updateUsername(){
+        let currentUserID = Auth.auth().currentUser?.uid ?? "unknown"
+        db.collection("users").document(currentUserID).getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.username = document.get("username") as? String ?? "unknown"
+            } else {
+                print("Username not found")
+            }
         }
     }
     
