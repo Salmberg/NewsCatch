@@ -16,6 +16,7 @@ struct Article: Codable, Identifiable, Hashable {
     var category: Category?
     //var picture: UIImage? // Temporarily commented out to conform to "codable"
     var date: Date // Add a property to store the creation date and time
+    var writer: String //Username of the user who made this article
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(heading)
@@ -36,12 +37,13 @@ struct Article: Codable, Identifiable, Hashable {
     }
 
     
-    init(heading: String, content: String, picture: UIImage? = nil, category: Category?) {
+    init(heading: String, content: String, writer: String, picture: UIImage? = nil, category: Category?) {
         self.heading = heading
         self.content = content
         self.category = category ?? Category.unspecified //Unspecified if given nothing
         //self.picture = picture // Temporarily commented out to conform to "codable"
         self.date = Date() // Set the current date and time during initialization
+        self.writer = writer
     }
 }
 

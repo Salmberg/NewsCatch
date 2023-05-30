@@ -23,12 +23,19 @@ struct ArticleView: View {
                 Text(article.content)
                     .font(.custom("CrimsonText-Regular", size: 18))
                     .padding()
-                
-                HStack {
-                    Image(systemName: "calendar")
-                    
-                    Text(Article.dateFormatter.string(from: article.date))
-                        .padding()
+                VStack{
+                    HStack{
+                        Image(systemName: "person")
+                        
+                        Text(article.writer)
+                            .padding()
+                    }
+                    HStack {
+                        Image(systemName: "calendar")
+                        
+                        Text(Article.dateFormatter.string(from: article.date))
+                            .padding()
+                    }
                 }
             }
             
@@ -49,7 +56,7 @@ struct ArticleView: View {
 
 struct ArticleView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleArticle = Article(heading: "Sample Article", content: "This is a sample article content.", category: Category.unspecified)
+        let sampleArticle = Article(heading: "Sample Article", content: "This is a sample article content.", writer: "unknown", category: Category.unspecified)
         return ArticleView(article: sampleArticle)
     }
 }
