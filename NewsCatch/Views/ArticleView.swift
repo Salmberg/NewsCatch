@@ -16,16 +16,20 @@ struct ArticleView: View {
         VStack {
             ScrollView {
                 Text(article.heading)
+                    .font(.custom("BebasNeue-Regular", size: 30))
+                    .padding()
                     .font(.title)
-                    .padding()
-                
-                Text(Article.dateFormatter.string(from: article.date))
-                    .padding()
                 
                 Text(article.content)
+                    .font(.custom("CrimsonText-Regular", size: 18))
                     .padding()
                 
-               
+                HStack {
+                    Image(systemName: "calendar")
+                    
+                    Text(Article.dateFormatter.string(from: article.date))
+                        .padding()
+                }
             }
             
             Spacer()
@@ -45,7 +49,7 @@ struct ArticleView: View {
 
 struct ArticleView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleArticle = Article(heading: "Sample Article", content: "This is a sample article content.", category: "foreign")
+        let sampleArticle = Article(heading: "Sample Article", content: "This is a sample article content.", category: Category.unspecified)
         return ArticleView(article: sampleArticle)
     }
 }

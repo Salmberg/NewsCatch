@@ -15,7 +15,7 @@ class SportsViewModel: ObservableObject{
     
     func getArticlesFromDb(){
         sportsArticles.removeAll()
-        db.collection("PublishedArticles").whereField("category", isEqualTo: "sports").addSnapshotListener() {
+        db.collection("PublishedArticles").addSnapshotListener() {
                 snapshot, error in
                 
                 guard let snapshot = snapshot else {return}
@@ -25,7 +25,9 @@ class SportsViewModel: ObservableObject{
                     for document in snapshot.documents{
                         do{
                             let article = try document.data(as: Article.self)
-                            self.sportsArticles.append(article)
+                            if(article.category == Category.sports){
+                                self.sportsArticles.append(article)
+                            }
                         }catch{
                             print("Error reading from FireStore")
                         }

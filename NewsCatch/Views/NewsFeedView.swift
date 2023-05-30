@@ -15,6 +15,14 @@ struct NewsFeedView: View {
     @State private var latestNewsSelected = true
     @State private var allNewsSelected = false
     @State private var selectedArticle: Article? = nil
+    
+    var filteredArticles: [Article] {
+        if latestNewsSelected {
+            return viewModel.articles.sorted { $0.date > $1.date }
+        } else {
+            return viewModel.articles.shuffled()
+        }
+    }
 
     var body: some View {
         NavigationView {
@@ -80,23 +88,30 @@ struct NewsFeedView: View {
                     VStack { // Move the NavigationView inside a VStack
                         ScrollView {
                             VStack(spacing: 0) {
-                                ForEach(viewModel.articles, id: \.heading) { article in
-                                    NavigationLink(
+                                ForEach(filteredArticles, id: \.heading) { article in                                    NavigationLink(
                                         destination: ArticleView(article: article),
                                         tag: article,
                                         selection: $selectedArticle
                                     ) {
                                         HStack {
-                                            VStack{
+                                            VStack(alignment: .leading, spacing: 0) {
+                                                HStack{
+                                                    Image(systemName: "clock")
+                                                        .resizable()
+                                                        .frame(width: 15, height: 15)
+                                                        .foregroundColor(.gray)
+                                                        .padding(.leading, 10)
+                                                    Text(article.relativeDate)
+                                                        .foregroundColor(.gray)
+                                                        
+                                                }
                                                 Text(article.heading)
                                                     .font(.title)
                                                     .bold()
                                                     .padding(.leading, 10)
+                                                    .padding(.bottom, 20)
                                                 
-                                                Text(article.relativeDate)
-                                                    .padding(.trailing, 130)
-
-
+                                                
                                             }
 
                                             Spacer()

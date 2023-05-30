@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3309C2262A23CFD10036B1C6 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309C2252A23CFD10036B1C6 /* ImageView.swift */; };
+		3309C2282A23CFF00036B1C6 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309C2272A23CFF00036B1C6 /* ImageViewModel.swift */; };
+		3309C22B2A23D0100036B1C6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3309C22A2A23D0100036B1C6 /* FirebaseStorage */; };
 		5C64124A2A1E1E3000DFCB62 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6412492A1E1E3000DFCB62 /* SportsView.swift */; };
 		5C64124C2A1E1E6200DFCB62 /* ForeignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64124B2A1E1E6200DFCB62 /* ForeignView.swift */; };
 		5C64124E2A1E1E7900DFCB62 /* AmusementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64124D2A1E1E7900DFCB62 /* AmusementView.swift */; };
@@ -49,6 +52,10 @@
 		CB7AAA2A2A1BE3950003CB48 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CB7AAA292A1BE3950003CB48 /* FirebaseFirestoreSwift */; };
 		CBE65EDF2A1E15FE003570E1 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE65EDE2A1E15FE003570E1 /* RegisterView.swift */; };
 		CBE65EE32A1E190E003570E1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EE22A1E190E003570E1 /* GoogleService-Info.plist */; };
+		CBE65EEA2A24EB5C003570E1 /* AoboshiOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EE92A24E9F7003570E1 /* AoboshiOne-Regular.ttf */; };
+		CBE65EEC2A24ECB5003570E1 /* Font-heading.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EE82A24E92A003570E1 /* Font-heading.ttf */; };
+		CBE65EEE2A24EE24003570E1 /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EED2A24EDD8003570E1 /* BebasNeue-Regular.ttf */; };
+		CBE65EF02A24EEDA003570E1 /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EEF2A24EECF003570E1 /* CrimsonText-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +76,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3309C2252A23CFD10036B1C6 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		3309C2272A23CFF00036B1C6 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		5C6412492A1E1E3000DFCB62 /* SportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsView.swift; sourceTree = "<group>"; };
 		5C64124B2A1E1E6200DFCB62 /* ForeignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeignView.swift; sourceTree = "<group>"; };
 		5C64124D2A1E1E7900DFCB62 /* AmusementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmusementView.swift; sourceTree = "<group>"; };
@@ -111,6 +120,11 @@
 		CB7AAA212A1BDEF40003CB48 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CBE65EDE2A1E15FE003570E1 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		CBE65EE22A1E190E003570E1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CBE65EE62A24E546003570E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CBE65EE82A24E92A003570E1 /* Font-heading.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font-heading.ttf"; sourceTree = "<group>"; };
+		CBE65EE92A24E9F7003570E1 /* AoboshiOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AoboshiOne-Regular.ttf"; sourceTree = "<group>"; };
+		CBE65EED2A24EDD8003570E1 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
+		CBE65EEF2A24EECF003570E1 /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +133,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB7AAA262A1BE3950003CB48 /* FirebaseAuth in Frameworks */,
+				3309C22B2A23D0100036B1C6 /* FirebaseStorage in Frameworks */,
 				CB7AAA282A1BE3950003CB48 /* FirebaseFirestore in Frameworks */,
 				CB7AAA2A2A1BE3950003CB48 /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -141,6 +156,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3309C2292A23D0100036B1C6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CB6952B22A1BD9E3003D494C = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +170,7 @@
 				CB6952CE2A1BD9E4003D494C /* NewsCatchTests */,
 				CB6952D82A1BD9E4003D494C /* NewsCatchUITests */,
 				CB6952BC2A1BD9E3003D494C /* Products */,
+				3309C2292A23D0100036B1C6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,6 +187,7 @@
 		CB6952BD2A1BD9E3003D494C /* NewsCatch */ = {
 			isa = PBXGroup;
 			children = (
+				CBE65EEB2A24EBC0003570E1 /* Fonts */,
 				CBE65EE22A1E190E003570E1 /* GoogleService-Info.plist */,
 				CB6953032A1BDC35003D494C /* Views */,
 				CB6952F42A1BDAFA003D494C /* ViewModels */,
@@ -195,6 +219,7 @@
 		CB6952D82A1BD9E4003D494C /* NewsCatchUITests */ = {
 			isa = PBXGroup;
 			children = (
+				CBE65EE62A24E546003570E1 /* Info.plist */,
 				CB6952D92A1BD9E4003D494C /* NewsCatchUITests.swift */,
 				CB6952DB2A1BD9E4003D494C /* NewsCatchUITestsLaunchTests.swift */,
 			);
@@ -216,6 +241,7 @@
 				CB6952EE2A1BDA81003D494C /* Article.swift */,
 				CB6952F02A1BDAA4003D494C /* ArticleLists.swift */,
 				CB6952F22A1BDADE003D494C /* Location.swift */,
+				7772FAB02A1FAA41000EC50D /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -233,6 +259,7 @@
 				5C64124F2A1E1EEC00DFCB62 /* AmusementViewModel.swift */,
 				5C6412512A1E1F5800DFCB62 /* ForeignViewModel.swift */,
 				5C6412532A1E1F9E00DFCB62 /* SportsViewModel.swift */,
+				3309C2272A23CFF00036B1C6 /* ImageViewModel.swift */,
 				5C8487622A2527DD001312EB /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
@@ -254,6 +281,7 @@
 				5C6412492A1E1E3000DFCB62 /* SportsView.swift */,
 				5C64124B2A1E1E6200DFCB62 /* ForeignView.swift */,
 				5C64124D2A1E1E7900DFCB62 /* AmusementView.swift */,
+				3309C2252A23CFD10036B1C6 /* ImageView.swift */,
 				5C6412552A2064B500DFCB62 /* MyFavouriteArticles.swift */,
 				5C6412572A20650400DFCB62 /* MyFavouriteAuthors.swift */,
 				5CA8482A2A22FAE200C88A64 /* MyArticles.swift */,
@@ -267,6 +295,17 @@
 				CB6953152A1BDD8F003D494C /* NAButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		CBE65EEB2A24EBC0003570E1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CBE65EE82A24E92A003570E1 /* Font-heading.ttf */,
+				CBE65EEF2A24EECF003570E1 /* CrimsonText-Regular.ttf */,
+				CBE65EED2A24EDD8003570E1 /* BebasNeue-Regular.ttf */,
+				CBE65EE92A24E9F7003570E1 /* AoboshiOne-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +328,7 @@
 				CB7AAA252A1BE3950003CB48 /* FirebaseAuth */,
 				CB7AAA272A1BE3950003CB48 /* FirebaseFirestore */,
 				CB7AAA292A1BE3950003CB48 /* FirebaseFirestoreSwift */,
+				3309C22A2A23D0100036B1C6 /* FirebaseStorage */,
 			);
 			productName = NewsCatch;
 			productReference = CB6952BB2A1BD9E3003D494C /* NewsCatch.app */;
@@ -381,6 +421,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBE65EF02A24EEDA003570E1 /* CrimsonText-Regular.ttf in Resources */,
+				CBE65EEE2A24EE24003570E1 /* BebasNeue-Regular.ttf in Resources */,
+				CBE65EEA2A24EB5C003570E1 /* AoboshiOne-Regular.ttf in Resources */,
+				CBE65EEC2A24ECB5003570E1 /* Font-heading.ttf in Resources */,
 				CB6952C62A1BD9E4003D494C /* Preview Assets.xcassets in Resources */,
 				CB6952C32A1BD9E4003D494C /* Assets.xcassets in Resources */,
 				CBE65EE32A1E190E003570E1 /* GoogleService-Info.plist in Resources */,
@@ -410,6 +454,7 @@
 			files = (
 				CB6952ED2A1BDA68003D494C /* User.swift in Sources */,
 				5C64124A2A1E1E3000DFCB62 /* SportsView.swift in Sources */,
+				3309C2262A23CFD10036B1C6 /* ImageView.swift in Sources */,
 				5C6412502A1E1EEC00DFCB62 /* AmusementViewModel.swift in Sources */,
 				CB6952C12A1BD9E3003D494C /* ContentView.swift in Sources */,
 				CB6953132A1BDD48003D494C /* MapView.swift in Sources */,
@@ -421,6 +466,7 @@
 				5C6412582A20650400DFCB62 /* MyFavouriteAuthors.swift in Sources */,
 				CB6952FA2A1BDB62003D494C /* ContentViewModel.swift in Sources */,
 				5C64124C2A1E1E6200DFCB62 /* ForeignView.swift in Sources */,
+				7772FAB12A1FAA41000EC50D /* Category.swift in Sources */,
 				CB69530F2A1BDD10003D494C /* AddArticleView.swift in Sources */,
 				CB6953112A1BDD29003D494C /* AdminView.swift in Sources */,
 				5C6412542A1E1F9E00DFCB62 /* SportsViewModel.swift in Sources */,
@@ -439,6 +485,7 @@
 				CB69530D2A1BDCF0003D494C /* ArticleView.swift in Sources */,
 				CB69530B2A1BDCCE003D494C /* NewsFeedView.swift in Sources */,
 				CB6952F82A1BDB3E003D494C /* RegisterViewModel.swift in Sources */,
+				3309C2282A23CFF00036B1C6 /* ImageViewModel.swift in Sources */,
 				5C6412562A2064B500DFCB62 /* MyFavouriteArticles.swift in Sources */,
 				CB6952F32A1BDADE003D494C /* Location.swift in Sources */,
 			);
@@ -602,6 +649,10 @@
 				DEVELOPMENT_TEAM = 5A8L7XTFM2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsCatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -631,6 +682,10 @@
 				DEVELOPMENT_TEAM = 5A8L7XTFM2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsCatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -697,6 +752,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5A8L7XTFM2;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsCatchUITests/Info.plist;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.salmberg.NewsCatchUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -715,6 +771,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5A8L7XTFM2;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NewsCatchUITests/Info.plist;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.salmberg.NewsCatchUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -778,6 +835,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3309C22A2A23D0100036B1C6 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CB7AAA242A1BE3950003CB48 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		CB7AAA252A1BE3950003CB48 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CB7AAA242A1BE3950003CB48 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
