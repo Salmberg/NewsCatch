@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
+
 
 struct NewsFeedView: View {
     @StateObject var viewModel = NewsFeedViewModel()
@@ -15,6 +18,8 @@ struct NewsFeedView: View {
     @State private var latestNewsSelected = true
     @State private var allNewsSelected = false
     @State private var selectedArticle: Article? = nil
+    @State private var selectedArticles: Set<Article> = []
+    
     
     var filteredArticles: [Article] {
         if latestNewsSelected {
@@ -23,7 +28,7 @@ struct NewsFeedView: View {
             return viewModel.articles.shuffled()
         }
     }
-
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -39,103 +44,117 @@ struct NewsFeedView: View {
                     .edgesIgnoringSafeArea(.top)
                     .frame(height: 110) // Adjust the height as needed
                     
-                 
-                        HStack{
-                            ZStack {
-                                Button(action: {
-                                    latestNewsSelected.toggle()
-                                    allNewsSelected = false // Deselect the "All news" button
-                                }) {
-                                    Text("Latest news")
-                                        .font(.title2)
-                                        .bold()
-                                        .padding(.leading, 30)
-                                        .foregroundColor(latestNewsSelected ? .orange : .white)
-                                }
-                                
-                                Rectangle()
-                                    .fill(Color.orange)
-                                    .frame(height: 2)
-                                    .padding(.top, 45) // Adjust the padding to align the thin line with the selected button
-                                    .opacity(latestNewsSelected ? 1 : 0)
-                            }
-                            
-                            Spacer()
-                            
-                            ZStack {
-                                Button(action: {
-                                    allNewsSelected.toggle()
-                                    latestNewsSelected = false // Deselect the "Latest news" button
-                                }) {
-                                    Text("All news")
-                                        .font(.title2)
-                                        .bold()
-                                        .padding(10)
-                                        .padding(.trailing, 30)
-                                        .foregroundColor(allNewsSelected ? .orange : .white)
-                                }
-                                
-                                Rectangle()
-                                    .fill(Color.orange)
-                                    .frame(height: 2)
-                                    .padding(.top, 45) // Adjust the padding to align the thin line with the selected button
-                                    .opacity(allNewsSelected ? 1 : 0)
-                            }
-                        }
-                        .background(Color.gray)
                     
-
+                    HStack{
+                        ZStack {
+                            Button(action: {
+                                latestNewsSelected.toggle()
+                                allNewsSelected = false // Deselect the "All news" button
+                            }) {
+                                Text("Latest news")
+                                    .font(.title2)
+                                    .bold()
+                                    .padding(.leading, 30)
+                                    .foregroundColor(latestNewsSelected ? .orange : .white)
+                            }
+                            
+                            Rectangle()
+                                .fill(Color.orange)
+                                .frame(height: 2)
+                                .padding(.top, 45) // Adjust the padding to align the thin line with the selected button
+                                .opacity(latestNewsSelected ? 1 : 0)
+                        }
+                        
+                        Spacer()
+                        
+                        ZStack {
+                            Button(action: {
+                                allNewsSelected.toggle()
+                                latestNewsSelected = false // Deselect the "Latest news" button
+                            }) {
+                                Text("All news")
+                                    .font(.title2)
+                                    .bold()
+                                    .padding(10)
+                                    .padding(.trailing, 30)
+                                    .foregroundColor(allNewsSelected ? .orange : .white)
+                            }
+                            
+                            Rectangle()
+                                .fill(Color.orange)
+                                .frame(height: 2)
+                                .padding(.top, 45) // Adjust the padding to align the thin line with the selected button
+                                .opacity(allNewsSelected ? 1 : 0)
+                        }
+                    }
+                    .background(Color.gray)
+                    
+                    
                     VStack { // Move the NavigationView inside a VStack
                         ScrollView {
                             VStack(spacing: 0) {
                                 ForEach(filteredArticles, id: \.heading) { article in                                    NavigationLink(
-                                        destination: ArticleView(article: article),
-                                        tag: article,
-                                        selection: $selectedArticle
-                                    ) {
-                                        HStack {
-                                            VStack(alignment: .leading, spacing: 0) {
-                                                HStack{
-                                                    Image(systemName: "clock")
-                                                        .resizable()
-                                                        .frame(width: 15, height: 15)
-                                                        .foregroundColor(.gray)
-                                                        .padding(.leading, 10)
-                                                    Text(article.relativeDate)
-                                                        .foregroundColor(.gray)
-                                                        
-                                                }
-                                                Text(article.heading)
-                                                    .font(.title)
-                                                    .bold()
+                                    destination: ArticleView(article: article),
+                                    tag: article,
+                                    selection: $selectedArticle
+                                ) {
+                                    HStack {
+                                        VStack(alignment: .leading, spacing: 0) {
+                                            HStack{
+                                                Image(systemName: "clock")
+                                                    .resizable()
+                                                    .frame(width: 15, height: 15)
+                                                    .foregroundColor(.gray)
                                                     .padding(.leading, 10)
-                                                    .padding(.bottom, 20)
-                                                
+                                                Text(article.relativeDate)
+                                                    .foregroundColor(.gray)
                                                 
                                             }
-
-                                            Spacer()
-
-                                            Image("Image")
-                                                .resizable()
-                                                .frame(width: 50, height: 50)
-                                                .padding(10)
+                                            Text(article.heading)
+                                                .font(.title)
+                                                .bold()
+                                                .padding(.leading, 10)
+                                                .padding(.bottom, 20)
+                                            
+                                            
                                         }
+                                        
+                                        Spacer()
+                                        
+                                        Image("Image")
+                                            .resizable()
+                                            .frame(width: 50, height: 50)
+                                            .padding(10)
                                     }
-                                    .buttonStyle(PlainButtonStyle())
-
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                    
                                     Divider()
                                         .padding(.horizontal, 10)
+                                    
+                                    Image(systemName: article.isStarred ? "star.fill" : "star") // Check if isStarred is true
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(article.isStarred ? .yellow : .gray) // Use filled star if isStarred is true
+                                        .padding(.trailing, 10)
+                                        .onTapGesture {
+                                            // Use a mutable reference to the article by declaring it as `var`
+                                            if let index = viewModel.articles.firstIndex(of: article) {
+                                                viewModel.articles[index].isStarred.toggle()
+                                                viewModel.saveArticle(viewModel.articles[index])
+                                            }
+                                        }
+                                    
                                 }
                             }
                         }
                         .frame(maxHeight: .infinity)
-
+                        
                         Spacer()
                     }
                     .navigationBarTitle("", displayMode: .inline)
                 }
-
+                
                 // Menu view
                 MenuView(isMenuActive: $isMenuActive)
                     .frame(width: UIScreen.main.bounds.width * 1) // Adjust the width as needed

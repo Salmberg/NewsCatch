@@ -56,7 +56,7 @@ struct ArticleView: View {
 
 struct ArticleView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleArticle = Article(heading: "Sample Article", content: "This is a sample article content.", writer: "unknown", category: Category.unspecified)
+        let sampleArticle = Article(heading: "Sample Article", content: "This is a sample article content.", writer: "unknown", category: Category.unspecified, isStarred: false)
         return ArticleView(article: sampleArticle)
     }
 }
