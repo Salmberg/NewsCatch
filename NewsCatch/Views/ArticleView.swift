@@ -6,39 +6,33 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ArticleView: View {
     var article: Article
     @Environment(\.presentationMode) var presentationMode
-    
-    
+
     var body: some View {
         VStack {
             ScrollView {
-                Text(article.heading)
-                    .font(.custom("BebasNeue-Regular", size: 30))
-                    .padding()
-                    .font(.title)
-                
-                Text(article.content)
-                    .font(.custom("CrimsonText-Regular", size: 18))
-                    .padding()
-                VStack{
-                    HStack{
-                        Image(systemName: "person")
-                        
-                        Text(article.writer)
-                            .padding()
-                    }
-                    HStack {
-                        Image(systemName: "calendar")
-                        
-                        Text(Article.dateFormatter.string(from: article.date))
-                            .padding()
-                    }
+                if let pictureURL = article.pictureURL {
+                    KFImage(URL(string: pictureURL))
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 200)
                 }
+
+                Text(article.heading)
+                    .font(.title)
+                    .padding()
+
+                Text(Article.dateFormatter.string(from: article.date))
+                    .padding()
+
+                Text(article.content)
+                    .padding()
             }
-            
+
             Spacer()
         }
         .navigationBarBackButtonHidden(true)
@@ -53,10 +47,9 @@ struct ArticleView: View {
     }
 }
 
-
-struct ArticleView_Previews: PreviewProvider {
-    static var previews: some View {
-        let sampleArticle = Article(heading: "Sample Article", content: "This is a sample article content.", writer: "unknown", category: Category.unspecified, isStarred: false)
-        return ArticleView(article: sampleArticle)
-    }
-}
+//struct ArticleView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let sampleArticle = Article(heading: "Sample Article", content: "This is a sample article content.", pictureURL: "https://example.com/image.jpg", category: Category.unspecified)
+//        return ArticleView(article: sampleArticle)
+//    }
+//}

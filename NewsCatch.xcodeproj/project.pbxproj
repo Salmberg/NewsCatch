@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		31E5C9482A266A1B00011406 /* SavedArticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9472A266A1B00011406 /* SavedArticlesView.swift */; };
-		3309C2262A23CFD10036B1C6 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309C2252A23CFD10036B1C6 /* ImageView.swift */; };
-		3309C2282A23CFF00036B1C6 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309C2272A23CFF00036B1C6 /* ImageViewModel.swift */; };
 		3309C22B2A23D0100036B1C6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3309C22A2A23D0100036B1C6 /* FirebaseStorage */; };
+		3334D8062A276D0200871FB3 /* ArticleImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3334D8052A276D0200871FB3 /* ArticleImageViewModel.swift */; };
+		3334D8082A276D2600871FB3 /* ArticleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3334D8072A276D2600871FB3 /* ArticleImageView.swift */; };
+		338283E12A2771A7002F4462 /* ImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338283E02A2771A7002F4462 /* ImagePickerModel.swift */; };
+		338283E32A277710002F4462 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 338283E22A277710002F4462 /* Kingfisher */; };
 		5C64124A2A1E1E3000DFCB62 /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6412492A1E1E3000DFCB62 /* SportsView.swift */; };
 		5C64124C2A1E1E6200DFCB62 /* ForeignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64124B2A1E1E6200DFCB62 /* ForeignView.swift */; };
 		5C64124E2A1E1E7900DFCB62 /* AmusementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C64124D2A1E1E7900DFCB62 /* AmusementView.swift */; };
@@ -75,8 +77,10 @@
 
 /* Begin PBXFileReference section */
 		31E5C9472A266A1B00011406 /* SavedArticlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesView.swift; sourceTree = "<group>"; };
-		3309C2252A23CFD10036B1C6 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
-		3309C2272A23CFF00036B1C6 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
+		3334D8052A276D0200871FB3 /* ArticleImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleImageViewModel.swift; sourceTree = "<group>"; };
+		3334D8072A276D2600871FB3 /* ArticleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleImageView.swift; sourceTree = "<group>"; };
+		3334D8092A276D9600871FB3 /* Kingfisher-master */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Kingfisher-master"; path = "../../Downloads/Kingfisher-master"; sourceTree = "<group>"; };
+		338283E02A2771A7002F4462 /* ImagePickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerModel.swift; sourceTree = "<group>"; };
 		5C6412492A1E1E3000DFCB62 /* SportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsView.swift; sourceTree = "<group>"; };
 		5C64124B2A1E1E6200DFCB62 /* ForeignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeignView.swift; sourceTree = "<group>"; };
 		5C64124D2A1E1E7900DFCB62 /* AmusementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmusementView.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 				3309C22B2A23D0100036B1C6 /* FirebaseStorage in Frameworks */,
 				CB7AAA282A1BE3950003CB48 /* FirebaseFirestore in Frameworks */,
 				CB7AAA2A2A1BE3950003CB48 /* FirebaseFirestoreSwift in Frameworks */,
+				338283E32A277710002F4462 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,13 +160,22 @@
 		3309C2292A23D0100036B1C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3334D8092A276D9600871FB3 /* Kingfisher-master */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3334D80A2A276DDC00871FB3 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		CB6952B22A1BD9E3003D494C = {
 			isa = PBXGroup;
 			children = (
+				3334D80A2A276DDC00871FB3 /* Packages */,
 				CB6952BD2A1BD9E3003D494C /* NewsCatch */,
 				CB6952CE2A1BD9E4003D494C /* NewsCatchTests */,
 				CB6952D82A1BD9E4003D494C /* NewsCatchUITests */,
@@ -255,7 +269,8 @@
 				5C64124F2A1E1EEC00DFCB62 /* AmusementViewModel.swift */,
 				5C6412512A1E1F5800DFCB62 /* ForeignViewModel.swift */,
 				5C6412532A1E1F9E00DFCB62 /* SportsViewModel.swift */,
-				3309C2272A23CFF00036B1C6 /* ImageViewModel.swift */,
+				3334D8052A276D0200871FB3 /* ArticleImageViewModel.swift */,
+				338283E02A2771A7002F4462 /* ImagePickerModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -276,8 +291,8 @@
 				5C6412492A1E1E3000DFCB62 /* SportsView.swift */,
 				5C64124B2A1E1E6200DFCB62 /* ForeignView.swift */,
 				5C64124D2A1E1E7900DFCB62 /* AmusementView.swift */,
-				3309C2252A23CFD10036B1C6 /* ImageView.swift */,
 				31E5C9472A266A1B00011406 /* SavedArticlesView.swift */,
+				3334D8072A276D2600871FB3 /* ArticleImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,6 +337,7 @@
 				CB7AAA272A1BE3950003CB48 /* FirebaseFirestore */,
 				CB7AAA292A1BE3950003CB48 /* FirebaseFirestoreSwift */,
 				3309C22A2A23D0100036B1C6 /* FirebaseStorage */,
+				338283E22A277710002F4462 /* Kingfisher */,
 			);
 			productName = NewsCatch;
 			productReference = CB6952BB2A1BD9E3003D494C /* NewsCatch.app */;
@@ -448,13 +464,13 @@
 				31E5C9482A266A1B00011406 /* SavedArticlesView.swift in Sources */,
 				CB6952ED2A1BDA68003D494C /* User.swift in Sources */,
 				5C64124A2A1E1E3000DFCB62 /* SportsView.swift in Sources */,
-				3309C2262A23CFD10036B1C6 /* ImageView.swift in Sources */,
 				5C6412502A1E1EEC00DFCB62 /* AmusementViewModel.swift in Sources */,
 				CB6952C12A1BD9E3003D494C /* ContentView.swift in Sources */,
 				CB6953132A1BDD48003D494C /* MapView.swift in Sources */,
 				CB6953052A1BDC5C003D494C /* LoginView.swift in Sources */,
 				CB6952BF2A1BD9E3003D494C /* NewsCatchApp.swift in Sources */,
 				5C6412522A1E1F5800DFCB62 /* ForeignViewModel.swift in Sources */,
+				3334D8062A276D0200871FB3 /* ArticleImageViewModel.swift in Sources */,
 				CB6952FC2A1BDB8B003D494C /* NewsFeedViewModel.swift in Sources */,
 				CB6952FA2A1BDB62003D494C /* ContentViewModel.swift in Sources */,
 				5C64124C2A1E1E6200DFCB62 /* ForeignView.swift in Sources */,
@@ -466,17 +482,18 @@
 				CB6952F62A1BDB1D003D494C /* LoginViewModel.swift in Sources */,
 				CB6952F12A1BDAA4003D494C /* ArticleLists.swift in Sources */,
 				5C64124E2A1E1E7900DFCB62 /* AmusementView.swift in Sources */,
+				338283E12A2771A7002F4462 /* ImagePickerModel.swift in Sources */,
 				CB6953092A1BDCA7003D494C /* ProfileView.swift in Sources */,
 				CB6952EF2A1BDA81003D494C /* Article.swift in Sources */,
 				CB6952FE2A1BDBA7003D494C /* ArticleViewModel.swift in Sources */,
 				CB6953002A1BDBE8003D494C /* AddArticleViewModel.swift in Sources */,
 				CB6953022A1BDC06003D494C /* MapViewModel.swift in Sources */,
 				CB6953162A1BDD8F003D494C /* NAButton.swift in Sources */,
+				3334D8082A276D2600871FB3 /* ArticleImageView.swift in Sources */,
 				CB7AAA222A1BDEF40003CB48 /* Extensions.swift in Sources */,
 				CB69530D2A1BDCF0003D494C /* ArticleView.swift in Sources */,
 				CB69530B2A1BDCCE003D494C /* NewsFeedView.swift in Sources */,
 				CB6952F82A1BDB3E003D494C /* RegisterViewModel.swift in Sources */,
-				3309C2282A23CFF00036B1C6 /* ImageViewModel.swift in Sources */,
 				CB6952F32A1BDADE003D494C /* Location.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -829,6 +846,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CB7AAA242A1BE3950003CB48 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		338283E22A277710002F4462 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Kingfisher;
 		};
 		CB7AAA252A1BE3950003CB48 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
