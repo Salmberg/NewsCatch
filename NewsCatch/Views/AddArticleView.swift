@@ -107,7 +107,7 @@ struct AddArticleView: View {
         }
         .background(Color(red: 240/255, green: 240/255, blue: 245/255))
         .sheet(isPresented: $isShowingImagePicker, onDismiss: loadImage) {
-            ImagePicker(selectedImage: $selectedImage)
+            ImagePickerModel(selectedImage: $selectedImage)
         }
     }
     

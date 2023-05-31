@@ -42,7 +42,7 @@ struct ArticleImageView: View {
             }
         }
         .sheet(isPresented: $viewModel.isPickerShowing, onDismiss: nil) {
-            ImagePicker(selectedImage: $viewModel.selectedImage)
+            ImagePickerModel(selectedImage: $viewModel.selectedImage)
         }
         .onAppear {
             viewModel.retrievePhotos()
