@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct ProfileView: View {
     @State var isAddArticle = false
+    @State var isSaved = false
     var body: some View {
         VStack{
             Text("Your Profile")
@@ -29,6 +30,20 @@ struct ProfileView: View {
                 .sheet(isPresented: $isAddArticle){
                     AddArticleView()
                 }
+            }
+            Spacer()
+            Button(action: {
+                isSaved = true
+            }, label: {
+                Text("Saved Articles")
+                    .frame(width: 120, height: 42)
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(20)
+            })
+            .offset(x: -130, y: -200)
+            .sheet(isPresented: $isSaved){
+                SavedArticlesView()
             }
             Spacer()
             Button(action: {

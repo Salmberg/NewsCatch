@@ -31,6 +31,10 @@ struct AdminView: View {
                         
                         Text(article.content)
                         Spacer()
+                        
+                        Text("published by: \(article.writer)")
+                        Text(" in: \(Article.dateFormatter.string(from: article.date))")
+                            .padding()
                         HStack{
                             Spacer()
                             Button(action: {

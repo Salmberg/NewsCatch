@@ -38,7 +38,7 @@ class AddArticleViewModel: ObservableObject{
     
     func requestArticle(){
         
-        let newArticle = Article(heading:titleContent, content: textContent, writer: username, category: categoryContent)
+        let newArticle = Article(heading:titleContent, content: textContent, writer: username, category: categoryContent, isStarred: false)
         //upload to firebase
         do{
             try db.collection("RequestedArticles").addDocument(from: newArticle)

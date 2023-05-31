@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31E5C9482A266A1B00011406 /* SavedArticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9472A266A1B00011406 /* SavedArticlesView.swift */; };
 		3309C2262A23CFD10036B1C6 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309C2252A23CFD10036B1C6 /* ImageView.swift */; };
 		3309C2282A23CFF00036B1C6 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3309C2272A23CFF00036B1C6 /* ImageViewModel.swift */; };
 		3309C22B2A23D0100036B1C6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3309C22A2A23D0100036B1C6 /* FirebaseStorage */; };
@@ -73,6 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31E5C9472A266A1B00011406 /* SavedArticlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesView.swift; sourceTree = "<group>"; };
 		3309C2252A23CFD10036B1C6 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		3309C2272A23CFF00036B1C6 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		5C6412492A1E1E3000DFCB62 /* SportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				5C64124B2A1E1E6200DFCB62 /* ForeignView.swift */,
 				5C64124D2A1E1E7900DFCB62 /* AmusementView.swift */,
 				3309C2252A23CFD10036B1C6 /* ImageView.swift */,
+				31E5C9472A266A1B00011406 /* SavedArticlesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31E5C9482A266A1B00011406 /* SavedArticlesView.swift in Sources */,
 				CB6952ED2A1BDA68003D494C /* User.swift in Sources */,
 				5C64124A2A1E1E3000DFCB62 /* SportsView.swift in Sources */,
 				3309C2262A23CFD10036B1C6 /* ImageView.swift in Sources */,
