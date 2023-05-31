@@ -19,6 +19,7 @@ class NewsFeedViewModel : ObservableObject {
     @Published var category = ""
     @Published var image = UIImage?.self
     @Published var articles: [Article] = []  //En tom lista som håller artiklarna
+    @Published var savedArticles: [Article] = []
     
     
    
@@ -45,35 +46,35 @@ class NewsFeedViewModel : ObservableObject {
                 }
             }
     }
+    
     func saveArticle(_ article: Article) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        let savedArticlesQuery = savedArticlesCollection.whereField("uid", isEqualTo: uid)
-                                                    .whereField("heading", isEqualTo: article.heading)
+        let savedArticlesCollection = db.collection("Userssaved articles")
+            .document(uid)
+            .collection("SavedArticles")
         
-        savedArticlesQuery.getDocuments { [self] snapshot, error in
+        let savedArticlesQuery = savedArticlesCollection
+            .whereField("heading", isEqualTo: article.heading)
+        
+        savedArticlesQuery.getDocuments { snapshot, error in
             if let error = error {
                 print("Error retrieving saved articles: \(error)")
                 return
             }
             
-            if let document = snapshot?.documents.first {
-                // The article is already saved, delete it
-                document.reference.delete { error in
-                    if let error = error {
-                        print("Error deleting article: \(error)")
-                    } else {
-                        print("Article deleted successfully!")
-                    }
-                }
+            if snapshot?.isEmpty == false {
+                // The article is already saved, do not save it again
+                print("Article is already saved!")
             } else {
                 // The article is not saved, save it
                 var data: [String: Any] = [
-                    "uid": uid,
                     "heading": article.heading,
+                    "content": article.content,
+                    "Image": article.pictureURL
                     // Add other article properties you want to store
                 ]
-                data["isStarred"] = true  // Update this based on your logic for setting the star status
+                
                 savedArticlesCollection.addDocument(data: data) { error in
                     if let error = error {
                         print("Error saving article: \(error)")
@@ -85,26 +86,33 @@ class NewsFeedViewModel : ObservableObject {
         }
     }
 
+
+
     func getSavedArticles(completion: @escaping ([Article]) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else {
             completion([])
             return
         }
-        savedArticlesCollection.whereField("uid", isEqualTo: uid).getDocuments { snapshot, error in
+        
+        savedArticlesCollection.getDocuments { snapshot, error in
             if let error = error {
                 print("Error retrieving saved articles: \(error)")
                 completion([])
                 return
             }
+            
             var savedArticles: [Article] = []
+            
             for document in snapshot?.documents ?? [] {
                 if let article = Article(document: document) {
                     savedArticles.append(article)
                 }
             }
+            
             completion(savedArticles)
         }
     }
+
 
 
 }
