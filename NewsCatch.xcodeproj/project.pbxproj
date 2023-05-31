@@ -20,6 +20,9 @@
 		5C6412522A1E1F5800DFCB62 /* ForeignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6412512A1E1F5800DFCB62 /* ForeignViewModel.swift */; };
 		5C6412542A1E1F9E00DFCB62 /* SportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6412532A1E1F9E00DFCB62 /* SportsViewModel.swift */; };
 		7772FAB12A1FAA41000EC50D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7772FAB02A1FAA41000EC50D /* Category.swift */; };
+		77FCAE552A2801EC00852912 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 77FCAE542A2801EC00852912 /* Kingfisher */; };
+		77FCAE572A2805A000852912 /* WriterArticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FCAE562A2805A000852912 /* WriterArticlesView.swift */; };
+		77FCAE592A28065000852912 /* WriterArticlesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FCAE582A28065000852912 /* WriterArticlesViewModel.swift */; };
 		CB6952BF2A1BD9E3003D494C /* NewsCatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6952BE2A1BD9E3003D494C /* NewsCatchApp.swift */; };
 		CB6952C12A1BD9E3003D494C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6952C02A1BD9E3003D494C /* ContentView.swift */; };
 		CB6952C32A1BD9E4003D494C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB6952C22A1BD9E4003D494C /* Assets.xcassets */; };
@@ -88,6 +91,8 @@
 		5C6412512A1E1F5800DFCB62 /* ForeignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForeignViewModel.swift; sourceTree = "<group>"; };
 		5C6412532A1E1F9E00DFCB62 /* SportsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsViewModel.swift; sourceTree = "<group>"; };
 		7772FAB02A1FAA41000EC50D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		77FCAE562A2805A000852912 /* WriterArticlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterArticlesView.swift; sourceTree = "<group>"; };
+		77FCAE582A28065000852912 /* WriterArticlesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterArticlesViewModel.swift; sourceTree = "<group>"; };
 		CB6952BB2A1BD9E3003D494C /* NewsCatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsCatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB6952BE2A1BD9E3003D494C /* NewsCatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCatchApp.swift; sourceTree = "<group>"; };
 		CB6952C02A1BD9E3003D494C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -132,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77FCAE552A2801EC00852912 /* Kingfisher in Frameworks */,
 				CB7AAA262A1BE3950003CB48 /* FirebaseAuth in Frameworks */,
 				3309C22B2A23D0100036B1C6 /* FirebaseStorage in Frameworks */,
 				CB7AAA282A1BE3950003CB48 /* FirebaseFirestore in Frameworks */,
@@ -271,6 +277,7 @@
 				5C6412532A1E1F9E00DFCB62 /* SportsViewModel.swift */,
 				3334D8052A276D0200871FB3 /* ArticleImageViewModel.swift */,
 				338283E02A2771A7002F4462 /* ImagePickerModel.swift */,
+				77FCAE582A28065000852912 /* WriterArticlesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -293,6 +300,7 @@
 				5C64124D2A1E1E7900DFCB62 /* AmusementView.swift */,
 				31E5C9472A266A1B00011406 /* SavedArticlesView.swift */,
 				3334D8072A276D2600871FB3 /* ArticleImageView.swift */,
+				77FCAE562A2805A000852912 /* WriterArticlesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -338,6 +346,7 @@
 				CB7AAA292A1BE3950003CB48 /* FirebaseFirestoreSwift */,
 				3309C22A2A23D0100036B1C6 /* FirebaseStorage */,
 				338283E22A277710002F4462 /* Kingfisher */,
+				77FCAE542A2801EC00852912 /* Kingfisher */,
 			);
 			productName = NewsCatch;
 			productReference = CB6952BB2A1BD9E3003D494C /* NewsCatch.app */;
@@ -413,6 +422,7 @@
 			mainGroup = CB6952B22A1BD9E3003D494C;
 			packageReferences = (
 				CB7AAA242A1BE3950003CB48 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				77FCAE532A2801EC00852912 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = CB6952BC2A1BD9E3003D494C /* Products */;
 			projectDirPath = "";
@@ -473,8 +483,10 @@
 				3334D8062A276D0200871FB3 /* ArticleImageViewModel.swift in Sources */,
 				CB6952FC2A1BDB8B003D494C /* NewsFeedViewModel.swift in Sources */,
 				CB6952FA2A1BDB62003D494C /* ContentViewModel.swift in Sources */,
+				77FCAE592A28065000852912 /* WriterArticlesViewModel.swift in Sources */,
 				5C64124C2A1E1E6200DFCB62 /* ForeignView.swift in Sources */,
 				7772FAB12A1FAA41000EC50D /* Category.swift in Sources */,
+				77FCAE572A2805A000852912 /* WriterArticlesView.swift in Sources */,
 				CB69530F2A1BDD10003D494C /* AddArticleView.swift in Sources */,
 				CB6953112A1BDD29003D494C /* AdminView.swift in Sources */,
 				5C6412542A1E1F9E00DFCB62 /* SportsViewModel.swift in Sources */,
@@ -831,6 +843,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		77FCAE532A2801EC00852912 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		CB7AAA242A1BE3950003CB48 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -849,6 +869,11 @@
 		};
 		338283E22A277710002F4462 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = Kingfisher;
+		};
+		77FCAE542A2801EC00852912 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77FCAE532A2801EC00852912 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 		CB7AAA252A1BE3950003CB48 /* FirebaseAuth */ = {

@@ -18,12 +18,26 @@ class AddArticleViewModel: ObservableObject {
     @Published var categoryContent: Category = Category.unspecified // Actual category
     @Published var categoryString: String = "Unspecified" // String for drop-down menu
     @Published var pictureURLL: String?
-    @Published var writerStared: String?
+    @Published var username: String
     
     // Message for the posting alert pop-up
     let alertMessage = "Thank you for your submission. Your article will soon be inspected by an admin. If approved, it will be published for other users to see."
     
-    init() {}
+    init() {
+        self.username = "unknown"
+        updateUsername()
+    }
+    
+    func updateUsername(){
+            let currentUserID = Auth.auth().currentUser?.uid ?? "unknown"
+            db.collection("users").document(currentUserID).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    self.username = document.get("username") as? String ?? "unknown"
+                } else {
+                    print("Username not found")
+                }
+            }
+        }
     
     func setCategory(cat: Category) {
         categoryContent = cat
@@ -33,7 +47,7 @@ class AddArticleViewModel: ObservableObject {
     }
     
     func requestArticle() {
-        let newArticle = Article(heading: titleContent, content: textContent, writer: writerStared ?? "", pictureURL: pictureURLL, category: categoryContent, isStarred: true)
+        let newArticle = Article(heading: titleContent, content: textContent, writer: username, pictureURL: pictureURLL, category: categoryContent, isStarred: true)
         
         // Upload to Firebase
         do {
