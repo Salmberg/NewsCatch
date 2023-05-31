@@ -14,6 +14,7 @@ class ArticleViewModel : ObservableObject {
     
     @Published var heading = ""
     @Published var content = ""
+    
 
     
 }
