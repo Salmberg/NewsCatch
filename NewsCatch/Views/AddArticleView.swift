@@ -6,21 +6,27 @@
 //
 
 import SwiftUI
+import UIKit
+import FirebaseStorage
 
 struct AddArticleView: View {
     @StateObject var viewModel = AddArticleViewModel()
     let lists = ArticleLists()
-    //For alert-popup
+    // For alert-popup
     @State var showingAlert = false
     
-    //For Category label
+    // For Category label
     @State var catLabel = "Unspecified"
     
-    //Needed to be able to "dismiss" the view
+    // Needed to be able to "dismiss" the view
     @Environment(\.presentationMode) var presentation
     
+    // Image picker
+    @State private var isShowingImagePicker = false
+    @State private var selectedImage: UIImage?
+    
     var body: some View {
-        VStack{
+        VStack {
             TextEditor(text: $viewModel.titleContent)
                 .padding(30)
                 .background(Color(red: 240/255, green: 240/255, blue: 245/255))
@@ -41,7 +47,8 @@ struct AddArticleView: View {
                         viewModel.textContent = ""
                     }
                 }
-            Menu { //Not very elegant, should be possible with some for-loop
+            
+            Menu {
                 Button {
                     viewModel.setCategory(cat: Category.foreign)
                     catLabel = viewModel.categoryString
@@ -63,23 +70,78 @@ struct AddArticleView: View {
             } label: {
                 Image(systemName: "newspaper.circle.fill")
                 Text(catLabel)
-            }.padding([.bottom, .trailing], 25)
-            Button("Publish", action: {viewModel.requestArticle()
-                showingAlert = true
             }
-            ).alert(viewModel.alertMessage, isPresented: $showingAlert) {
-                Button("OK", role: .cancel) {
-                    self.presentation.wrappedValue.dismiss() //Dismiss the view
+            .padding([.bottom, .trailing], 25)
+            
+            Button(action: {
+                isShowingImagePicker = true
+            }) {
+                Text("Add Image")
+            }
+            
+            if let selectedImage = selectedImage {
+                Image(uiImage: selectedImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 200)
+            }
+            
+            Button("Publish") {
+                if let image = selectedImage {
+                    // Upload the image
+                    uploadImage(image)
+                } else {
+                    // No image selected, proceed without uploading
+                    viewModel.requestArticle()
+                    showingAlert = true
                 }
+            }
+            .alert(isPresented: $showingAlert) {
+                Alert(
+                    title: Text("Thank you for your submission"),
+                    message: Text(viewModel.alertMessage),
+                    dismissButton: .cancel(Text("OK"), action: {
+                        presentation.wrappedValue.dismiss() // Dismiss the view
+                    })
+                )
             }
         }
         .background(Color(red: 240/255, green: 240/255, blue: 245/255))
-        
+        .sheet(isPresented: $isShowingImagePicker, onDismiss: loadImage) {
+            ImagePickerModel(selectedImage: $selectedImage)
+        }
     }
-}
-
-struct AddArticleView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddArticleView()
+    
+    private func uploadImage(_ image: UIImage) {
+        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
+            return
+        }
+        
+        let filename = UUID().uuidString + ".jpg"
+        let storageRef = Storage.storage().reference().child("article_images/\(filename)")
+        
+        let uploadTask = storageRef.putData(imageData, metadata: nil) { _, error in
+            if let error = error {
+                print("Image upload error: \(error.localizedDescription)")
+            } else {
+                storageRef.downloadURL { url, error in
+                    if let error = error {
+                        print("Download URL error: \(error.localizedDescription)")
+                    } else if let downloadURL = url {
+                        viewModel.pictureURLL = downloadURL.absoluteString
+                        viewModel.requestArticle()
+                        showingAlert = true
+                    }
+                }
+            }
+        }
+    }
+    
+    private func loadImage() {
+        guard let selectedImage = selectedImage else {
+            return
+        }
+        
+        // Perform any necessary operations with the selected image here
     }
 }

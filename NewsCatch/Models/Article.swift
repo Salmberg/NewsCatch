@@ -16,7 +16,7 @@ struct Article: Codable, Identifiable, Hashable {
     var heading: String
     var content: String
     var category: Category?
-    //var picture: UIImage? // Temporarily commented out to conform to "codable"
+    var pictureURL: String? // Temporarily commented out to conform to "codable"
     var date: Date // Add a property to store the creation date and time
     var writer: String //Username of the user who made this article
     
@@ -59,12 +59,13 @@ struct Article: Codable, Identifiable, Hashable {
     }
 
     
-    init(heading: String, content: String, writer: String, picture: UIImage? = nil, category: Category?, isStarred: Bool) {
+    init(heading: String, content: String, writer: String, pictureURL: String?, category: Category?, isStarred: Bool) {
         self.heading = heading
         self.content = content
         self.category = category ?? Category.unspecified //Unspecified if given nothing
         //self.picture = picture // Temporarily commented out to conform to "codable"
         self.date = Date() // Set the current date and time during initialization
+        self.pictureURL = pictureURL
         self.writer = writer
         self.isStarred = isStarred
     }
@@ -81,7 +82,7 @@ extension Article {
         let category = data["category"] as? Category
         let isStarred = data["isStarred"] as? Bool ?? false // Default value if isStarred is nil
         
-        self.init(heading: heading, content: content ?? "", writer: writer ?? "", category: category, isStarred: isStarred)
+        self.init(heading: heading, content: content ?? "", writer: writer ?? "", pictureURL: nil, category: category, isStarred: isStarred)
     }
 }
 
