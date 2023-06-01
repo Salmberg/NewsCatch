@@ -57,6 +57,8 @@
 		CBE65EEC2A24ECB5003570E1 /* Font-heading.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EE82A24E92A003570E1 /* Font-heading.ttf */; };
 		CBE65EEE2A24EE24003570E1 /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EED2A24EDD8003570E1 /* BebasNeue-Regular.ttf */; };
 		CBE65EF02A24EEDA003570E1 /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EEF2A24EECF003570E1 /* CrimsonText-Regular.ttf */; };
+		CBE65EF52A288A86003570E1 /* AbrilFatface-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EF42A288A67003570E1 /* AbrilFatface-Regular.ttf */; };
+		CBE65EF72A289829003570E1 /* DMSerifDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBE65EF62A289820003570E1 /* DMSerifDisplay-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +128,8 @@
 		CBE65EE92A24E9F7003570E1 /* AoboshiOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AoboshiOne-Regular.ttf"; sourceTree = "<group>"; };
 		CBE65EED2A24EDD8003570E1 /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
 		CBE65EEF2A24EECF003570E1 /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
+		CBE65EF42A288A67003570E1 /* AbrilFatface-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AbrilFatface-Regular.ttf"; sourceTree = "<group>"; };
+		CBE65EF62A289820003570E1 /* DMSerifDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSerifDisplay-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,6 +315,8 @@
 			isa = PBXGroup;
 			children = (
 				CBE65EE82A24E92A003570E1 /* Font-heading.ttf */,
+				CBE65EF62A289820003570E1 /* DMSerifDisplay-Regular.ttf */,
+				CBE65EF42A288A67003570E1 /* AbrilFatface-Regular.ttf */,
 				CBE65EEF2A24EECF003570E1 /* CrimsonText-Regular.ttf */,
 				CBE65EED2A24EDD8003570E1 /* BebasNeue-Regular.ttf */,
 				CBE65EE92A24E9F7003570E1 /* AoboshiOne-Regular.ttf */,
@@ -436,6 +442,8 @@
 			files = (
 				CBE65EF02A24EEDA003570E1 /* CrimsonText-Regular.ttf in Resources */,
 				CBE65EEE2A24EE24003570E1 /* BebasNeue-Regular.ttf in Resources */,
+				CBE65EF52A288A86003570E1 /* AbrilFatface-Regular.ttf in Resources */,
+				CBE65EF72A289829003570E1 /* DMSerifDisplay-Regular.ttf in Resources */,
 				CBE65EEA2A24EB5C003570E1 /* AoboshiOne-Regular.ttf in Resources */,
 				CBE65EEC2A24ECB5003570E1 /* Font-heading.ttf in Resources */,
 				CB6952C62A1BD9E4003D494C /* Preview Assets.xcassets in Resources */,

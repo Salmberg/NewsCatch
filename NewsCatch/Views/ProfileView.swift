@@ -13,8 +13,27 @@ struct ProfileView: View {
     @State var isSaved = false
     var body: some View {
         VStack{
-            Text("Your Profile")
-                .font(.system(size: 30))
+            HStack {
+                Text("Profile")
+                    .font(.system(size: 30))
+                    .frame(maxWidth: .infinity)
+                    .padding(.leading, 50)
+
+                Spacer()
+
+                Button(action: {
+                    do {
+                        try Auth.auth().signOut()
+                    } catch let signOutError as NSError {
+                        print("Error signing out: %@", signOutError)
+                    }
+                }) {
+                    Image(systemName: "square.and.arrow.up")
+                        .foregroundColor(.black)
+                }
+                .padding(.trailing, 30)
+                
+            }
             Spacer()
             HStack{
                 Button(action: {
@@ -26,12 +45,13 @@ struct ProfileView: View {
                         .background(Color.blue)
                         .cornerRadius(20)
                 })
-                .offset(x: -130, y: -200)
+                //.offset(x: -130, y: -200)
                 .sheet(isPresented: $isAddArticle){
                     AddArticleView()
                 }
+                .padding(.bottom, 40)
             }
-            Spacer()
+           
             Button(action: {
                 isSaved = true
             }, label: {
@@ -41,22 +61,12 @@ struct ProfileView: View {
                     .background(Color.blue)
                     .cornerRadius(20)
             })
-            .offset(x: -130, y: -200)
+            //.offset(x: -130, y: -200)
             .sheet(isPresented: $isSaved){
                 SavedArticlesView()
             }
             Spacer()
-            Button(action: {
-                do{
-                    try Auth.auth().signOut()
-                } catch let signOutError as NSError {
-                    print("Error signing out: %@", signOutError)
-                }
-                
-                
-            }){
-                Text("Logout")
-            }
+           
         }
     }
 }
