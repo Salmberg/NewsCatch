@@ -132,19 +132,6 @@ struct NewsFeedView: View {
                                     Divider()
                                         .padding(.horizontal, 10)
                                     
-                                    Image(systemName: article.isStarred ? "star.fill" : "star") // Check if isStarred is true
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(article.isStarred ? .yellow : .gray) // Use filled star if isStarred is true
-                                        .padding(.trailing, 10)
-                                        .onTapGesture {
-                                            // Use a mutable reference to the article by declaring it as `var`
-                                            if let index = viewModel.articles.firstIndex(of: article) {
-                                                viewModel.articles[index].isStarred.toggle()
-                                                viewModel.saveArticle(viewModel.articles[index])
-                                            }
-                                        }
-                                    
                                 }
                             }
                         }

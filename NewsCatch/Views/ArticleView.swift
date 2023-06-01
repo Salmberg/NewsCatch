@@ -10,8 +10,9 @@ import Kingfisher
 
 struct ArticleView: View {
     var article: Article
+    @StateObject private var viewModel = NewsFeedViewModel()
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
         VStack {
             ScrollView {
@@ -21,7 +22,7 @@ struct ArticleView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 200)
                 }
-
+                
                 Text(article.heading)
                     .font(.title)
                     .padding()
@@ -46,18 +47,36 @@ struct ArticleView: View {
 
                 Text(article.content)
                     .padding()
+                
+                Button(action: {
+                    viewModel.saveArticle(article)
+                }) {
+                    Text("Save to read later")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding()
+            }
+            .onAppear {
+                viewModel.getSavedArticles { articles in
+                    // Update the saved articles in the view model
+                    viewModel.savedArticles = articles
+                }
             }
             
             Spacer()
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Image(systemName: "chevron.left")
-                    .foregroundColor(.black)
-            }
+                                Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            Image(systemName: "chevron.left")
+                .foregroundColor(.black)
+        }
         )
     }
     

@@ -20,28 +20,6 @@ struct Article: Codable, Identifiable, Hashable {
     var date: Date // Add a property to store the creation date and time
     var writer: String //Username of the user who made this article
     
-    var isStarred: Bool {
-        didSet {
-            // Update the corresponding value in Firebase when `isStarred` changes
-            saveIsStarred()
-        }
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(heading)
-    }
-    
-    private func saveIsStarred() {
-        guard let id = id else { return }
-        let documentRef = Firestore.firestore().collection("PublishedArticles").document(id)
-        documentRef.updateData(["isStarred": isStarred]) { error in
-            if let error = error {
-                print("Error updating isStarred in Firebase: \(error)")
-            } else {
-                print("isStarred updated successfully!")
-            }
-        }
-    }
     
     
     static let dateFormatter: DateFormatter = {
@@ -59,7 +37,7 @@ struct Article: Codable, Identifiable, Hashable {
     }
 
     
-    init(heading: String, content: String, writer: String, pictureURL: String?, category: Category?, isStarred: Bool) {
+    init(heading: String, content: String, writer: String, pictureURL: String?, category: Category?) {
         self.heading = heading
         self.content = content
         self.category = category ?? Category.unspecified //Unspecified if given nothing
@@ -67,7 +45,6 @@ struct Article: Codable, Identifiable, Hashable {
         self.date = Date() // Set the current date and time during initialization
         self.pictureURL = pictureURL
         self.writer = writer
-        self.isStarred = isStarred
     }
 }
 
@@ -80,9 +57,8 @@ extension Article {
         let content = data["content"] as? String
         let writer = data["writer"] as? String
         let category = data["category"] as? Category
-        let isStarred = data["isStarred"] as? Bool ?? false // Default value if isStarred is nil
         
-        self.init(heading: heading, content: content ?? "", writer: writer ?? "", pictureURL: nil, category: category, isStarred: isStarred)
+        self.init(heading: heading, content: content ?? "", writer: writer ?? "", pictureURL: nil, category: category)
     }
 }
 
