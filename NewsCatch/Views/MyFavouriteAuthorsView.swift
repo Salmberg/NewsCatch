@@ -13,8 +13,3 @@ struct MyFavouriteAuthorsView: View {
     }
 }
 
-struct MyFavouriteAuthorsView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyFavouriteAuthorsView()
-    }
-}

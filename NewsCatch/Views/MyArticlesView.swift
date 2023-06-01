@@ -75,6 +75,7 @@ struct MyArticlesView: View {
                             }
                         }
                         .frame(maxHeight: .infinity)
+                        .onAppear(perform: viewModel.getMyArticlesFomDB)
                         
                         Spacer()
                     }

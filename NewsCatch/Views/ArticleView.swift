@@ -14,6 +14,7 @@ struct ArticleView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var showAlert = false
     
+    
     var body: some View {
         VStack {
             ScrollView {
@@ -56,6 +57,12 @@ struct ArticleView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding()
+                    VStack{
+                        //Button(action: {
+                            //call to saveMethod
+                        //    Text("Följ")
+                        //})
+                    }
                 }
                 
                 Button(action: {

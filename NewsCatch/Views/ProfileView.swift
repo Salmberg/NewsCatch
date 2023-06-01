@@ -9,11 +9,13 @@ import SwiftUI
 import FirebaseAuth
 import Firebase
 import Kingfisher
+import FirebaseStorage
 
 struct ProfileView: View {
     @State var isAddArticle = false
     var auth = FirebaseAuth.Auth.self
     var user = Auth.auth().currentUser
+
     var body: some View {
         NavigationView{
             ScrollView{
@@ -29,7 +31,7 @@ struct ProfileView: View {
                         .ignoresSafeArea()
                         HStack(){
                             VStack{
-                                KFImage(URL(string: "profile-images/swift.jpg"))
+                                KFImage(URL(string: "Profile-Image/swift.jpg"))
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(height: 200)
