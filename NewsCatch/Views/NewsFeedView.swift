@@ -8,7 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
-
+import Kingfisher
 
 struct NewsFeedView: View {
     @StateObject var viewModel = NewsFeedViewModel()
@@ -111,8 +111,8 @@ struct NewsFeedView: View {
                                                 
                                             }
                                             Text(article.heading)
-                                                .font(.title)
-                                                .bold()
+                                                
+                                                .font(.custom("BebasNeue-Regular", size: 30))
                                                 .padding(.leading, 10)
                                                 .padding(.bottom, 20)
                                             
@@ -121,10 +121,20 @@ struct NewsFeedView: View {
                                         
                                         Spacer()
                                         
-                                        Image("Image")
-                                            .resizable()
-                                            .frame(width: 50, height: 50)
-                                            .padding(10)
+                                        if let pictureURL = article.pictureURL {
+                                            KFImage(URL(string: pictureURL))
+                                                .resizable()
+                                                .frame(width: 100, height: 100)
+                                                .cornerRadius(10)
+                                                .padding()
+                                        } else {
+                                            Image("Image")
+                                                .resizable()
+                                                .frame(width: 100, height: 100)
+                                                .cornerRadius(10)
+                                                .padding()
+                                        }
+                                        
                                     }
                                 }
                                 .buttonStyle(PlainButtonStyle())

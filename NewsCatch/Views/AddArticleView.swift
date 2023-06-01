@@ -78,7 +78,8 @@ struct AddArticleView: View {
             }) {
                 Text("Add Image")
             }
-            .padding([.bottom, .trailing], 25)
+            .padding(.bottom, 30)
+
             
             if let selectedImage = selectedImage {
                 Image(uiImage: selectedImage)
@@ -86,6 +87,9 @@ struct AddArticleView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 200)
             }
+               
+            
+            
             
             Button("Publish") {
                 if let image = selectedImage {

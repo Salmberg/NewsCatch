@@ -12,18 +12,31 @@ struct ArticleView: View {
     var article: Article
     @StateObject private var viewModel = NewsFeedViewModel()
     @Environment(\.presentationMode) var presentationMode
+    @State private var showAlert = false
     
     var body: some View {
         VStack {
             ScrollView {
+               
+                Text(article.heading)
+                    .font(.custom("BebasNeue-Regular", size: 30))
+                    .padding()
+                                    
                 if let pictureURL = article.pictureURL {
                     KFImage(URL(string: pictureURL))
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 200)
+                        .cornerRadius(10)
+                        .shadow(color: Color.gray.opacity(0.5), radius: 4, x: 0, y: 2)
                 }
                 
-                Text(article.heading)
+                Text(article.content)
+                    .padding()
+                    .font(.custom("CrimsonText-Regular", size: 18))
+               
+                Spacer()
+                                Text(article.heading)
                     .font(.title)
                     .padding()
                 HStack{
@@ -44,19 +57,24 @@ struct ArticleView: View {
                     .buttonStyle(PlainButtonStyle())
                     .padding()
                 }
-
-                Text(article.content)
-                    .padding()
                 
                 Button(action: {
                     viewModel.saveArticle(article)
+                    showAlert = true
                 }) {
-                    Text("Save to read later")
-                        .font(.headline)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                    HStack {
+                        Image(systemName: "bookmark")
+                            
+                    }
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Article saved!"),
+                        message: Text("The article is now under saved articles in your profile"),
+                        dismissButton: .default(Text("OK"))
+                    
+                        
+                    )
                 }
                 .padding()
             }

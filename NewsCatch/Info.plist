@@ -8,11 +8,10 @@
 	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string></string>
 		<string>BebasNeue-Regular.ttf</string>
 		<string>CrimsonText-Regular.ttf</string>
-		<string></string>
-		<string></string>
+		<string>DMSerifDisplay-Regular.ttf</string>
+		<string>AbrilFatface-Regular.ttf</string>
 	</array>
 </dict>
 </plist>
