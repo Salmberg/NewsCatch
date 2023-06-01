@@ -26,10 +26,25 @@ struct ArticleView: View {
                 Text(article.heading)
                     .font(.title)
                     .padding()
-                
-                Text(Article.dateFormatter.string(from: article.date))
+                HStack{
+                    Image(systemName: "calendar")
+                    Text(Article.dateFormatter.string(from: article.date))
+                        .padding()
+                }
+                HStack{
+                    NavigationLink(
+                        destination: WriterArticlesView(writer: self.article.writer)
+                    ) {
+                        HStack {
+                            Image(systemName: "person")
+                            Text(article.writer)
+                                .foregroundColor(.blue)
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
                     .padding()
-                
+                }
+
                 Text(article.content)
                     .padding()
                 
@@ -64,6 +79,7 @@ struct ArticleView: View {
         }
         )
     }
+    
 }
 
 //struct ArticleView_Previews: PreviewProvider {
