@@ -79,6 +79,7 @@ struct AddArticleView: View {
                 Text("Add Image")
             }
             .padding(.bottom, 30)
+
             
             if let selectedImage = selectedImage {
                 Image(uiImage: selectedImage)
