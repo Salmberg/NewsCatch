@@ -47,7 +47,7 @@ struct ArticleView: View {
                 Text(article.content)
                     .padding()
             }
-
+            
             Spacer()
         }
         .navigationBarBackButtonHidden(true)
@@ -60,6 +60,7 @@ struct ArticleView: View {
             }
         )
     }
+    
 }
 
 //struct ArticleView_Previews: PreviewProvider {
