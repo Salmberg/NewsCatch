@@ -31,24 +31,15 @@ struct ProfileView: View {
                         .ignoresSafeArea()
                         HStack(){
                             VStack{
-                                KFImage(URL(string: "https://firebasestorage.googleapis.com:443/v0/b/newscatch-94592.appspot.com/o/swift.jpg.jpg?alt=media&token=f0629957-9d7d-4faa-9a10-1288f3d1e870"))
+                                
+                                KFImage(URL(string: "https://firebasestorage.googleapis.com:443/v0/b/newscatch-94592.appspot.com/o/swift.jpg?alt=media&token=f0629957-9d7d-4faa-9a10-1288f3d1e870"))
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(height: 200)
-                                    .cornerRadius(10)
+                                    .frame(height: 120)
+                                    .cornerRadius(90)
                                     .shadow(color: Color.gray.opacity(0.5), radius: 4, x: 0, y: 2)
-                                
-                                Button(action: {
-                                    do{
-                                        //Method for changing picture
-                                    } catch let changeImageError as NSError {
-                                        print("Error changing profile image: %@", changeImageError)
-                                    }
-                                }){
-                                    Text("Byt bild")
-                                        .padding(.bottom, 20)
-                                        .foregroundColor(Color.black)
-                                }
+                                    .padding(20)
+
                             }
                             Spacer()
                             VStack{
