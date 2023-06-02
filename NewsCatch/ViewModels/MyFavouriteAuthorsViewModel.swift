@@ -65,6 +65,7 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                         do{
                             let dbUser = try document.data(as: User.self)
                             if(dbUser.username == userName){
+                                print(dbUser)
                                 self.users.append(dbUser)
                             }
                         }catch{

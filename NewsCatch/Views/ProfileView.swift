@@ -75,20 +75,36 @@ struct ProfileView: View {
                             .sheet(isPresented: $isAddArticle){
                                 AddArticleView()
                             }
-                            
-                            Image(systemName: "heart.text.square.fill")
-                                .font(.system(size: 35))
-                                .padding(20)
-                                .foregroundColor(Color.white)
-                            Image(systemName: "person.text.rectangle.fill")
-                                .font(.system(size: 35))
-                                .padding(20)
-                                .foregroundColor(Color.white)
-                            Image(systemName: "calendar.badge.clock")
-                                .font(.system(size: 35))
-                                .padding(20)
-                                .foregroundColor(Color.white)
-                            
+                            NavigationLink(
+                                destination: MyFavouriteArticlesView()
+                            ) {
+                                HStack {
+                                    Image(systemName: "heart.text.square.fill")
+                                        .font(.system(size: 35))
+                                        .padding(20)
+                                        .foregroundColor(Color.white)
+                                }
+                            }
+                            NavigationLink(
+                                destination: MyFavouriteAuthorsView()
+                            ) {
+                                HStack {
+                                    Image(systemName: "person.text.rectangle.fill")
+                                        .font(.system(size: 35))
+                                        .padding(20)
+                                        .foregroundColor(Color.white)
+                                }
+                            }
+                            NavigationLink(
+                                destination: ReminderView()
+                            ) {
+                                HStack {
+                                    Image(systemName: "calendar.badge.clock")
+                                        .font(.system(size: 35))
+                                        .padding(20)
+                                        .foregroundColor(Color.white)
+                                }
+                            }
                         }
                         .padding(20)
                         .background(Color(red: 31/255, green:59/255,blue: 77/255))
