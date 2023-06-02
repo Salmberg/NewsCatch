@@ -11,6 +11,7 @@ import Kingfisher
 struct ArticleView: View {
     var article: Article
     @StateObject private var viewModel = NewsFeedViewModel()
+    @StateObject private var favouriteAuthorVM = MyFavouriteAuthorViewModel()
     @Environment(\.presentationMode) var presentationMode
     @State private var showAlert = false
     
@@ -57,14 +58,8 @@ struct ArticleView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding()
-                    VStack{
-                        //Button(action: {
-                            //call to saveMethod
-                        //    Text("Följ")
-                        //})
-                    }
                 }
-                
+
                 Button(action: {
                     viewModel.saveArticle(article)
                     showAlert = true

@@ -13,6 +13,7 @@ struct WriterArticlesView: View {
     @State private var selectedArticle: Article? = nil
     var writer : String
     @StateObject var viewModel = WriterArticlesViewModel()
+    @StateObject var favouriteWriterVM = MyFavouriteAuthorViewModel()
     
     var body: some View {
         NavigationView {
@@ -29,7 +30,7 @@ struct WriterArticlesView: View {
                     .edgesIgnoringSafeArea(.top)
                     .frame(height: 110) // Adjust the height as needed
                     HStack{
-                                                
+                  
                         Spacer()
                     }
                     .background(Color.gray)
@@ -77,7 +78,15 @@ struct WriterArticlesView: View {
                             }
                         }
                         .frame(maxHeight: .infinity)
-
+                        VStack{
+                            Button(action: {
+                                favouriteWriterVM.saveFavouriteAuthor(userName: writer)
+                            }, label: {
+                                Text("Följ")
+                            })
+                            .buttonStyle(BorderedProminentButtonStyle())
+                            }
+                        }
                         Spacer()
                     }
                     .navigationBarTitle("", displayMode: .inline)
@@ -109,7 +118,7 @@ struct WriterArticlesView: View {
         }
     }
     
-}
+
 
 struct WriterArticlesView_Previews: PreviewProvider {
     static var previews: some View {

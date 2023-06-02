@@ -11,13 +11,13 @@ import Firebase
 class MyFavouriteAuthorViewModel: ObservableObject{
     
     let db = Firestore.firestore()
-    @Published var MyAuthor = [Article]()
+    @Published var MyAuthors = [User]()
     @Published var users = [User]()
     
     var username = String()
     
     func getMyFavouriteAuthorsFomDB(){
-        MyAuthor.removeAll()
+        MyAuthors.removeAll()
         db.collection("PublishedArticles").addSnapshotListener() {
             snapshot, error in
             
@@ -27,9 +27,9 @@ class MyFavouriteAuthorViewModel: ObservableObject{
             }else{
                 for document in snapshot.documents{
                     do{
-                        let author = try document.data(as: Article.self)
+                        let author = try document.data(as: User.self)
                        
-                        self.MyAuthor.append(author)
+                        self.MyAuthors.append(author)
                     }catch{
                         print("Error reading from FireStore")
                     }
@@ -39,23 +39,41 @@ class MyFavouriteAuthorViewModel: ObservableObject{
         }
     }
     
-    func setFavouriteAuthor(){
-            let currentUserID = Auth.auth().currentUser?.uid ?? "unknown"
-            db.collection("users").document(currentUserID).getDocument { (document, error) in
-                if let document = document, document.exists {
-                    self.username = document.get("username") as? String ?? "unknown"
-                } else {
-                    print("Username not found")
-                }
-            }
-        }
     
-    func saveFavouriteAuthor(author: User){
+    func saveFavouriteAuthor(userName: String){
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         var authUser = Auth.auth().currentUser
-        getUsersFromDb()
+       
+        
+        
+        users.removeAll()
+        var user = Auth.auth().currentUser
+        db.collection("users").addSnapshotListener() {
+                snapshot, error in
+                
+                guard let snapshot = snapshot else {return}
+                if let error = error {
+                    print("Error listning to FireStore \(error)")
+                }else{
+                    for document in snapshot.documents{
+                        do{
+                            let dbUser = try document.data(as: User.self)
+                            if(dbUser.email == user?.email){
+                                self.users.append(dbUser)
+                            }
+                        }catch{
+                            print("Error reading from FireStore")
+                        }
+                    }
+                    
+                }
+            }
+        
+        
+        
+        
         
             
         let favouriteAuthors = db.collection("authors")
@@ -81,7 +99,7 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                 } else {
             
                     var data: [String: Any] = [
-                        "name": self.users[0].name,
+                        "username": self.users[0].username,
                         "Image": self.users[0].imageURL
                         
                     ]
@@ -96,33 +114,6 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                 }
             }
         }
-    
-     
-    func getUsersFromDb(){
-        users.removeAll()
-        var user = Auth.auth().currentUser
-        db.collection("users").addSnapshotListener() {
-                snapshot, error in
-                
-                guard let snapshot = snapshot else {return}
-                if let error = error {
-                    print("Error listning to FireStore \(error)")
-                }else{
-                    for document in snapshot.documents{
-                        do{
-                            let dbUser = try document.data(as: User.self)
-                            if(dbUser.email == user?.email){
-                                self.users.append(dbUser)
-                            }
-                        }catch{
-                            print("Error reading from FireStore")
-                        }
-                    }
-                    
-                }
-            }
         
     }
-    
-}
 
