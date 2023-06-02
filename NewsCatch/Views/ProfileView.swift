@@ -113,35 +113,53 @@ struct ProfileView: View {
                                 Text("MINA ARTIKLAR")
                                     .font(.system(size: 25))
                                     .padding(.trailing, 20)
-                                HStack{
-                                    Spacer()
-                                    NavigationLink(
-                                        destination: MyArticlesView                                                                 ()
-                                    ) {
-                                        HStack {
-                                            Text("Se fler")
-                                                .font(.title)
-                                                .bold()
-                                                .padding(.leading, 10)
-                                        }
+                                    .bold()
+                                VStack{
+                                    HStack{
+                                        //Remove these dummy images when real data is used
+                                        Image("ocean")
+                                            .resizable()
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(10)
+                                            .padding()
+                                        Image("viking")
+                                            .resizable()
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(10)
+                                            .padding()
                                     }
-                                    .buttonStyle(BorderedProminentButtonStyle())
-                                    .padding(15)
+                                        VStack{
+                                            NavigationLink(
+                                                destination: MyArticlesView                                                                 ()
+                                            ) {
+                                                HStack {
+                                                    Text("Se fler")
+                                                        .font(.title)
+                                                        .bold()
+                                                }
+                                            }
+                                            .buttonStyle(BorderedProminentButtonStyle())
+                                            .padding(15)
+                                        }
                                 }
                             }
                             .background(Color.white)
                             .cornerRadius(15)
-                            .frame(width: UIScreen.main.bounds.width * 0.9)
+                            .frame(width: UIScreen.main.bounds.width * 0.98)
                             
                         }
                         .padding(20)
                         .background(Color.gray)
                         
                         ZStack{
-                            VStack{
-                                Text("MINA FAVORIT SKRIBENTER")
+                            VStack(){
+                                Text("MINA FAVORIT")
                                     .font(.system(size: 25))
-                                    .padding(15)
+
+                                    .bold()
+                                Text("SKRIBENTER")
+                                    .font(.system(size: 25))
+                                    .bold()
                                 HStack{
                                     VStack{
                                         Image(systemName: "person.crop.circle.fill")
@@ -157,17 +175,9 @@ struct ProfileView: View {
                                         Text("Skribent 2")
                                             .font(.system(size: 15))
                                     }
-                                    VStack{
-                                        Image(systemName: "person.crop.circle.fill")
-                                            .font(.system(size: 80))
-                                            .padding(15)
-                                        Text("Skribent 3")
-                                            .font(.system(size: 15))
-                                    }
                                     
                                 }
-                                HStack{
-                                    Spacer()
+                                VStack{
                                     NavigationLink(
                                         destination: MyFavouriteAuthorsView()
                                     ) {
@@ -175,44 +185,61 @@ struct ProfileView: View {
                                             Text("Se fler")
                                                 .font(.title)
                                                 .bold()
-                                                .padding(.leading, 10)
                                         }
+                                        .padding(.bottom, 20)
                                     }
                                     .buttonStyle(BorderedProminentButtonStyle())
-                                    .padding(.trailing, 15)
+                                    .padding(15)
                                 }
                             }
                             .background(Color.white)
                             .cornerRadius(15)
-                            .frame(width: UIScreen.main.bounds.width * 0.9)
-                        }
-                        
-                        VStack{
-                            Text("FAVORIT ARTIKLAR")
-                                .font(.system(size: 25))
-                                .padding(.trailing, 20)
-                            HStack{
-                                Spacer()
-                                NavigationLink(
-                                    destination: MyFavouriteArticlesView()
-                                ) {
-                                    HStack {
-                                        Text("Se fler")
-                                            .font(.title)
-                                            .bold()
-                                            .padding(.leading, 10)
-                                    }
-                                }
-                                .buttonStyle(BorderedProminentButtonStyle())
-                                .padding(.trailing, 15)
-                            }
-                            
                         }
                         .padding(20)
-                        
-                        
-                        
-                        
+                        .background(Color.gray)
+                        ZStack{
+                            VStack{
+                                Text("FAVORIT ARTIKLAR")
+                                    .font(.system(size: 25))
+                                    .padding(.trailing, 20)
+                                    .bold()
+                                VStack{
+                                    HStack{
+                                        //Remove these dummy images when real data is used
+                                        Image("OldTrafford")
+                                            .resizable()
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(10)
+                                            .padding()
+                                        Image("lax")
+                                            .resizable()
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(10)
+                                            .padding()
+                                    }
+                                        VStack{
+                                            NavigationLink(
+                                                destination: MyArticlesView()
+                                            ) {
+                                                HStack {
+                                                    Text("Se fler")
+                                                        .font(.title)
+                                                        .bold()
+                                                }
+                                                .padding(.bottom, 20)
+                                            }
+                                            .buttonStyle(BorderedProminentButtonStyle())
+                                            .padding(15)
+                                        }
+                                }
+                                
+                            }
+                            .background(Color.white)
+                            .cornerRadius(15)
+                        }
+                        .padding(20)
+                        .background(Color.gray)
+
                         Spacer()
                         
                         Spacer()
