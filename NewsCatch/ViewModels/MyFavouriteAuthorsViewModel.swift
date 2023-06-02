@@ -16,27 +16,31 @@ class MyFavouriteAuthorViewModel: ObservableObject{
     
     var username = String()
     
-    func getMyFavouriteAuthorsFomDB(){
-        MyAuthors.removeAll()
-        db.collection("PublishedArticles").addSnapshotListener() {
-            snapshot, error in
-            
-            guard let snapshot = snapshot else {return}
-            if let error = error {
-                print("Error listning to FireStore \(error)")
-            }else{
-                for document in snapshot.documents{
-                    do{
-                        let author = try document.data(as: User.self)
-                       
-                        self.MyAuthors.append(author)
-                    }catch{
-                        print("Error reading from FireStore")
-                    }
-                            
-                }
-            }
+    func getMyFavouriteAuthors() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
         }
+        
+        let favouriteAuthorsCollection = db.collection("authors")
+            .document(uid)
+            .collection("FavouriteAuthors")
+        
+        favouriteAuthorsCollection.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error retrieving favourite authors: \(error)")
+                return
+            }
+            do{
+                for document in snapshot?.documents ?? [] {
+                    let user = try document.data(as: User.self)
+                    self.MyAuthors.append(user)
+                }
+            }catch{
+                print("Error reading from FireStore")
+            }
+
+        }
+      
     }
     
     
@@ -60,7 +64,7 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                     for document in snapshot.documents{
                         do{
                             let dbUser = try document.data(as: User.self)
-                            if(dbUser.email == user?.email){
+                            if(dbUser.username == userName){
                                 self.users.append(dbUser)
                             }
                         }catch{
@@ -70,12 +74,7 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                     
                 }
             }
-        
-        
-        
-        
-        
-            
+
         let favouriteAuthors = db.collection("authors")
                 .document(uid)
                 .collection("FavouriteAuthors")
@@ -100,8 +99,9 @@ class MyFavouriteAuthorViewModel: ObservableObject{
             
                     var data: [String: Any] = [
                         "username": self.users[0].username,
-                        "Image": self.users[0].imageURL
-                        
+                        "image": self.users[0].imageURL,
+                        "name": self.users[0].name,
+                        "email": self.users[0].email
                     ]
                     
                     favouriteAuthorsCollection.addDocument(data: data) { error in

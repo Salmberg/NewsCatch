@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Kingfisher
 
 struct WriterArticlesView: View {
     @State private var isMenuActive: Bool = false
@@ -64,10 +65,19 @@ struct WriterArticlesView: View {
 
                                             Spacer()
 
-                                            Image("Image")
-                                                .resizable()
-                                                .frame(width: 50, height: 50)
-                                                .padding(10)
+                                            if let pictureURL = article.pictureURL {
+                                                KFImage(URL(string: pictureURL))
+                                                    .resizable()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                            } else {
+                                                Image("Image")
+                                                    .resizable()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                            }
                                         }
                                     }
                                     .buttonStyle(PlainButtonStyle())

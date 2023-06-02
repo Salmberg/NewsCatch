@@ -1,4 +1,3 @@
-
 //  AmusementView.swift
 //  NewsApp
 //
