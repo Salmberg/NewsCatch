@@ -35,7 +35,8 @@ class RegisterViewModel: ObservableObject{
                            name:name,
                            username:username,
                            email:email,
-                           joined: Date().timeIntervalSince1970)
+                           joined: Date().timeIntervalSince1970,
+                           imageURL:"")
         
         let db = Firestore.firestore()
         

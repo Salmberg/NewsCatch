@@ -1,4 +1,4 @@
-//
+
 //  AmusementView.swift
 //  NewsApp
 //

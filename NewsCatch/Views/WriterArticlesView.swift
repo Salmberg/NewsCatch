@@ -7,12 +7,14 @@
 
 import Foundation
 import SwiftUI
+import Kingfisher
 
 struct WriterArticlesView: View {
     @State private var isMenuActive: Bool = false
     @State private var selectedArticle: Article? = nil
     var writer : String
     @StateObject var viewModel = WriterArticlesViewModel()
+    @StateObject var favouriteWriterVM = MyFavouriteAuthorViewModel()
     
     var body: some View {
         NavigationView {
@@ -29,7 +31,7 @@ struct WriterArticlesView: View {
                     .edgesIgnoringSafeArea(.top)
                     .frame(height: 110) // Adjust the height as needed
                     HStack{
-                                                
+                  
                         Spacer()
                     }
                     .background(Color.gray)
@@ -63,10 +65,19 @@ struct WriterArticlesView: View {
 
                                             Spacer()
 
-                                            Image("Image")
-                                                .resizable()
-                                                .frame(width: 50, height: 50)
-                                                .padding(10)
+                                            if let pictureURL = article.pictureURL {
+                                                KFImage(URL(string: pictureURL))
+                                                    .resizable()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                            } else {
+                                                Image("Image")
+                                                    .resizable()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                            }
                                         }
                                     }
                                     .buttonStyle(PlainButtonStyle())
@@ -77,7 +88,15 @@ struct WriterArticlesView: View {
                             }
                         }
                         .frame(maxHeight: .infinity)
-
+                        VStack{
+                            Button(action: {
+                                favouriteWriterVM.saveFavouriteAuthor(userName: writer)
+                            }, label: {
+                                Text("Följ")
+                            })
+                            .buttonStyle(BorderedProminentButtonStyle())
+                            }
+                        }
                         Spacer()
                     }
                     .navigationBarTitle("", displayMode: .inline)
@@ -109,7 +128,7 @@ struct WriterArticlesView: View {
         }
     }
     
-}
+
 
 struct WriterArticlesView_Previews: PreviewProvider {
     static var previews: some View {

@@ -8,8 +8,8 @@
 import SwiftUI
 import Kingfisher
 
-struct ForeignView: View {
-    @StateObject var viewModel = ForeignViewModel()
+struct MyFavouriteArticlesView: View {
+    @StateObject var viewModel = MyFavouriteArticlesViewModel()
     @State private var isMenuActive: Bool = false
     @State private var selectedArticle: Article? = nil
     
@@ -20,7 +20,7 @@ struct ForeignView: View {
                     ZStack {
                         Color.black
                             .frame(height: 110) // Adjust the height as needed
-                        Text("Utrikes")
+                        Text("MyFavouriteArticles")
                             .font(.system(size: 20))
                             .foregroundColor(.white)
                             .bold()
@@ -36,7 +36,7 @@ struct ForeignView: View {
                     VStack {
                         ScrollView {
                             VStack {
-                                ForEach(viewModel.foreignArticles, id: \.heading) { article in
+                                ForEach(viewModel.favouriteArticles, id: \.heading) { article in
                                     NavigationLink(
                                         destination: ArticleView(article: article),
                                         tag: article,

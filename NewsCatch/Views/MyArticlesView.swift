@@ -8,8 +8,8 @@
 import SwiftUI
 import Kingfisher
 
-struct ForeignView: View {
-    @StateObject var viewModel = ForeignViewModel()
+struct MyArticlesView: View {
+    @StateObject var viewModel = MyArticlesViewModel()
     @State private var isMenuActive: Bool = false
     @State private var selectedArticle: Article? = nil
     
@@ -28,7 +28,7 @@ struct ForeignView: View {
                     .edgesIgnoringSafeArea(.top)
                     .frame(height: 110) // Adjust the height as needed
                     HStack{
-                                                
+                        
                         Spacer()
                     }
                     .background(Color.gray)
@@ -36,7 +36,7 @@ struct ForeignView: View {
                     VStack {
                         ScrollView {
                             VStack {
-                                ForEach(viewModel.foreignArticles, id: \.heading) { article in
+                                ForEach(viewModel.myArticles, id: \.heading) { article in
                                     NavigationLink(
                                         destination: ArticleView(article: article),
                                         tag: article,
@@ -59,9 +59,9 @@ struct ForeignView: View {
                                                     .padding(.leading, 10)
                                                     .padding(.bottom, 20)
                                             }
-
+                                            
                                             Spacer()
-
+                                            
                                             if let pictureURL = article.pictureURL {
                                                 KFImage(URL(string: pictureURL))
                                                     .resizable()
@@ -78,43 +78,27 @@ struct ForeignView: View {
                                         }
                                     }
                                     .buttonStyle(PlainButtonStyle())
-
+                                    
                                     Divider()
                                         .padding(.horizontal, 10)
                                 }
                             }
                         }
                         .frame(maxHeight: .infinity)
-
+                        .onAppear(perform: viewModel.getMyArticlesFomDB)
+                        
                         Spacer()
                     }
                     .navigationBarTitle("", displayMode: .inline)
                 }
                 
-                // Menu view
-                MenuView(isMenuActive: $isMenuActive)
-                    .frame(width: UIScreen.main.bounds.width * 1) // Adjust the width as needed
-                    .offset(x: isMenuActive ? 0 : -UIScreen.main.bounds.width) // Apply the offset to control the slide-out animation
-                    .animation(.easeInOut) // Apply animation
-                    .zIndex(1) // Ensure the menu appears above the content
             }
-            .modifier(InitialMenuActivationModifier(isMenuActive: $isMenuActive))
-            .edgesIgnoringSafeArea(.all)
-            .onAppear {
-                viewModel.getArticlesFromDb()
-            }
-            .navigationBarTitle("", displayMode: .inline) // Set an empty title to keep the navigation bar visible
-            .navigationBarItems(
-                leading: Button(action: {
-                    isMenuActive.toggle()
-                }) {
-                    Image(systemName: "line.horizontal.3")
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
-                }
-            )
         }
     }
 }
 
-
+struct ForeignView_Previews: PreviewProvider {
+    static var previews: some View {
+        ForeignView()
+    }
+}

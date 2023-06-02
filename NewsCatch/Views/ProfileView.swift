@@ -7,66 +7,247 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
+import Kingfisher
+import FirebaseStorage
 
 struct ProfileView: View {
     @State var isAddArticle = false
-    @State var isSaved = false
+    var auth = FirebaseAuth.Auth.self
+    var user = Auth.auth().currentUser
+
     var body: some View {
-        VStack{
-            HStack {
-                Text("Profile")
-                    .font(.system(size: 30))
-                    .frame(maxWidth: .infinity)
-                    .padding(.leading, 50)
+        NavigationView{
+            ScrollView{
+                ZStack{
+                    VStack(spacing: 0){
+                        HStack{
+                            Spacer()
+                            Text("Hej användarnamn")
+                                .font(.system(size: 30))
+                                .padding(.trailing, 20)
+                        }
+                        .background(Color.gray)
+                        .ignoresSafeArea()
+                        HStack(){
+                            VStack{
+                                
+                                KFImage(URL(string: "https://firebasestorage.googleapis.com:443/v0/b/newscatch-94592.appspot.com/o/swift.jpg?alt=media&token=f0629957-9d7d-4faa-9a10-1288f3d1e870"))
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(height: 120)
+                                    .cornerRadius(90)
+                                    .shadow(color: Color.gray.opacity(0.5), radius: 4, x: 0, y: 2)
+                                    .padding(20)
 
-                Spacer()
+                            }
+                            Spacer()
+                            VStack{
+                                Text("Ditt användarnamn")
+                                    .font(.system(size: 20))
+                                    .padding(.trailing, 20)
+                                Text("Din epost")
+                                    .font(.system(size: 20))
+                                    .padding(.trailing, 20)
+                            }
+                            
+                        }
+                        .background(Color.gray)
+                        HStack{
+                            
+                            Button(action: {
+                                isAddArticle = true
+                            }, label: {
+                                Image(systemName: "note.text.badge.plus")
+                                    .font(.system(size: 35))
+                                    .padding(20)
+                                    .foregroundColor(Color.white)
+                            })
+                            .sheet(isPresented: $isAddArticle){
+                                AddArticleView()
+                            }
+                            NavigationLink(
+                                destination: MyFavouriteArticlesView()
+                            ) {
+                                HStack {
+                                    Image(systemName: "heart.text.square.fill")
+                                        .font(.system(size: 35))
+                                        .padding(20)
+                                        .foregroundColor(Color.white)
+                                }
+                            }
+                            NavigationLink(
+                                destination: MyFavouriteAuthorsView()
+                            ) {
+                                HStack {
+                                    Image(systemName: "person.text.rectangle.fill")
+                                        .font(.system(size: 35))
+                                        .padding(20)
+                                        .foregroundColor(Color.white)
+                                }
+                            }
+                            NavigationLink(
+                                destination: ReminderView()
+                            ) {
+                                HStack {
+                                    Image(systemName: "calendar.badge.clock")
+                                        .font(.system(size: 35))
+                                        .padding(20)
+                                        .foregroundColor(Color.white)
+                                }
+                            }
+                        }
+                        .padding(20)
+                        .background(Color(red: 31/255, green:59/255,blue: 77/255))
+                        ZStack{
+                            VStack{
+                                Text("MINA ARTIKLAR")
+                                    .font(.system(size: 25))
+                                    .padding(.trailing, 20)
+                                    .bold()
+                                VStack{
+                                    HStack{
+                                        //Remove these dummy images when real data is used
+                                        Image("ocean")
+                                            .resizable()
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(10)
+                                            .padding()
+                                        Image("viking")
+                                            .resizable()
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(10)
+                                            .padding()
+                                    }
+                                        VStack{
+                                            NavigationLink(
+                                                destination: MyArticlesView                                                                 ()
+                                            ) {
+                                                HStack {
+                                                    Text("Se fler")
+                                                        .font(.title)
+                                                        .bold()
+                                                }
+                                            }
+                                            .buttonStyle(BorderedProminentButtonStyle())
+                                            .padding(15)
+                                        }
+                                }
+                            }
+                            .background(Color.white)
+                            .cornerRadius(15)
+                            .frame(width: UIScreen.main.bounds.width * 0.98)
+                            
+                        }
+                        .padding(20)
+                        .background(Color.gray)
+                        
+                        ZStack{
+                            VStack(){
+                                Text("MINA FAVORIT")
+                                    .font(.system(size: 25))
 
-                Button(action: {
-                    do {
-                        try Auth.auth().signOut()
-                    } catch let signOutError as NSError {
-                        print("Error signing out: %@", signOutError)
+                                    .bold()
+                                Text("SKRIBENTER")
+                                    .font(.system(size: 25))
+                                    .bold()
+                                HStack{
+                                    VStack{
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .font(.system(size: 80))
+                                            .padding(15)
+                                        Text("Skribent 1")
+                                            .font(.system(size: 15))
+                                    }
+                                    VStack{
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .font(.system(size: 80))
+                                            .padding(15)
+                                        Text("Skribent 2")
+                                            .font(.system(size: 15))
+                                    }
+                                    
+                                }
+                                VStack{
+                                    NavigationLink(
+                                        destination: MyFavouriteAuthorsView()
+                                    ) {
+                                        HStack {
+                                            Text("Se fler")
+                                                .font(.title)
+                                                .bold()
+                                        }
+                                        .padding(.bottom, 20)
+                                    }
+                                    .buttonStyle(BorderedProminentButtonStyle())
+                                    .padding(15)
+                                }
+                            }
+                            .background(Color.white)
+                            .cornerRadius(15)
+                        }
+                        .padding(20)
+                        .background(Color.gray)
+                        ZStack{
+                            VStack{
+                                Text("FAVORIT ARTIKLAR")
+                                    .font(.system(size: 25))
+                                    .padding(.trailing, 20)
+                                    .bold()
+                                VStack{
+                                    HStack{
+                                        //Remove these dummy images when real data is used
+                                        Image("OldTrafford")
+                                            .resizable()
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(10)
+                                            .padding()
+                                        Image("lax")
+                                            .resizable()
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(10)
+                                            .padding()
+                                    }
+                                        VStack{
+                                            NavigationLink(
+                                                destination: MyArticlesView()
+                                            ) {
+                                                HStack {
+                                                    Text("Se fler")
+                                                        .font(.title)
+                                                        .bold()
+                                                }
+                                                .padding(.bottom, 20)
+                                            }
+                                            .buttonStyle(BorderedProminentButtonStyle())
+                                            .padding(15)
+                                        }
+                                }
+                                
+                            }
+                            .background(Color.white)
+                            .cornerRadius(15)
+                        }
+                        .padding(20)
+                        .background(Color.gray)
+
+                        Spacer()
+                        
+                        Spacer()
+                        Button(action: {
+                            do{
+                                try Auth.auth().signOut()
+                            } catch let signOutError as NSError {
+                                print("Error signing out: %@", signOutError)
+                            }
+                        }){
+                            Text("Logout")
+                        }
                     }
-                }) {
-                    Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(.black)
                 }
-                .padding(.trailing, 30)
-                
             }
-            Spacer()
-            HStack{
-                Button(action: {
-                    isAddArticle = true
-                }, label: {
-                    Text("Add article")
-                        .frame(width: 120, height: 42)
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(20)
-                })
-                //.offset(x: -130, y: -200)
-                .sheet(isPresented: $isAddArticle){
-                    AddArticleView()
-                }
-                .padding(.bottom, 40)
-            }
-           
-            Button(action: {
-                isSaved = true
-            }, label: {
-                Text("Saved Articles")
-                    .frame(width: 120, height: 42)
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(20)
-            })
-            //.offset(x: -130, y: -200)
-            .sheet(isPresented: $isSaved){
-                SavedArticlesView()
-            }
-            Spacer()
-           
+            .background(Color.gray)
+            .ignoresSafeArea()
         }
     }
 }
