@@ -31,7 +31,7 @@ struct ProfileView: View {
                         .ignoresSafeArea()
                         HStack(){
                             VStack{
-                                KFImage(URL(string: "Profile-Image/swift.jpg"))
+                                KFImage(URL(string: "https://firebasestorage.googleapis.com:443/v0/b/newscatch-94592.appspot.com/o/swift.jpg.jpg?alt=media&token=f0629957-9d7d-4faa-9a10-1288f3d1e870"))
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(height: 200)

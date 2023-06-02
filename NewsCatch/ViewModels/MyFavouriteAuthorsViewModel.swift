@@ -49,14 +49,14 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                 }
             }
         }
-    /*
+    
     func saveFavouriteAuthor(author: User){
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         var authUser = Auth.auth().currentUser
-        var users = getUsersFromDb()
-  
+        getUsersFromDb()
+        
             
         let favouriteAuthors = db.collection("authors")
                 .document(uid)
@@ -81,8 +81,8 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                 } else {
             
                     var data: [String: Any] = [
-                        "name": users[0].first,
-                        "Image": users[0].pictureURL
+                        "name": self.users[0].name,
+                        "Image": self.users[0].imageURL
                         
                     ]
                     
@@ -97,11 +97,11 @@ class MyFavouriteAuthorViewModel: ObservableObject{
             }
         }
     
-     */
+     
     func getUsersFromDb(){
         users.removeAll()
         var user = Auth.auth().currentUser
-        db.collection("PublishedArticles").addSnapshotListener() {
+        db.collection("users").addSnapshotListener() {
                 snapshot, error in
                 
                 guard let snapshot = snapshot else {return}
