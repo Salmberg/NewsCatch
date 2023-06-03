@@ -21,9 +21,9 @@ class MyFavouriteAuthorViewModel: ObservableObject{
             return
         }
         
-        let favouriteAuthorsCollection = db.collection("authors")
+        let favouriteAuthorsCollection = db.collection("writers")
             .document(uid)
-            .collection("FavouriteAuthors")
+            .collection("favouriteWriters")
         
         favouriteAuthorsCollection.getDocuments { snapshot, error in
             if let error = error {
@@ -47,14 +47,10 @@ class MyFavouriteAuthorViewModel: ObservableObject{
     func saveFavouriteAuthor(userName: String){
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        
         var authUser = Auth.auth().currentUser
-       
-        
-        
         users.removeAll()
-        var user = Auth.auth().currentUser
-        db.collection("users").addSnapshotListener() {
+        
+        db.collection("writers").document(uid).collection("favouriteWriters").addSnapshotListener() {
                 snapshot, error in
                 
                 guard let snapshot = snapshot else {return}
@@ -76,13 +72,13 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                 }
             }
 
-        let favouriteAuthors = db.collection("authors")
+        let favouriteAuthors = db.collection("writers")
                 .document(uid)
-                .collection("FavouriteAuthors")
+                .collection("favouriteWriters")
         
         let favouriteAuthorsCollection = db.collection("authors")
             .document(uid)
-            .collection("FavouriteAuthors")
+            .collection("favouriteWriters")
         
         let savedArticlesQuery = favouriteAuthorsCollection
             .whereField("email", isEqualTo: authUser?.email)

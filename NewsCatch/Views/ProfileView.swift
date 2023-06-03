@@ -210,7 +210,7 @@ struct ProfileView: View {
                                     }
                                         VStack{
                                             NavigationLink(
-                                                destination: MyArticlesView()
+                                                destination: MyFavouriteArticlesView()
                                             ) {
                                                 HStack {
                                                     Text("Se fler")

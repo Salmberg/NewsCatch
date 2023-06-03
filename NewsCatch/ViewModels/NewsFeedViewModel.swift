@@ -51,7 +51,7 @@ class NewsFeedViewModel : ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         //let user = 
         
-        let savedArticlesCollection = db.collection("Userssaved articles")
+        let savedArticlesCollection = db.collection("usersaved articles")
             .document(uid)
             .collection("SavedArticles")
         

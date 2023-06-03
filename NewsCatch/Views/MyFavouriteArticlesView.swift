@@ -20,7 +20,7 @@ struct MyFavouriteArticlesView: View {
                     ZStack {
                         Color.black
                             .frame(height: 110) // Adjust the height as needed
-                        Text("MyFavouriteArticles")
+                        Text("Mina favorit artiklar")
                             .font(.system(size: 20))
                             .foregroundColor(.white)
                             .bold()
@@ -28,7 +28,7 @@ struct MyFavouriteArticlesView: View {
                     .edgesIgnoringSafeArea(.top)
                     .frame(height: 110) // Adjust the height as needed
                     HStack{
-                                                
+                        
                         Spacer()
                     }
                     .background(Color.gray)
@@ -55,13 +55,13 @@ struct MyFavouriteArticlesView: View {
                                                 }
                                                 Text(article.heading)
                                                     .font(.title)
-                                                    .bold()
+                                            .bold()
                                                     .padding(.leading, 10)
                                                     .padding(.bottom, 20)
                                             }
-
+                                            
                                             Spacer()
-
+                                            
                                             if let pictureURL = article.pictureURL {
                                                 KFImage(URL(string: pictureURL))
                                                     .resizable()
@@ -78,43 +78,21 @@ struct MyFavouriteArticlesView: View {
                                         }
                                     }
                                     .buttonStyle(PlainButtonStyle())
-
+                                    
                                     Divider()
                                         .padding(.horizontal, 10)
                                 }
                             }
                         }
                         .frame(maxHeight: .infinity)
-
+                        .onAppear(perform: viewModel.getArticlesFromDb)
+                        
                         Spacer()
                     }
                     .navigationBarTitle("", displayMode: .inline)
                 }
                 
-                // Menu view
-                MenuView(isMenuActive: $isMenuActive)
-                    .frame(width: UIScreen.main.bounds.width * 1) // Adjust the width as needed
-                    .offset(x: isMenuActive ? 0 : -UIScreen.main.bounds.width) // Apply the offset to control the slide-out animation
-                    .animation(.easeInOut) // Apply animation
-                    .zIndex(1) // Ensure the menu appears above the content
             }
-            .modifier(InitialMenuActivationModifier(isMenuActive: $isMenuActive))
-            .edgesIgnoringSafeArea(.all)
-            .onAppear {
-                viewModel.getArticlesFromDb()
-            }
-            .navigationBarTitle("", displayMode: .inline) // Set an empty title to keep the navigation bar visible
-            .navigationBarItems(
-                leading: Button(action: {
-                    isMenuActive.toggle()
-                }) {
-                    Image(systemName: "line.horizontal.3")
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
-                }
-            )
         }
     }
 }
-
-
