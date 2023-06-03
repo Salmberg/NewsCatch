@@ -72,7 +72,7 @@ class NewsFeedViewModel : ObservableObject {
                 var data: [String: Any] = [
                     "heading": article.heading,
                     "content": article.content,
-                    "image": article.pictureURL,
+                    "pictureURL": article.pictureURL,
                     "writer": article.writer,
                     "date": article.date,
                 ]
