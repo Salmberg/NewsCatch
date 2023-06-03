@@ -20,7 +20,7 @@ struct MyFavouriteArticlesView: View {
                     ZStack {
                         Color.black
                             .frame(height: 110) // Adjust the height as needed
-                        Text("Mina favorit artiklar")
+                        Text("Mina favoritartiklar")
                             .font(.system(size: 20))
                             .foregroundColor(.white)
                             .bold()
@@ -55,7 +55,7 @@ struct MyFavouriteArticlesView: View {
                                                 }
                                                 Text(article.heading)
                                                     .font(.title)
-                                            .bold()
+                                                    .bold()
                                                     .padding(.leading, 10)
                                                     .padding(.bottom, 20)
                                             }

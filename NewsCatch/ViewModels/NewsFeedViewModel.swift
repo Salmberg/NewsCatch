@@ -72,8 +72,9 @@ class NewsFeedViewModel : ObservableObject {
                 var data: [String: Any] = [
                     "heading": article.heading,
                     "content": article.content,
-                    "Image": article.pictureURL
-                    // Add other article properties you want to store
+                    "image": article.pictureURL,
+                    "writer": article.writer,
+                    "date": article.date,
                 ]
                 
                 savedArticlesCollection.addDocument(data: data) { error in
