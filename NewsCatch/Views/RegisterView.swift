@@ -16,7 +16,7 @@ struct RegisterView: View {
                 Rectangle().fill().background(Color.black)
                     .frame(height: 180)
             }
-            Text("Register for NewsApp")
+            Text("Register for NewsCatch")
                 .foregroundColor(Color.white)
                 .font(.system(size: 30))
             
