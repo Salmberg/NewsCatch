@@ -19,7 +19,20 @@ struct ArticleView: View {
     var body: some View {
         VStack {
             ScrollView {
-               
+                
+                HStack{
+                    NavigationLink(
+                        destination: MapView()
+                    ) {
+                        HStack {
+                            Text("Visa på karta")
+                                .foregroundColor(.black)
+                        }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding()
+                }
+                
                 Text(article.heading)
                     .font(.custom("BebasNeue-Regular", size: 30))
                     .padding()
