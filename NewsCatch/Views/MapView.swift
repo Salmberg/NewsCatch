@@ -25,11 +25,16 @@ struct MapView: View {
     var body: some View {
         Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
             MapAnnotation(coordinate: location.coordinate){
-                Circle()
-                    .stroke(.red, lineWidth: 3)
-                    .frame(width: 44,height: 44)
-                Text(location.name)
-                    .foregroundColor(.red)
+                VStack{
+                    Circle()
+                        .fill(.red)
+                        .frame(width: 44,height: 44)
+                        .onTapGesture{
+                            print("Tapped on \(location.name)")
+                        }
+                    Text(location.name)
+                        .foregroundColor(.red)
+                }
             }
         }
     }
