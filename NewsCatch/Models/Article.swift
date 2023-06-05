@@ -19,6 +19,7 @@ struct Article: Codable, Identifiable, Hashable {
     var pictureURL: String? // Temporarily commented out to conform to "codable"
     var date: Date // Add a property to store the creation date and time
     var writer: String //Username of the user who made this article
+    var popularity: Int //How many times the article has been saved by users
     
     
     
@@ -45,6 +46,7 @@ struct Article: Codable, Identifiable, Hashable {
         self.date = Date() // Set the current date and time during initialization
         self.pictureURL = pictureURL
         self.writer = writer
+        self.popularity = 0
     }
 }
 

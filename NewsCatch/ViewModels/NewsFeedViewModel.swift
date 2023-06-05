@@ -84,6 +84,12 @@ class NewsFeedViewModel : ObservableObject {
                         print("Article saved successfully!")
                     }
                 }
+                
+                //update popularity
+                if let articleID = article.id{
+                    self.db.collection("PublishedArticles").document(articleID).updateData(["popularity": (article.popularity + 1)])
+                }
+                
             }
         }
     }
