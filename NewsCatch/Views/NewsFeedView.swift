@@ -25,7 +25,7 @@ struct NewsFeedView: View {
         if latestNewsSelected {
             return viewModel.articles.sorted { $0.date > $1.date }
         } else {
-            return viewModel.articles.shuffled()
+            return viewModel.articles.sorted {$0.popularity > $1.popularity}
         }
     }
     
