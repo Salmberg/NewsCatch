@@ -40,7 +40,6 @@ class MapAPI: ObservableObject{
     func getLocation(adress: String, delta: Double){
         let pAdress = adress.replacingOccurrences(of: " ", with: "%20")
         let url_string = "\(BASE_URL)?access_key=\(API_KEY)&query=\(pAdress)"
-        print(url_string)
         guard let url = URL(string: url_string) else {
             print("invalid url")
             return
@@ -69,6 +68,7 @@ class MapAPI: ObservableObject{
                 
                 let new_location = ArticleLocation(name: name ?? "Marker", coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon))
                 self.locations.removeAll()
+                self.locations.append(new_location)
                 
                 print("Succesfully loaded the location!")
             }
