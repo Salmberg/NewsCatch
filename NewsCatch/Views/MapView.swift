@@ -24,7 +24,13 @@ struct MapView: View {
     
     var body: some View {
         Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
-            MapMarker(coordinate: location.coordinate)
+            MapAnnotation(coordinate: location.coordinate){
+                Circle()
+                    .stroke(.red, lineWidth: 3)
+                    .frame(width: 44,height: 44)
+                Text(location.name)
+                    .foregroundColor(.red)
+            }
         }
     }
 }
