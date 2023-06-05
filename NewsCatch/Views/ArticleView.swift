@@ -22,7 +22,7 @@ struct ArticleView: View {
                 
                 HStack{
                     NavigationLink(
-                        destination: MapView()
+                        destination: MapView(article: article)
                     ) {
                         HStack {
                             Text("Visa på karta")

@@ -15,6 +15,7 @@ struct ArticleLocation: Identifiable{
 }
 
 struct MapView: View {
+    var article: Article
     @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 57.7087, longitude:11.9751), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
     
     let locations = [
@@ -23,26 +24,24 @@ struct MapView: View {
     ]
     
     var body: some View {
-        Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
-            MapAnnotation(coordinate: location.coordinate){
-                VStack{
-                    Circle()
-                        .fill(.red)
-                        .frame(width: 44,height: 44)
-                        .onTapGesture{
-                            print("Tapped on \(location.name)")
+        NavigationView{
+            Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
+                MapAnnotation(coordinate: location.coordinate){
+                    NavigationLink(destination: ArticleView(article:article)
+                    ) {
+                        VStack{
+                            Circle()
+                                .fill(.red)
+                                .frame(width: 44,height: 44)
+                            Text(location.name)
+                                .foregroundColor(.red)
                         }
-                    Text(location.name)
-                        .foregroundColor(.red)
+                    }
                 }
             }
         }
+        .navigationTitle("Artiklar via karta")
     }
+        
 }
 
-
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView()
-    }
-}
