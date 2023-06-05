@@ -19,6 +19,7 @@ struct Article: Codable, Identifiable, Hashable {
     var pictureURL: String? // Temporarily commented out to conform to "codable"
     var date: Date // Add a property to store the creation date and time
     var writer: String //Username of the user who made this article
+    var location: String  //Holds the location where the article takes place
     
     
     
@@ -37,7 +38,7 @@ struct Article: Codable, Identifiable, Hashable {
     }
 
     
-    init(heading: String, content: String, writer: String, pictureURL: String?, category: Category?) {
+    init(heading: String, content: String, writer: String, pictureURL: String?, category: Category?, location: String) {
         self.heading = heading
         self.content = content
         self.category = category ?? Category.unspecified //Unspecified if given nothing
@@ -45,6 +46,7 @@ struct Article: Codable, Identifiable, Hashable {
         self.date = Date() // Set the current date and time during initialization
         self.pictureURL = pictureURL
         self.writer = writer
+        self.location = location
     }
 }
 
@@ -57,8 +59,9 @@ extension Article {
         let content = data["content"] as? String
         let writer = data["writer"] as? String
         let category = data["category"] as? Category
-        
-        self.init(heading: heading, content: content ?? "", writer: writer ?? "", pictureURL: nil, category: category)
+        let location = data["location"] as? String
+ 
+        self.init(heading: heading, content: content ?? "", writer: writer ?? "", pictureURL: nil, category: category, location: location ?? "")
     }
 }
 

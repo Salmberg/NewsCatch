@@ -15,6 +15,7 @@ class AddArticleViewModel: ObservableObject {
     @Published var articles = [Article]()
     @Published var titleContent: String = "Enter Title..."
     @Published var textContent: String = "Enter your article text here..."
+    @Published var locationContent: String = "Stockholm"
     @Published var categoryContent: Category = Category.unspecified // Actual category
     @Published var categoryString: String = "Unspecified" // String for drop-down menu
     @Published var pictureURLL: String?
@@ -48,7 +49,7 @@ class AddArticleViewModel: ObservableObject {
     
     func requestArticle() {
 
-        let newArticle = Article(heading: titleContent, content: textContent, writer: username, pictureURL: pictureURLL, category: categoryContent)
+        let newArticle = Article(heading: titleContent, content: textContent, writer: username, pictureURL: pictureURLL, category: categoryContent, location: locationContent)
         
         // Upload to Firebase
         do {
