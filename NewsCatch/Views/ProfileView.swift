@@ -15,8 +15,6 @@ struct ProfileView: View {
     @State var isAddArticle = false
     var auth = FirebaseAuth.Auth.self
     var user = Auth.auth().currentUser
-    @State private var username = ""
-  
 
     var body: some View {
         NavigationView {
@@ -40,52 +38,60 @@ struct ProfileView: View {
                                 .padding(.bottom, 30)
 
                             VStack(spacing: 10) {
-                               Text(username)
-                             .font(.system(size: 20))
-                                Text(user?.email ?? "")
-                                .font(.system(size: 20))
-                                .padding(.bottom, 30)
+//                                Text(user?.name ?? "")
+//                             .font(.system(size: 20))
+                                HStack {
+                                    Image(systemName: "at")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .padding(.bottom, 30)
+
+                                    Text(user?.email ?? "")
+                                        .font(.system(size: 20))
+                                        .padding(.bottom, 30)
+                                }
+                            }
+                            .onAppear {
+                                print("User: \(user?.email)")
                             }
                         }
                         .background(Color.gray)
 
-                        ZStack {
-                            VStack {
-                                Text("MINA ARTIKLAR")
-                                    .font(.system(size: 25))
-                                    .padding(.trailing, 20)
-                                    .bold()
-                                VStack {
-                                    HStack {
-                                        //Remove these dummy images when real data is used
-                                        Image("ocean")
-                                            .resizable()
-                                            .frame(width: 100, height: 100)
-                                            .cornerRadius(10)
-                                            .padding()
-                                        Image("viking")
-                                            .resizable()
-                                            .frame(width: 100, height: 100)
-                                            .cornerRadius(10)
-                                            .padding()
-                                    }
+                        Button(action: {
+                            // Action to perform when the ZStack is clicked
+                        }) {
+                            NavigationLink(destination: MyArticlesView()) {
+                                ZStack {
                                     VStack {
-                                        NavigationLink(destination: MyArticlesView()) {
+                                        Text("MINA ARTIKLAR")
+                                            .font(.system(size: 25))
+                                            .padding(.trailing, 15)
+                                            .foregroundColor(.white)
+                                            .padding(.top, 5)
+                                            .bold()
+                                        VStack {
                                             HStack {
-                                                Text("Se fler")
-                                                    .font(.title)
-                                                    .bold()
+                                                //Remove these dummy images when real data is used
+                                                Image("ocean")
+                                                    .resizable()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                                Image("viking")
+                                                    .resizable()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(10)
+                                                    .padding()
                                             }
+    
                                         }
-                                        .buttonStyle(BorderedProminentButtonStyle())
-                                        .padding(15)
+                                        Spacer()
                                     }
+                                    .background(Color(red: 31/255, green: 59/255, blue: 77/255))
+                                    .cornerRadius(15)
+                                    .frame(width: UIScreen.main.bounds.width * 0.98)
                                 }
                             }
-                            .background(Color.white)
-                            .cornerRadius(15)
-                            .frame(width: UIScreen.main.bounds.width * 0.98)
-
                         }
                         .padding(20)
                         .background(Color.gray)
@@ -95,8 +101,13 @@ struct ProfileView: View {
                                 Text("MINA FAVORIT")
                                     .font(.system(size: 25))
                                     .bold()
+                                    .foregroundColor(.white)
+                                    .padding(.top, 5)
+
                                 Text("SKRIBENTER")
                                     .font(.system(size: 25))
+                                    .foregroundColor(.white)
+
                                     .bold()
                                 HStack {
                                     VStack {
@@ -122,13 +133,13 @@ struct ProfileView: View {
                                                 .font(.title)
                                                 .bold()
                                         }
-                                        .padding(.bottom, 20)
+                                        .padding(.bottom, 5)
                                     }
                                     .buttonStyle(BorderedProminentButtonStyle())
                                     .padding(15)
                                 }
                             }
-                            .background(Color.white)
+                            .background(Color(red: 31/255, green: 59/255, blue: 77/255))
                             .cornerRadius(15)
                         }
                         .padding(20)
@@ -138,7 +149,11 @@ struct ProfileView: View {
                             VStack {
                                 Text("FAVORIT ARTIKLAR")
                                     .font(.system(size: 25))
-                                    .padding(.trailing, 20)
+                                    .padding(.trailing, 10)
+                                    .foregroundColor(.white)
+                                    .padding(.top, 5)
+
+
                                     .bold()
                                 VStack {
                                     HStack {
@@ -161,7 +176,7 @@ struct ProfileView: View {
                                                     .font(.title)
                                                     .bold()
                                             }
-                                            .padding(.bottom, 20)
+                                            .padding(.bottom, 5)
                                         }
                                         .buttonStyle(BorderedProminentButtonStyle())
                                         .padding(15)
@@ -169,7 +184,7 @@ struct ProfileView: View {
                                 }
 
                             }
-                            .background(Color.white)
+                            .background(Color(red: 31/255, green: 59/255, blue: 77/255))
                             .cornerRadius(15)
                         }
                         .padding(20)
@@ -233,20 +248,6 @@ struct ProfileView: View {
             }
         }
     }
-    private func fetchUsername() {
-            
-            guard let uid = user?.uid else { return }
-            
-            let db = Firestore.firestore()
-            let userRef = db.collection("users").document(uid)
-            
-            userRef.getDocument { document, error in
-                if let document = document, document.exists {
-                    let data = document.data()
-                    username = data?["username"] as? String ?? ""
-                }
-            }
-        }
 }
 
 
