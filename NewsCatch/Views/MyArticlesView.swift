@@ -20,7 +20,7 @@ struct MyArticlesView: View {
                     ZStack {
                         Color.black
                             .frame(height: 110) // Adjust the height as needed
-                        Text("Utrikes")
+                        Text("Mina artiklar")
                             .font(.system(size: 20))
                             .foregroundColor(.white)
                             .bold()
@@ -94,11 +94,5 @@ struct MyArticlesView: View {
                 
             }
         }
-    }
-}
-
-struct ForeignView_Previews: PreviewProvider {
-    static var previews: some View {
-        ForeignView()
     }
 }

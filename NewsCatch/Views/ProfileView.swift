@@ -160,7 +160,6 @@ struct ProfileView: View {
                             }
                         }
 
-
                         Button(action: {
                             // Action to perform when the ZStack is clicked
                         }) {

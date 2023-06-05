@@ -56,7 +56,6 @@ class MyArticlesViewModel: ObservableObject{
                     for document in snapshot.documents{
                         do{
                             let article = try document.data(as: Article.self)
-                            print(article.writer)
                             if(article.writer == dbUser.username){
                                 self.myArticles.append(article)
                             }

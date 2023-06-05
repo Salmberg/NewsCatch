@@ -5,63 +5,96 @@
 //  Created by David Salmberg on 2023-05-22.
 //
 
+
+
+
+
 import SwiftUI
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewModel()
     @State var isAdmin = false
+    
     var body: some View {
-        
-        NavigationView{
-            VStack{
-                VStack{
-                    Rectangle().fill().background(Color.black)
-                        .frame(height: 135)
+        NavigationView {
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
+                
+                VStack(spacing: 20) {
+                    Spacer()
+                    
+                    Image("Image 1") //newsCatchLogo.png
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 210)
+                        .clipped()
+                        .shadow(color: .white, radius: 10, x: 0, y: 0)
+                        .padding([.top, .leading, .trailing], 50)
+                        .transformEffect(/*@START_MENU_TOKEN@*/.identity/*@END_MENU_TOKEN@*/)
+                    
+                    Rectangle()
+                        .foregroundColor(Color.gray)
+                        .cornerRadius(1000)
+                        .overlay(
+                            
+                            VStack(spacing: 20) {
+                                if !viewModel.errorMessage.isEmpty {
+                                    Text(viewModel.errorMessage)
+                                        .foregroundColor(Color.red)
+                                }
+                                    Spacer()
+                                
+                                TextField("Email Address", text: $viewModel.email)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .autocapitalization(.none)
+                                    .disableAutocorrection(true)
+                                    .padding(.horizontal, 100.0)
+                                    
+                                    
+                                
+                                SecureField("Password", text: $viewModel.password)
+                                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                                    .padding(.horizontal, 100.0)
+                                    
+                                Image(systemName: "newspaper.fill")
+                                    .font(.system(size: 60))
+                                    .foregroundColor(.white)
+                                
+                                NAButton(title: "Login", background: Color.black) {
+                                    if viewModel.email == "admin@newsfeed.se" && viewModel.password == "12345678" {
+                                        isAdmin = true
+                                        return
+                                        
+                                    }
+                                    
+                                    viewModel.login()
+                                    
+                                }
+                                
+                                
+                                .frame(maxWidth: .infinity) // Make the button wider
+                                .fullScreenCover(isPresented: $isAdmin) {
+                                    AdminView(logInVm: viewModel, isAdmin: $isAdmin)
+                                }
+                                .padding(.horizontal, 100.0)
+                                
+                               
+                                
+                                Text("Don't have an account yet?")
+                                    .foregroundColor(.white)
+                                
+                                NavigationLink("Create an account", destination: RegisterView())
+                                    .foregroundColor(.white)
+                                    .font(.headline)
+                                    .padding(.bottom, 20)
+                            }
+                            .padding()
+                        )
+                    
+                    Spacer()
                 }
-                Text("Login to news app")
-                    .foregroundColor(Color.black)
-                    .font(.system(size: 30))
-                
-                Form{
-                    if !viewModel.errorMessage.isEmpty{
-                        Text(viewModel.errorMessage)
-                            .foregroundColor(Color.red)
-                    }
-                    TextField("Email Address", text: $viewModel.email)
-                        .textFieldStyle(DefaultTextFieldStyle())
-                        .autocapitalization(.none)
-                        .autocorrectionDisabled()
-                    SecureField("Password", text: $viewModel.password)
-                        .textFieldStyle(DefaultTextFieldStyle())
-                    
-                    NAButton(title: "Login", background: .green){
-                        if viewModel.email == "admin@newsfeed.se" && viewModel.password == "12345678" {
-                            isAdmin = true
-                            return
-                        }
-                        viewModel.login()
-                        
-                    }
-                    .navigationBarTitle("Admin View")
-                    .fullScreenCover(isPresented: $isAdmin) {
-                        AdminView(logInVm: viewModel, isAdmin: $isAdmin)
-                    }
-                    
-                    
-                }
-                .background(Color(red: 47/255, green:79/255,blue: 79/255))
-                
-                //Create account
-                
-                Text("Don't have an account yet?")
-                    .foregroundColor(Color.black)
-                NavigationLink("Create an account",
-                               destination: RegisterView())
             }
-            
-            
         }
-        
     }
 }
 
@@ -70,4 +103,3 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-

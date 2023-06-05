@@ -51,7 +51,7 @@ class NewsFeedViewModel : ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         //let user = 
         
-        let savedArticlesCollection = db.collection("Userssaved articles")
+        let savedArticlesCollection = db.collection("usersaved articles")
             .document(uid)
             .collection("SavedArticles")
         
@@ -72,8 +72,9 @@ class NewsFeedViewModel : ObservableObject {
                 var data: [String: Any] = [
                     "heading": article.heading,
                     "content": article.content,
-                    "Image": article.pictureURL
-                    // Add other article properties you want to store
+                    "pictureURL": article.pictureURL,
+                    "writer": article.writer,
+                    "date": article.date,
                 ]
                 
                 savedArticlesCollection.addDocument(data: data) { error in
