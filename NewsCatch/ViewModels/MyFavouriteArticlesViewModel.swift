@@ -17,9 +17,9 @@ class MyFavouriteArticlesViewModel: ObservableObject {
 
         guard let uid = Auth.auth().currentUser?.uid else { return }
         print(uid)
-        favouriteArticles.removeAll()
-        db.collection("usersaved articles").document(uid).collection("SavedArticles").addSnapshotListener() {
-                snapshot, error in
+        db.collection("usersaved articles").document(uid).collection("SavedArticles").addSnapshotListener() { snapshot, error in
+            self.favouriteArticles.removeAll()
+                
                 
                 guard let snapshot = snapshot else {return}
                 if let error = error {
@@ -38,4 +38,23 @@ class MyFavouriteArticlesViewModel: ObservableObject {
                 }
             }
         }
+    
+    func deleteArticle(_ article: Article) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        if let articleIndex = favouriteArticles.firstIndex(of: article), let articleID = article.id {
+            favouriteArticles.remove(at: articleIndex)
+
+            db.collection("usersaved articles").document(uid)
+                .collection("SavedArticles").document(articleID).delete { error in
+                    if let error = error {
+                        print("Error deleting article from Firestore: \(error)")
+                    } else {
+                        print("Article deleted successfully")
+                    }
+                }
+        }
+    }
+
+
     }

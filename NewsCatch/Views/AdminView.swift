@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import Kingfisher
 
 struct AdminView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -27,6 +28,15 @@ struct AdminView: View {
                             .bold()
                             .foregroundColor(.red)
                         
+                        Spacer()
+                        if let pictureURL = article.pictureURL {
+                            KFImage(URL(string: pictureURL))
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: 200)
+                                .cornerRadius(10)
+                                .shadow(color: Color.gray.opacity(0.5), radius: 4, x: 0, y: 2)
+                        }
                         Spacer()
                         
                         Text(article.content)
