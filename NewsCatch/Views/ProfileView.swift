@@ -12,9 +12,10 @@ import Kingfisher
 import FirebaseStorage
 
 struct ProfileView: View {
+    let db = Firestore.firestore()
     @State var isAddArticle = false
-    var auth = FirebaseAuth.Auth.self
     var user = Auth.auth().currentUser
+    @State var username = "unknown"
 
     var body: some View {
         NavigationView {
@@ -27,6 +28,22 @@ struct ProfileView: View {
                         .background(Color.gray)
                         .ignoresSafeArea()
 
+                        VStack{
+                            Button(action: {
+                                do {
+                                    try Auth.auth().signOut()
+                                } catch {
+                                    print("Failed to sign out: \(error.localizedDescription)")
+                                }
+                            }) {
+                                Image(systemName: "square.and.arrow.up")
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.black)
+                            }
+                            .padding(.leading, 300)
+                            .padding(.top, 50)
+                        }
+
                         VStack(spacing: 10) {
                             KFImage(URL(string: "https://firebasestorage.googleapis.com:443/v0/b/newscatch-94592.appspot.com/o/swift.jpg?alt=media&token=f0629957-9d7d-4faa-9a10-1288f3d1e870"))
                                 .resizable()
@@ -37,22 +54,34 @@ struct ProfileView: View {
                                 .padding(.top, 60)
                                 .padding(.bottom, 30)
 
-                            VStack(spacing: 10) {
-//                                Text(user?.name ?? "")
-//                             .font(.system(size: 20))
+                            if let user = Auth.auth().currentUser {
+                                let email = user.email ?? ""
+                                let displayName = user.displayName ?? ""
+                                let profilePictureURL = user.photoURL?.absoluteString ?? ""
+
                                 HStack {
                                     Image(systemName: "at")
                                         .resizable()
                                         .frame(width: 20, height: 20)
-                                        .padding(.bottom, 30)
-
-                                    Text(user?.email ?? "")
+                                       
+                                    Text(email)
                                         .font(.system(size: 20))
-                                        .padding(.bottom, 30)
                                 }
+                                HStack{
+                                    Image(systemName: "person")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    Text(username)
+                                }
+
+                                Text(profilePictureURL)
+                            }
+
+                            VStack(spacing: 10) {
+                            
                             }
                             .onAppear {
-                                print("User: \(user?.email)")
+                                updateUsername()
                             }
                         }
                         .background(Color.gray)
@@ -65,7 +94,6 @@ struct ProfileView: View {
                                     VStack {
                                         Text("MINA ARTIKLAR")
                                             .font(.system(size: 25))
-                                            .padding(.trailing, 15)
                                             .foregroundColor(.white)
                                             .padding(.top, 5)
                                             .bold()
@@ -83,7 +111,7 @@ struct ProfileView: View {
                                                     .cornerRadius(10)
                                                     .padding()
                                             }
-    
+
                                         }
                                         Spacer()
                                     }
@@ -96,105 +124,92 @@ struct ProfileView: View {
                         .padding(20)
                         .background(Color.gray)
 
-                        ZStack {
-                            VStack() {
-                                Text("MINA FAVORIT")
-                                    .font(.system(size: 25))
-                                    .bold()
-                                    .foregroundColor(.white)
-                                    .padding(.top, 5)
-
-                                Text("SKRIBENTER")
-                                    .font(.system(size: 25))
-                                    .foregroundColor(.white)
-
-                                    .bold()
-                                HStack {
+                        Button(action: {
+                            // Action to perform when the ZStack is clicked
+                        }) {
+                            NavigationLink(destination:  MyFavouriteArticlesView()) {
+                                ZStack {
                                     VStack {
-                                        Image(systemName: "person.crop.circle.fill")
-                                            .font(.system(size: 80))
-                                            .padding(15)
-                                        Text("Skribent 1")
-                                            .font(.system(size: 15))
-                                    }
-                                    VStack {
-                                        Image(systemName: "person.crop.circle.fill")
-                                            .font(.system(size: 80))
-                                            .padding(15)
-                                        Text("Skribent 2")
-                                            .font(.system(size: 15))
-                                    }
-
-                                }
-                                VStack {
-                                    NavigationLink(destination: MyFavouriteAuthorsView()) {
-                                        HStack {
-                                            Text("Se fler")
-                                                .font(.title)
-                                                .bold()
-                                        }
-                                        .padding(.bottom, 5)
-                                    }
-                                    .buttonStyle(BorderedProminentButtonStyle())
-                                    .padding(15)
-                                }
-                            }
-                            .background(Color(red: 31/255, green: 59/255, blue: 77/255))
-                            .cornerRadius(15)
-                        }
-                        .padding(20)
-                        .background(Color.gray)
-
-                        ZStack {
-                            VStack {
-                                Text("FAVORIT ARTIKLAR")
-                                    .font(.system(size: 25))
-                                    .padding(.trailing, 10)
-                                    .foregroundColor(.white)
-                                    .padding(.top, 5)
-
-
-                                    .bold()
-                                VStack {
-                                    HStack {
-                                        //Remove these dummy images when real data is used
-                                        Image("OldTrafford")
-                                            .resizable()
-                                            .frame(width: 100, height: 100)
-                                            .cornerRadius(10)
-                                            .padding()
-                                        Image("lax")
-                                            .resizable()
-                                            .frame(width: 100, height: 100)
-                                            .cornerRadius(10)
-                                            .padding()
-                                    }
-                                    VStack {
-                                        NavigationLink(destination: MyArticlesView()) {
+                                        Text("SPARADE ARTIKLAR")
+                                            .font(.system(size: 25))
+                                            .foregroundColor(.white)
+                                            .padding(.top, 5)
+                                            .bold()
+                                        VStack {
                                             HStack {
-                                                Text("Se fler")
-                                                    .font(.title)
-                                                    .bold()
+                                                //Remove these dummy images when real data is used
+                                                Image("ocean")
+                                                    .resizable()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(10)
+                                                    .padding()
+                                                Image("viking")
+                                                    .resizable()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(10)
+                                                    .padding()
                                             }
-                                            .padding(.bottom, 5)
-                                        }
-                                        .buttonStyle(BorderedProminentButtonStyle())
-                                        .padding(15)
-                                    }
-                                }
 
+                                        }
+                                        Spacer()
+                                    }
+                                    .background(Color(red: 31/255, green: 59/255, blue: 77/255))
+                                    .cornerRadius(15)
+                                    .frame(width: UIScreen.main.bounds.width * 0.98)
+                                }
                             }
-                            .background(Color(red: 31/255, green: 59/255, blue: 77/255))
-                            .cornerRadius(15)
+                        }
+
+
+                        Button(action: {
+                            // Action to perform when the ZStack is clicked
+                        }) {
+                            NavigationLink(destination:  MyFavouriteAuthorsView()) {
+                                ZStack {
+                                    VStack {
+                                        Text("FAVORITSKRIBENTER")
+                                            .font(.system(size: 25))
+                                            .foregroundColor(.white)
+                                            .padding(.top, 10)
+                                            .bold()
+                                        VStack {
+                                            HStack {
+                                                VStack{
+                                                    Image(systemName: "person.crop.circle.fill")
+                                                        .font(.system(size: 80))
+                                                        .padding(20)
+                                                    Text("Skribent 1")
+                                                        .font(.system(size: 15))
+                                                }
+                                                VStack{
+                                                    Image(systemName: "person.crop.circle.fill")
+                                                        .font(.system(size: 80))
+                                                        .padding(20)
+                                                    Text("Skribent 2")
+                                                        .font(.system(size: 15))
+                                                }
+                                            }
+
+                                        }
+                                        Spacer()
+                                    }
+                                    .background(Color(red: 31/255, green: 59/255, blue: 77/255))
+                                    .cornerRadius(15)
+                                    .frame(width: UIScreen.main.bounds.width * 0.98)
+
+                                }
+                            }
                         }
                         .padding(20)
                         .background(Color.gray)
 
-                        Spacer()
                     }
                 }
                 .background(Color.gray)
-                .ignoresSafeArea()
+                .ignoresSafeArea(.all)
+                .padding(.bottom, 20)
+
+
 
                 VStack {
                     Spacer()
@@ -240,7 +255,7 @@ struct ProfileView: View {
                         .padding(.bottom, 70)
                         .padding(.leading, 30)
                         .padding(.trailing, 20)
-                        
+
                         .background(Color(red: 31/255, green: 59/255, blue: 77/255))
                         .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 100)
                     }
@@ -248,7 +263,24 @@ struct ProfileView: View {
             }
         }
     }
+
+    func updateUsername() {
+        if let user = Auth.auth().currentUser {
+            db.collection("users").document(user.uid).getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let data = document.data()
+                    let username = data?["username"] as? String ?? "unknown"
+                    DispatchQueue.main.async {
+                        self.username = username
+                    }
+                } else {
+                    print("Document does not exist")
+                }
+            }
+        }
+    }
 }
+
 
 
 
