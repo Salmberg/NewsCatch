@@ -22,10 +22,11 @@ struct NewsFeedView: View {
     
     
     var filteredArticles: [Article] {
+        //sort on date or popularity
         if latestNewsSelected {
             return viewModel.articles.sorted { $0.date > $1.date }
         } else {
-            return viewModel.articles.shuffled()
+            return viewModel.articles.sorted {$0.popularity > $1.popularity}
         }
     }
     
@@ -72,7 +73,7 @@ struct NewsFeedView: View {
                                 allNewsSelected.toggle()
                                 latestNewsSelected = false // Deselect the "Latest news" button
                             }) {
-                                Text("All news")
+                                Text("Popular news")
                                     .font(.title2)
                                     .bold()
                                     .padding(10)
