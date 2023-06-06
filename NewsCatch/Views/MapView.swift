@@ -12,19 +12,20 @@ struct MapView: View {
     var articles: [Article]
     @StateObject private var mapAPI = MapAPI()
     @State private var text = ""
+    @StateObject var manager = LocationManager()
     
     var body: some View {
         NavigationView{
             ForEach(articles) { article in
-                Map(coordinateRegion: $mapAPI.region, annotationItems: mapAPI.locations) { tja in
-                    MapAnnotation(coordinate: tja.coordinate){
+                Map(coordinateRegion: $manager.region, annotationItems: mapAPI.locations) { location in
+                    MapAnnotation(coordinate: location.coordinate){
                         NavigationLink(destination: ArticleView(article:article)
                         ) {
                             VStack{
                                 Circle()
                                     .fill(.red)
                                     .frame(width: 44,height: 44)
-                                Text(tja.name)
+                                Text(location.name)
                                     .foregroundColor(.red)
                             }
                         }
