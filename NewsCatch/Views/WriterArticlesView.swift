@@ -11,10 +11,11 @@ import Kingfisher
 
 struct WriterArticlesView: View {
     @State private var isMenuActive: Bool = false
-    @State private var selectedArticle: Article? = nil
     var writer : String
     @StateObject var viewModel = WriterArticlesViewModel()
     @StateObject var favouriteWriterVM = MyFavouriteAuthorViewModel()
+    @State private var selectedArticleSheet: Article? = nil // New state variable
+    
     
     var body: some View {
         NavigationView {
@@ -31,7 +32,7 @@ struct WriterArticlesView: View {
                     .edgesIgnoringSafeArea(.top)
                     .frame(height: 110) // Adjust the height as needed
                     HStack{
-                  
+                        
                         Spacer()
                     }
                     .background(Color.gray)
@@ -40,11 +41,9 @@ struct WriterArticlesView: View {
                         ScrollView {
                             VStack {
                                 ForEach(viewModel.articles, id: \.heading) { article in
-                                    NavigationLink(
-                                        destination: ArticleView(article: article),
-                                        tag: article,
-                                        selection: $selectedArticle
-                                    ) {
+                                    Button(action: {
+                                        selectedArticleSheet = article // Set the selected article for the sheet
+                                    }) {
                                         HStack {
                                             VStack(alignment: .leading, spacing: 0) {
                                                 HStack(spacing: 0) { // Add spacing: 0 to the HStack
@@ -62,9 +61,9 @@ struct WriterArticlesView: View {
                                                     .padding(.leading, 10)
                                                     .padding(.bottom, 20)
                                             }
-
+                                            
                                             Spacer()
-
+                                            
                                             if let pictureURL = article.pictureURL {
                                                 KFImage(URL(string: pictureURL))
                                                     .resizable()
@@ -81,7 +80,7 @@ struct WriterArticlesView: View {
                                         }
                                     }
                                     .buttonStyle(PlainButtonStyle())
-
+                                    
                                     Divider()
                                         .padding(.horizontal, 10)
                                 }
@@ -95,39 +94,33 @@ struct WriterArticlesView: View {
                                 Text("Följ")
                             })
                             .buttonStyle(BorderedProminentButtonStyle())
-                            }
                         }
-                        Spacer()
                     }
-                    .navigationBarTitle("", displayMode: .inline)
+                    Spacer()
                 }
-                
-                // Menu view
-                MenuView(isMenuActive: $isMenuActive)
-                    .frame(width: UIScreen.main.bounds.width * 1) // Adjust the width as needed
-                    .offset(x: isMenuActive ? 0 : -UIScreen.main.bounds.width) // Apply the offset to control the slide-out animation
-                    .animation(.easeInOut) // Apply animation
-                    .zIndex(1) // Ensure the menu appears above the content
+                .navigationBarTitle("", displayMode: .inline)
             }
-            .modifier(InitialMenuActivationModifier(isMenuActive: $isMenuActive))
-            .edgesIgnoringSafeArea(.all)
-            .onAppear {
-                viewModel.username = self.writer
-                viewModel.getArticlesFromDb()
-            }
-            .navigationBarTitle("", displayMode: .inline) // Set an empty title to keep the navigation bar visible
-            .navigationBarItems(
-                leading: Button(action: {
-                    isMenuActive.toggle()
-                }) {
-                    Image(systemName: "line.horizontal.3")
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
-                }
-            )
+            
+            // Menu view
+            MenuView(isMenuActive: $isMenuActive)
+                .frame(width: UIScreen.main.bounds.width * 1) // Adjust the width as needed
+                .offset(x: isMenuActive ? 0 : -UIScreen.main.bounds.width) // Apply the offset to control the slide-out animation
+                .animation(.easeInOut) // Apply animation
+                .zIndex(1) // Ensure the menu appears above the content
         }
+        .modifier(InitialMenuActivationModifier(isMenuActive: $isMenuActive))
+        .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            viewModel.username = self.writer
+            viewModel.getArticlesFromDb()
+        }
+        .navigationBarTitle("", displayMode: .inline) // Set an empty title to keep the navigation bar visible
+        .sheet(item: $selectedArticleSheet) { article in
+            WriterArticleContentView(article: article)
+        } // Present the sheet when an article is selected
     }
-    
+}
+
 
 
 struct WriterArticlesView_Previews: PreviewProvider {

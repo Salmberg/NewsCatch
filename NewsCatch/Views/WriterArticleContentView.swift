@@ -1,20 +1,20 @@
 //
-//  ArticleView.swift
+//  WriterArticleContentView.swift
 //  NewsCatch
 //
-//  Created by David Salmberg on 2023-05-22.
+//  Created by Youssef Azroun on 2023-06-06.
 //
 
 import SwiftUI
 import Kingfisher
 
-struct ArticleView: View {
+struct WriterArticleContentView: View {
+    
     var article: Article
     @StateObject private var viewModel = NewsFeedViewModel()
     @StateObject private var favouriteAuthorVM = MyFavouriteAuthorViewModel()
     @Environment(\.presentationMode) var presentationMode
     @State private var showAlert = false
-    @State private var isShowingWriterSheet = false
     
     
     var body: some View {
@@ -44,19 +44,6 @@ struct ArticleView: View {
                     Image(systemName: "calendar")
                     Text(Article.dateFormatter.string(from: article.date))
                         .padding()
-                }
-                HStack{
-                    NavigationLink(
-                        destination: WriterArticlesView(writer: self.article.writer)
-                    ) {
-                        HStack {
-                            Image(systemName: "person")
-                            Text(article.writer)
-                                .foregroundColor(.blue)
-                        }
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .padding()
                 }
 
                 Button(action: {
@@ -101,9 +88,8 @@ struct ArticleView: View {
     
 }
 
-//struct ArticleView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let sampleArticle = Article(heading: "Sample Article", content: "This is a sample article content.", pictureURL: "https://example.com/image.jpg", category: Category.unspecified)
-//        return ArticleView(article: sampleArticle)
-//    }
-//}
+/*struct WriterArticleContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        WriterArticleContentView()
+    }
+}*/
