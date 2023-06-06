@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3181D4ED2A2FB73B00A7BE74 /* WriterArticleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3181D4EC2A2FB73B00A7BE74 /* WriterArticleContentView.swift */; };
 		31E5C9482A266A1B00011406 /* SavedArticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C9472A266A1B00011406 /* SavedArticlesView.swift */; };
 		31E5C94B2A27919100011406 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 31E5C94A2A27919100011406 /* Kingfisher */; };
 		31E5C94D2A2D37AF00011406 /* AdminStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E5C94C2A2D37AF00011406 /* AdminStartView.swift */; };
@@ -90,6 +91,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3181D4EC2A2FB73B00A7BE74 /* WriterArticleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriterArticleContentView.swift; sourceTree = "<group>"; };
 		31E5C9472A266A1B00011406 /* SavedArticlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesView.swift; sourceTree = "<group>"; };
 		31E5C94C2A2D37AF00011406 /* AdminStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminStartView.swift; sourceTree = "<group>"; };
 		31E5C94E2A2D3D3300011406 /* AdminDeleteArticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminDeleteArticles.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				5C0FCE262A29AAB7008B1B04 /* ReminderView.swift */,
 				31E5C94C2A2D37AF00011406 /* AdminStartView.swift */,
 				31E5C94E2A2D3D3300011406 /* AdminDeleteArticles.swift */,
+				3181D4EC2A2FB73B00A7BE74 /* WriterArticleContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				CB6953162A1BDD8F003D494C /* NAButton.swift in Sources */,
 				31E5C94D2A2D37AF00011406 /* AdminStartView.swift in Sources */,
 				3334D8082A276D2600871FB3 /* ArticleImageView.swift in Sources */,
+				3181D4ED2A2FB73B00A7BE74 /* WriterArticleContentView.swift in Sources */,
 				CB7AAA222A1BDEF40003CB48 /* Extensions.swift in Sources */,
 				CB69530D2A1BDCF0003D494C /* ArticleView.swift in Sources */,
 				CB69530B2A1BDCCE003D494C /* NewsFeedView.swift in Sources */,
