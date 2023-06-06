@@ -69,12 +69,13 @@ class NewsFeedViewModel : ObservableObject {
                 print("Article is already saved!")
             } else {
                 // The article is not saved, save it
-                var data: [String: Any] = [
+                let data: [String: Any] = [
                     "heading": article.heading,
                     "content": article.content,
                     "pictureURL": article.pictureURL,
                     "writer": article.writer,
                     "date": article.date,
+                    "popularity": article.popularity
                 ]
                 
                 savedArticlesCollection.addDocument(data: data) { error in
