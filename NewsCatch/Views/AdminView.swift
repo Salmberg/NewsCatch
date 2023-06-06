@@ -50,7 +50,7 @@ struct AdminView: View {
                             Button(action: {
                                 viewModel.AproveArticle(article: article)
                             }, label: {
-                                Text("Aprove Article")
+                                Text("Approve Article")
                                     .frame(width: 130, height: 30)
                                     .background(.green)
                                     .cornerRadius(15)

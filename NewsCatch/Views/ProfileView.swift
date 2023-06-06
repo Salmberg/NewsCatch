@@ -230,7 +230,7 @@ struct ProfileView: View {
                             }
 
                             NavigationLink(destination:
-                                SavedArticlesView()) {
+                                MyFavouriteArticlesView()) {
                                 Image(systemName: "heart.text.square.fill")
                                     .font(.system(size: 35))
                                     .padding(20)
