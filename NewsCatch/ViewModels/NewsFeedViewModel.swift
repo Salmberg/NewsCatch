@@ -84,6 +84,12 @@ class NewsFeedViewModel : ObservableObject {
                         print("Article saved successfully!")
                     }
                 }
+                
+                //update popularity
+                if let articleID = article.id{
+                    self.db.collection("PublishedArticles").document(articleID).updateData(["popularity": (article.popularity + 1)])
+                }
+                
             }
         }
     }
@@ -115,6 +121,31 @@ class NewsFeedViewModel : ObservableObject {
         }
     }
 
+    func delete(index: Int) {
+        let article = articles[index]
+        if let id = article.id {
+            db.collection("PublishedArticles").document(id).delete()
+        }
+    }
+    
+    func deleteArticle(_ article: Article) {
+        let db = Firestore.firestore()
+        
+        if let articleId = article.id {
+            db.collection("PublishedArticles").document(articleId).delete { error in
+                if let error = error {
+                    print("Error deleting article: \(error)")
+                } else {
+                    print("Article deleted successfully")
+                    // You can also remove the article from the viewModel.articles array
+                }
+            }
+        } else {
+            print("Article ID is nil")
+        }
+    }
 
+
+    
 
 }

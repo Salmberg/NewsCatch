@@ -75,6 +75,14 @@ struct MyFavouriteArticlesView: View {
                                                     .cornerRadius(10)
                                                     .padding()
                                             }
+                                            
+                                            Button(action: {
+                                                viewModel.deleteArticle(article)
+                                            }) {
+                                                Image(systemName: "trash")
+                                                    .foregroundColor(.red)
+                                                    .padding(.trailing, 10)
+                                            }
                                         }
                                     }
                                     .buttonStyle(PlainButtonStyle())

@@ -20,6 +20,7 @@ struct Article: Codable, Identifiable, Hashable {
     var date: Date // Add a property to store the creation date and time
     var writer: String //Username of the user who made this article
     var location: String  //Holds the location where the article takes place
+    var popularity: Int //How many times the article has been saved by users
     
     
     
@@ -47,6 +48,7 @@ struct Article: Codable, Identifiable, Hashable {
         self.pictureURL = pictureURL
         self.writer = writer
         self.location = location
+        self.popularity = 0
     }
 }
 

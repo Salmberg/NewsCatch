@@ -51,9 +51,7 @@ struct ArticleView: View {
                     .font(.custom("CrimsonText-Regular", size: 18))
                
                 Spacer()
-                                Text(article.heading)
-                    .font(.title)
-                    .padding()
+                     
                 HStack{
                     Image(systemName: "calendar")
                     Text(Article.dateFormatter.string(from: article.date))

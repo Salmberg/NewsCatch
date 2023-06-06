@@ -74,7 +74,7 @@ struct LoginView: View {
                                 
                                 .frame(maxWidth: .infinity) // Make the button wider
                                 .fullScreenCover(isPresented: $isAdmin) {
-                                    AdminView(logInVm: viewModel, isAdmin: $isAdmin)
+                                    AdminStartView()
                                 }
                                 .padding(.horizontal, 100.0)
                                 
