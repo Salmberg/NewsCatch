@@ -87,6 +87,17 @@ struct AddArticleView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 200)
             }
+            
+            TextEditor(text: $viewModel.locationContent)
+                .padding(30)
+                .background(Color(red: 240/255, green: 240/255, blue: 245/255))
+                .frame(height: 100)
+                .foregroundColor(viewModel.locationContent == "Enter Location..." ? .gray : .black)
+                .onTapGesture {
+                    if viewModel.locationContent == "Enter Location..." {
+                        viewModel.locationContent = ""
+                    }
+                }
                
             
             
