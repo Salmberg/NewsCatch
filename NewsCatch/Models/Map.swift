@@ -67,7 +67,6 @@ class MapAPI: ObservableObject{
                 self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude:lon), span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta))
                 
                 let new_location = ArticleLocation(name: name ?? "Marker", coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon))
-                self.locations.removeAll()
                 self.locations.append(new_location)
                 
                 print("Succesfully loaded the location!")

@@ -19,6 +19,7 @@ struct NewsFeedView: View {
     @State private var allNewsSelected = false
     @State private var selectedArticle: Article? = nil
     @State private var selectedArticles: Set<Article> = []
+    @StateObject private var mapAPI = MapAPI()
     
     
     var filteredArticles: [Article] {
@@ -94,7 +95,17 @@ struct NewsFeedView: View {
                     VStack { // Move the NavigationView inside a VStack
                         ScrollView {
                             VStack(spacing: 0) {
-                                ForEach(filteredArticles, id: \.heading) { article in                                    NavigationLink(
+                                NavigationLink(
+                                    destination: MapView(articles: filteredArticles)
+                                ) {
+                                    HStack {
+                                        Text("Visa alla på karta")
+                                            .foregroundColor(.black)
+                                    }
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                .padding()
+                                ForEach(filteredArticles, id: \.heading) { article in                                  NavigationLink(
                                     destination: ArticleView(article: article),
                                     tag: article,
                                     selection: $selectedArticle

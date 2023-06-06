@@ -48,7 +48,7 @@ class AddArticleViewModel: ObservableObject {
     }
     
     func requestArticle() {
-
+        
         let newArticle = Article(heading: titleContent, content: textContent, writer: username, pictureURL: pictureURLL, category: categoryContent, location: locationContent)
         
         // Upload to Firebase
