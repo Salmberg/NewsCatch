@@ -28,21 +28,9 @@ struct ProfileView: View {
                         .background(Color.gray)
                         .ignoresSafeArea()
 
-                        VStack{
-                            Button(action: {
-                                do {
-                                    try Auth.auth().signOut()
-                                } catch {
-                                    print("Failed to sign out: \(error.localizedDescription)")
-                                }
-                            }) {
-                                Image(systemName: "square.and.arrow.up")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(.black)
-                            }
-                            .padding(.leading, 300)
-                            .padding(.top, 50)
-                        }
+                        
+                          
+                        
 
                         VStack(spacing: 10) {
                             KFImage(URL(string: "https://firebasestorage.googleapis.com:443/v0/b/newscatch-94592.appspot.com/o/swift.jpg?alt=media&token=f0629957-9d7d-4faa-9a10-1288f3d1e870"))
@@ -58,16 +46,18 @@ struct ProfileView: View {
                                 let email = user.email ?? ""
                                 let displayName = user.displayName ?? ""
                                 let profilePictureURL = user.photoURL?.absoluteString ?? ""
+                                
+                                
 
                                 HStack {
                                     Image(systemName: "at")
                                         .resizable()
                                         .frame(width: 20, height: 20)
-                                       
+
                                     Text(email)
                                         .font(.system(size: 20))
                                 }
-                                HStack{
+                                HStack {
                                     Image(systemName: "person")
                                         .resizable()
                                         .frame(width: 20, height: 20)
@@ -78,7 +68,10 @@ struct ProfileView: View {
                             }
 
                             VStack(spacing: 10) {
-                            
+
+                               
+                                
+                                
                             }
                             .onAppear {
                                 updateUsername()
@@ -111,6 +104,21 @@ struct ProfileView: View {
                                                     .cornerRadius(10)
                                                     .padding()
                                             }
+                                            Button(action: {
+                                                
+                                            }) {
+                                                NavigationLink(destination: MyArticlesView()) {
+                                                    Text("Se alla")
+                                                        .font(.title2)
+                                                        .bold()
+                                                        .foregroundColor(.white)
+                                                        .padding()
+                                                        .background(Color.blue)
+                                                        .cornerRadius(10)
+                                                }
+                                                .buttonStyle(PlainButtonStyle())
+                                            }
+
 
                                         }
                                         Spacer()
@@ -125,9 +133,9 @@ struct ProfileView: View {
                         .background(Color.gray)
 
                         Button(action: {
-                            // Action to perform when the ZStack is clicked
+                            
                         }) {
-                            NavigationLink(destination:  MyFavouriteArticlesView()) {
+                            NavigationLink(destination: MyFavouriteArticlesView()) {
                                 ZStack {
                                     VStack {
                                         Text("SPARADE ARTIKLAR")
@@ -149,6 +157,20 @@ struct ProfileView: View {
                                                     .cornerRadius(10)
                                                     .padding()
                                             }
+                                            Button(action: {
+                                                
+                                            }) {
+                                                NavigationLink(destination:MyFavouriteArticlesView()) {
+                                                    Text("Se alla")
+                                                        .font(.title2)
+                                                        .bold()
+                                                        .foregroundColor(.white)
+                                                        .padding()
+                                                        .background(Color.blue)
+                                                        .cornerRadius(10)
+                                                }
+                                                .buttonStyle(PlainButtonStyle())
+                                            }
 
                                         }
                                         Spacer()
@@ -163,7 +185,7 @@ struct ProfileView: View {
                         Button(action: {
                             // Action to perform when the ZStack is clicked
                         }) {
-                            NavigationLink(destination:  MyFavouriteAuthorsView()) {
+                            NavigationLink(destination: MyFavouriteAuthorsView()) {
                                 ZStack {
                                     VStack {
                                         Text("FAVORITSKRIBENTER")
@@ -173,14 +195,14 @@ struct ProfileView: View {
                                             .bold()
                                         VStack {
                                             HStack {
-                                                VStack{
+                                                VStack {
                                                     Image(systemName: "person.crop.circle.fill")
                                                         .font(.system(size: 80))
                                                         .padding(20)
                                                     Text("Skribent 1")
                                                         .font(.system(size: 15))
                                                 }
-                                                VStack{
+                                                VStack {
                                                     Image(systemName: "person.crop.circle.fill")
                                                         .font(.system(size: 80))
                                                         .padding(20)
@@ -188,6 +210,21 @@ struct ProfileView: View {
                                                         .font(.system(size: 15))
                                                 }
                                             }
+                                            Button(action: {
+                                                
+                                            }) {
+                                                NavigationLink(destination: MyFavouriteAuthorsView()) {
+                                                    Text("Se alla")
+                                                        .font(.title2)
+                                                        .bold()
+                                                        .foregroundColor(.white)
+                                                        .padding()
+                                                        .background(Color.blue)
+                                                        .cornerRadius(10)
+                                                }
+                                                .buttonStyle(PlainButtonStyle())
+                                            }
+                                            
 
                                         }
                                         Spacer()
@@ -195,7 +232,6 @@ struct ProfileView: View {
                                     .background(Color(red: 31/255, green: 59/255, blue: 77/255))
                                     .cornerRadius(15)
                                     .frame(width: UIScreen.main.bounds.width * 0.98)
-
                                 }
                             }
                         }
@@ -203,12 +239,24 @@ struct ProfileView: View {
                         .background(Color.gray)
 
                     }
+                    Button(action: {
+                        do {
+                            try Auth.auth().signOut()
+                        } catch {
+                            print("Failed to sign out: \(error.localizedDescription)")
+                            print("clicked")
+                        }
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
+                    }
+                    
+                    .padding(.bottom, 100)
                 }
                 .background(Color.gray)
                 .ignoresSafeArea(.all)
                 .padding(.bottom, 20)
-
-
 
                 VStack {
                     Spacer()
@@ -229,8 +277,7 @@ struct ProfileView: View {
                                 AddArticleView()
                             }
 
-                            NavigationLink(destination:
-                                MyFavouriteArticlesView()) {
+                            NavigationLink(destination: MyFavouriteArticlesView()) {
                                 Image(systemName: "heart.text.square.fill")
                                     .font(.system(size: 35))
                                     .padding(20)
@@ -254,12 +301,12 @@ struct ProfileView: View {
                         .padding(.bottom, 70)
                         .padding(.leading, 30)
                         .padding(.trailing, 20)
-
                         .background(Color(red: 31/255, green: 59/255, blue: 77/255))
                         .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 100)
                     }
                 }
             }
+            
         }
     }
 
@@ -279,7 +326,6 @@ struct ProfileView: View {
         }
     }
 }
-
 
 
 
