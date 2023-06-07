@@ -11,21 +11,22 @@ import Kingfisher
 
 struct MyFavouriteAuthorsView: View {
     @StateObject var viewModel = MyFavouriteAuthorViewModel()
+    
     var body: some View {
         NavigationView {
-            ScrollView{
-                ZStack{
-                    HStack{
-                        VStack{
+            ScrollView {
+                ZStack {
+                    HStack {
+                        VStack {
                             ForEach(viewModel.MyAuthors, id: \.username) { user in
-                                HStack{
-                                    VStack{
+                                HStack {
+                                    VStack {
                                         let pictureURL = user.imageURL
                                         if pictureURL != "" {
                                             NavigationLink(
                                                 destination: WriterArticlesView(writer: user.username)
-                                            ){
-                                                KFImage(URL(string: pictureURL!)) //added ! for it to work PM
+                                            ) {
+                                                KFImage(URL(string: pictureURL!))
                                                     .resizable()
                                                     .frame(width: 100, height: 100)
                                                     .cornerRadius(10)
@@ -35,7 +36,7 @@ struct MyFavouriteAuthorsView: View {
                                         } else {
                                             NavigationLink(
                                                 destination: WriterArticlesView(writer: user.username)
-                                            ){
+                                            ) {
                                                 Image(systemName: "person.crop.circle.fill")
                                                     .resizable()
                                                     .frame(width: 100, height: 100)
@@ -55,15 +56,15 @@ struct MyFavouriteAuthorsView: View {
                                             .padding()
                                             .imageScale(.large)
                                     }
-                                    
                                 }
                             }
                         }
                     }
                 }
             }
+            .navigationBarTitle("", displayMode: .inline)
             .onAppear(perform: viewModel.getMyFavouriteAuthors)
         }
+        .navigationBarHidden(true)
     }
 }
-

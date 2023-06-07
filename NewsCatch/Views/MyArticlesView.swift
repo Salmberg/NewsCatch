@@ -11,7 +11,7 @@ import Kingfisher
 struct MyArticlesView: View {
     @StateObject var viewModel = MyArticlesViewModel()
     @State private var isMenuActive: Bool = false
-    @State private var selectedArticle: Article? = nil
+    @State private var selectedArticleSheet: Article? = nil 
     
     var body: some View {
         NavigationView {
@@ -37,11 +37,9 @@ struct MyArticlesView: View {
                         ScrollView {
                             VStack {
                                 ForEach(viewModel.myArticles, id: \.heading) { article in
-                                    NavigationLink(
-                                        destination: ArticleView(article: article),
-                                        tag: article,
-                                        selection: $selectedArticle
-                                    ) {
+                                    Button(action: {
+                                        selectedArticleSheet = article // Set the selected article for the sheet
+                                    }) {
                                         HStack {
                                             VStack(alignment: .leading, spacing: 0) {
                                                 HStack(spacing: 0) { // Add spacing: 0 to the HStack
@@ -90,6 +88,9 @@ struct MyArticlesView: View {
                         Spacer()
                     }
                     .navigationBarTitle("", displayMode: .inline)
+                    .sheet(item: $selectedArticleSheet) { article in
+                        WriterArticleContentView(article: article)
+                    }
                 }
                 
             }

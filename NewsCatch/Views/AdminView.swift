@@ -10,7 +10,6 @@ import FirebaseAuth
 import Kingfisher
 
 struct AdminView: View {
-    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel = AddArticleViewModel()
     @ObservedObject var logInVm: LoginViewModel
     @Binding var isAdmin: Bool
@@ -72,19 +71,6 @@ struct AdminView: View {
                     
                 }
             }
-            Button(action: {
-                do {
-                    try Auth.auth().signOut()
-                    presentationMode.wrappedValue.dismiss()
-                    logInVm.email = ""
-                    logInVm.password = ""
-                } catch let signOutError as NSError {
-                    print("Error signing out: \(signOutError.localizedDescription)")
-                }
-            }) {
-                Text("Logout")
-            }
-            .padding(.vertical)
         }
         
         .onAppear {

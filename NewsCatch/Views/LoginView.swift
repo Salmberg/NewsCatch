@@ -63,6 +63,7 @@ struct LoginView: View {
                                 NAButton(title: "Login", background: Color.black) {
                                     if viewModel.email == "admin@newsfeed.se" && viewModel.password == "12345678" {
                                         isAdmin = true
+                                        viewModel.clearFields()
                                         return
                                         
                                     }

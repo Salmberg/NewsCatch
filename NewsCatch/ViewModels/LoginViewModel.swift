@@ -20,19 +20,36 @@ class LoginViewModel: ObservableObject{
         guard validate() else{
             return
         }
-        Auth.auth().signIn(withEmail: email, password: password)
-    }
-   
-    private func validate() -> Bool {
-        guard !email.trimmingCharacters(in: .whitespaces).isEmpty, !password.trimmingCharacters(in: .whitespaces).isEmpty else {
-            errorMessage = "Please fill in all fields."
-            return false
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                if error == nil {
+                    // Successful login
+                    DispatchQueue.main.async {
+                        self?.clearFields()
+                    }
+                } else {
+                    // Failed login
+                    self?.errorMessage = "Login failed. Please try again."
+                }
+            }
         }
-        
-        guard email.contains("@") && email.contains(".") else{
-            errorMessage = "Please enter valid email."
-            return false
+
+         func clearFields() {
+            DispatchQueue.main.async {
+                self.email = ""
+                self.password = ""
+            }
+            }
+            
+            private func validate() -> Bool {
+                guard !email.trimmingCharacters(in: .whitespaces).isEmpty, !password.trimmingCharacters(in: .whitespaces).isEmpty else {
+                    errorMessage = "Please fill in all fields."
+                    return false
+                }
+                
+                guard email.contains("@") && email.contains(".") else{
+                    errorMessage = "Please enter valid email."
+                    return false
+                }
+                return true
+            }
         }
-        return true
-    }
-}
