@@ -75,7 +75,11 @@ class NewsFeedViewModel : ObservableObject {
                     "pictureURL": article.pictureURL,
                     "writer": article.writer,
                     "date": article.date,
-                    "popularity": article.popularity
+                    "popularity": article.popularity,
+                  
+                    "location": article.location,
+                                      "longitude": article.longitude,
+                                      "latitude": article.latitude
                 ]
                 
                 savedArticlesCollection.addDocument(data: data) { error in
