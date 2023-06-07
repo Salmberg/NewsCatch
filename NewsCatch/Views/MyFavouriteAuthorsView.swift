@@ -8,6 +8,7 @@
 import SwiftUI
 import Kingfisher
 
+
 struct MyFavouriteAuthorsView: View {
     @StateObject var viewModel = MyFavouriteAuthorViewModel()
     var body: some View {
@@ -20,7 +21,7 @@ struct MyFavouriteAuthorsView: View {
                                 
                                 let pictureURL = user.imageURL
                                 if pictureURL != "" {
-                                    KFImage(URL(string: pictureURL))
+                                    KFImage(URL(string: pictureURL!)) //added ! for it to work PM
                                         .resizable()
                                         .frame(width: 100, height: 100)
                                         .cornerRadius(10)

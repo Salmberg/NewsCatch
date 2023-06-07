@@ -10,12 +10,16 @@ import FirebaseAuth
 import Firebase
 import Kingfisher
 import FirebaseStorage
+import Combine
 
 struct ProfileView: View {
     let db = Firestore.firestore()
     @State var isAddArticle = false
     var user = Auth.auth().currentUser
     @State var username = "unknown"
+    @State var selectedImage: UIImage? = nil
+    @State var imageURL: URL? = nil
+    @State private var userModel = User(id: "", name: "", username: "", email: "", joined: 0, imageURL: nil)
 
     var body: some View {
         NavigationView {
@@ -33,14 +37,22 @@ struct ProfileView: View {
                         
 
                         VStack(spacing: 10) {
-                            KFImage(URL(string: "https://firebasestorage.googleapis.com:443/v0/b/newscatch-94592.appspot.com/o/swift.jpg?alt=media&token=f0629957-9d7d-4faa-9a10-1288f3d1e870"))
+                            KFImage(imageURL)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(height: 120)
                                 .cornerRadius(90)
                                 .shadow(color: Color.gray.opacity(0.5), radius: 4, x: 0, y: 2)
-                                .padding(.top, 60)
-                                .padding(.bottom, 30)
+                                .padding(20)
+                                .onTapGesture {
+                                    isAddArticle = true
+                                }
+                                .sheet(isPresented: $isAddArticle) {
+                                    ImagePickerView2(selectedImage: $selectedImage, imageURL: $imageURL)
+                                        .onDisappear {
+                                            uploadImage()
+                                        }
+                                }
 
                             if let user = Auth.auth().currentUser {
                                 let email = user.email ?? ""
@@ -308,7 +320,26 @@ struct ProfileView: View {
             }
             
         }
+        .onAppear {
+            updateUserImageURL()
+        }
+
+        
+        .onAppear {
+            // Retrieve the profile picture URL from UserDefaults
+            if let currentUser = Auth.auth().currentUser {
+                if let profilePictureURL = UserDefaults.standard.string(forKey: "ProfilePictureURL_\(currentUser.uid)") {
+                    imageURL = URL(string: profilePictureURL)
+                }
+            }
+        }
+            
+            
+        
     }
+        
+        
+    
 
     func updateUsername() {
         if let user = Auth.auth().currentUser {
@@ -325,7 +356,170 @@ struct ProfileView: View {
             }
         }
     }
+    
+    
+    
+    //     ±±±± Phil's "did not manage to move the code to ProfileImageViewModel and have it working funcs" corner.±±±±
+       
+                
+        func uploadImage() {
+            guard let selectedImage = selectedImage else { return }
+            
+            // Convert the selected image to Data
+            guard let imageData = selectedImage.jpegData(compressionQuality: 0.5) else { return }
+            
+            // Generate a unique filename for the uploaded image
+            let filename = UUID().uuidString + ".jpg"
+            
+            // Reference to the Firebase Storage for the user's image data
+            guard let currentUser = Auth.auth().currentUser else { return }
+            let storageRef = Storage.storage().reference().child("Profile-Image/\(currentUser.uid)/\(filename)")
+            
+            // Upload the image data to Firebase Storage
+            storageRef.putData(imageData, metadata: nil) { metadata, error in
+                if let error = error {
+                    print("Error uploading image: \(error)")
+                    return
+                }
+                
+                // Get the download URL of the uploaded image
+                storageRef.downloadURL { url, error in
+                    if let error = error {
+                        print("Error retrieving download URL: \(error)")
+                        return
+                    }
+                    
+                    if let downloadURL = url?.absoluteString {
+                        // Update the profile picture URL in the user's data
+                        guard let currentUser = Auth.auth().currentUser else { return }
+                        let changeRequest = currentUser.createProfileChangeRequest()
+                        changeRequest.photoURL = URL(string: downloadURL)
+                        changeRequest.commitChanges { error in
+                            if let error = error {
+                                print("Error updating profile picture URL: \(error)")
+                                return
+                            }
+                            imageURL = URL(string: downloadURL)
+                            print("Profile picture URL updated successfully")
+                            
+                            // Save the profile picture URL to UserDefaults
+                            UserDefaults.standard.set(downloadURL, forKey: "ProfilePictureURL_\(currentUser.uid)")
+                            print("Profile picture URL updated and saved successfully")
+                            
+                            // Update the profile picture URL in Firestore
+                            let db = Firestore.firestore()
+                            let userUID = currentUser.uid
+                            let profileData = ["imageURL": downloadURL]
+                            db.collection("users").document(userUID).updateData(profileData) { error in
+                                if let error = error {
+                                    print("Error updating profile picture URL in Firestore: \(error)")
+                                    return
+                                }
+                                print("Profile picture URL updated in Firestore successfully")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+            
+        
+        // Function to update the imageURL property in the User model
+            func updateUserImageURL() {
+                guard let currentUser = Auth.auth().currentUser else {
+                    return
+                }
+
+                let db = Firestore.firestore()
+                let userUID = currentUser.uid
+
+                // Retrieve the user document from Firestore
+                db.collection("users").document(userUID).getDocument { document, error in
+                    if let error = error {
+                        print("Error retrieving user document: \(error)")
+                        return
+                    }
+
+                    guard let document = document else {
+                        print("User document does not exist")
+                        return
+                    }
+
+                    if let imageURL = document["imageURL"] as? String {
+                        // Update the imageURL property in the User model
+                        userModel.imageURL = imageURL
+                    }
+                }
+            }
+        
+        
+
+        
+        
+        
+                func updateProfilePictureURL(_ imageURL: URL) {
+                        guard let currentUser = Auth.auth().currentUser else {
+                            return
+                        }
+        
+                        let changeRequest = currentUser.createProfileChangeRequest()
+                        changeRequest.photoURL = imageURL
+        
+                        changeRequest.commitChanges { error in
+                            if let error = error {
+                                print("Error updating profile picture URL: \(error)")
+                                return
+                            }
+        
+                            print("Profile picture URL updated successfully")
+                        }
+                    }
+    
+    
 }
+
+struct ImagePickerView2: UIViewControllerRepresentable {
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var selectedImage: UIImage?
+    @Binding var imageURL: URL?
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePickerView2>) -> UIImagePickerController {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = context.coordinator
+        return imagePicker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePickerView2>) {
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        let parent: ImagePickerView2
+        
+        init(_ parent: ImagePickerView2) {
+            self.parent = parent
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                parent.selectedImage = image
+                parent.imageURL = nil
+            }
+            
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+        
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+    }
+}
+
 
 
 
