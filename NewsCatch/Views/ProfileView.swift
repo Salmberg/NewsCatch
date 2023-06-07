@@ -32,10 +32,6 @@ struct ProfileView: View {
                         .background(Color.gray)
                         .ignoresSafeArea()
 
-                        
-                          
-                        
-
                         VStack(spacing: 10) {
             
                             Button(action: {
@@ -91,7 +87,6 @@ struct ProfileView: View {
                                     Text(username)
                                 }
 
-                                
                             }
 
                             VStack(spacing: 10) {
