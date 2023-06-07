@@ -18,7 +18,22 @@ struct MapView: View {
         NavigationView{
            //ForEach(articles) { article in
                 Map(coordinateRegion: $manager.region, annotationItems: articles) { location in
-                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    
+                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)){
+                        NavigationLink(destination: ArticleView(article: location.self)
+                        ) {
+                            VStack{
+                                Circle()
+                                    .fill(.red)
+                                    .frame(width: 44,height: 44)
+                                Text(location.location)
+                                    .foregroundColor(.red)
+                            }
+                        }
+                    }
+                    
+        
+                        
                         /*
                         NavigationLink(destination: ArticleView(article:article)
                         ) {
