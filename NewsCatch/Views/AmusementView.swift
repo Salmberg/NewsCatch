@@ -36,7 +36,8 @@ struct AmusementView: View {
                         VStack {
                             ForEach(viewModel.amusementArticles, id: \.heading) { article in
                                 NavigationLink(
-                                    destination: ArticleView(article: article),
+                                    destination: ArticleView(article: article)
+                                        .navigationBarHidden(true), // Hide the navigation bar in the destination view
                                     tag: article,
                                     selection: $selectedArticle
                                 ) {
@@ -52,7 +53,8 @@ struct AmusementView: View {
                                                     .foregroundColor(.gray)
                                             }
                                             Text(article.heading)
-                                                .font(.custom("BebasNeue-Regular", size: 30))   .padding(.leading, 10)
+                                                .font(.custom("BebasNeue-Regular", size: 30))
+                                                .padding(.leading, 10)
                                                 .padding(.bottom, 20)
                                         }
 
@@ -93,6 +95,7 @@ struct AmusementView: View {
         }
     }
 }
+
 
 
 struct AmusementView_Previews: PreviewProvider {
