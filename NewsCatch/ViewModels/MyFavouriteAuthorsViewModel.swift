@@ -21,27 +21,32 @@ class MyFavouriteAuthorViewModel: ObservableObject{
             return
         }
         
-        let favouriteAuthorsCollection = db.collection("writers")
+        let favouriteAuthorsCollection = db.collection("authors")
             .document(uid)
             .collection("favouriteWriters")
         
-        favouriteAuthorsCollection.getDocuments { snapshot, error in
+        favouriteAuthorsCollection.addSnapshotListener() {
+            snapshot, error in
+            
+            guard let snapshot = snapshot else {return}
+            
             if let error = error {
                 print("Error retrieving favourite authors: \(error)")
                 return
-            }
-            do{
-                for document in snapshot?.documents ?? [] {
-                    let user = try document.data(as: User.self)
-                    self.MyAuthors.append(user)
+            } else{
+                for document in snapshot.documents{
+                    do{
+                        let dbUser = try document.data(as: User.self)
+                        self.MyAuthors.append(dbUser)
+                    }catch{
+                        print("Error reading from FireStore")
+                    }
                 }
-            }catch{
-                print("Error reading from FireStore")
             }
-
         }
       
     }
+    
     
     
     func saveFavouriteAuthor(userName: String){
@@ -50,7 +55,7 @@ class MyFavouriteAuthorViewModel: ObservableObject{
         var authUser = Auth.auth().currentUser
         users.removeAll()
         
-        db.collection("writers").document(uid).collection("favouriteWriters").addSnapshotListener() {
+        db.collection("users").addSnapshotListener() {
                 snapshot, error in
                 
                 guard let snapshot = snapshot else {return}
@@ -69,46 +74,50 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                         }
                     }
                     
+                    
+                    let favouriteAuthorsCollection = self.db.collection("authors")
+                        .document(uid)
+                        .collection("favouriteWriters")
+                    
+                    let savedArticlesQuery = favouriteAuthorsCollection
+                        .whereField("email", isEqualTo: self.users[0].email)
+                        
+                        savedArticlesQuery.getDocuments { snapshot, error in
+                            if let error = error {
+                                print("Error retrieving saved articles: \(error)")
+                                return
+                            }
+                            
+                            if snapshot?.isEmpty == false {
+                              
+                                print("Author is already saved!")
+                            } else {
+                                
+                                if(!self.users.isEmpty){ //to avoid index out of bounds crash
+                                    var data: [String: Any] = [
+                                        "username": self.users[0].username,
+                                        "imageURL": self.users[0].imageURL,
+                                        "name": self.users[0].name,
+                                        "email": self.users[0].email,
+                                        "joined": self.users[0].joined,
+                                        "id": self.users[0].id
+                                    ]
+                                    
+                                    
+                                    favouriteAuthorsCollection.addDocument(data: data) { error in
+                                        if let error = error {
+                                            print("Error saving author: \(error)")
+                                        } else {
+                                            print("Author saved successfully!")
+                                        }
+                                    }
+                                }
+                            }
+                    
                 }
             }
 
-        let favouriteAuthors = db.collection("writers")
-                .document(uid)
-                .collection("favouriteWriters")
         
-        let favouriteAuthorsCollection = db.collection("authors")
-            .document(uid)
-            .collection("favouriteWriters")
-        
-        let savedArticlesQuery = favouriteAuthorsCollection
-            .whereField("email", isEqualTo: authUser?.email)
-            
-            savedArticlesQuery.getDocuments { snapshot, error in
-                if let error = error {
-                    print("Error retrieving saved articles: \(error)")
-                    return
-                }
-                
-                if snapshot?.isEmpty == false {
-                  
-                    print("Author is already saved!")
-                } else {
-            
-                    var data: [String: Any] = [
-                        "username": self.users[0].username,
-                        "image": self.users[0].imageURL,
-                        "name": self.users[0].name,
-                        "email": self.users[0].email
-                    ]
-                    
-                    favouriteAuthorsCollection.addDocument(data: data) { error in
-                        if let error = error {
-                            print("Error saving author: \(error)")
-                        } else {
-                            print("Author saved successfully!")
-                        }
-                    }
-                }
             }
         }
         
