@@ -93,9 +93,9 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                                 print("Author is already saved!")
                             } else {
                                 
-                                if(!self.users.isEmpty){
+                                if(!self.users.isEmpty){ //to avoid index out of bounds crash
                                     var data: [String: Any] = [
-                                        "username": self.users[0].username, //out of bounds fatal error
+                                        "username": self.users[0].username,
                                         "imageURL": self.users[0].imageURL,
                                         "name": self.users[0].name,
                                         "email": self.users[0].email,
