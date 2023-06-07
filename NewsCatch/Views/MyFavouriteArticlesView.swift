@@ -1,5 +1,5 @@
 //
-//  ForeignView.swift
+//  MyFavouriteArticlesView.swift
 //  NewsApp
 //
 //  Created by Linda Bergsängel on 2023-05-23.
@@ -12,6 +12,7 @@ struct MyFavouriteArticlesView: View {
     @StateObject var viewModel = MyFavouriteArticlesViewModel()
     @State private var isMenuActive: Bool = false
     @State private var selectedArticle: Article? = nil
+    @State private var isShowingArticleSheet = false
     
     var body: some View {
         NavigationView {
@@ -28,7 +29,6 @@ struct MyFavouriteArticlesView: View {
                     .edgesIgnoringSafeArea(.top)
                     .frame(height: 110) // Adjust the height as needed
                     HStack{
-                        
                         Spacer()
                     }
                     .background(Color.gray)
@@ -37,11 +37,10 @@ struct MyFavouriteArticlesView: View {
                         ScrollView {
                             VStack {
                                 ForEach(viewModel.favouriteArticles, id: \.heading) { article in
-                                    NavigationLink(
-                                        destination: ArticleView(article: article),
-                                        tag: article,
-                                        selection: $selectedArticle
-                                    ) {
+                                    Button(action: {
+                                        selectedArticle = article
+                                        isShowingArticleSheet = true
+                                    }) {
                                         HStack {
                                             VStack(alignment: .leading, spacing: 0) {
                                                 HStack(spacing: 0) { // Add spacing: 0 to the HStack
@@ -101,6 +100,9 @@ struct MyFavouriteArticlesView: View {
                 }
                 
             }
+        }
+        .sheet(item: $selectedArticle) { article in
+            ArticleView(article: article)
         }
     }
 }
