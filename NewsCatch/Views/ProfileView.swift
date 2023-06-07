@@ -32,11 +32,8 @@ struct ProfileView: View {
                         .background(Color.gray)
                         .ignoresSafeArea()
 
-                        
-                          
-                        
-
                         VStack(spacing: 10) {
+            
                             Button(action: {
                                        isAddArticle = true
                                    }) {
@@ -47,12 +44,14 @@ struct ProfileView: View {
                                                    .resizable()
                                                    .aspectRatio(contentMode: .fit)
                                                    .frame(height: 120)
+                                               
                                            }
                                            .aspectRatio(contentMode: .fit)
                                            .frame(height: 120)
                                            .cornerRadius(90)
                                            .shadow(color: Color.gray.opacity(0.5), radius: 4, x: 0, y: 2)
                                            .padding(20)
+                                           .padding(.top, 70)
                                    }
                                    .onTapGesture {
                                        isAddArticle = true
@@ -88,7 +87,6 @@ struct ProfileView: View {
                                     Text(username)
                                 }
 
-                                Text(profilePictureURL)
                             }
 
                             VStack(spacing: 10) {
