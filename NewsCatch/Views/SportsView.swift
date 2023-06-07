@@ -53,8 +53,7 @@ struct SportsView: View {
                                                     
                                             }
                                             Text(article.heading)
-                                                .font(.title)
-                                                .bold()
+                                                .font(.custom("BebasNeue-Regular", size: 30))
                                                 .padding(.leading, 10)
                                                 .padding(.bottom, 20)
                                             

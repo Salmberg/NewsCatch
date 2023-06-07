@@ -27,7 +27,7 @@ struct AmusementView: View {
                 .frame(height: 110) // Adjust the height as needed
                 
                 HStack{
-                   // Spacer()
+                   Spacer()
                 }
                 .background(Color.gray)
                 
@@ -52,9 +52,7 @@ struct AmusementView: View {
                                                     .foregroundColor(.gray)
                                             }
                                             Text(article.heading)
-                                                .font(.title)
-                                                .bold()
-                                                .padding(.leading, 10)
+                                                .font(.custom("BebasNeue-Regular", size: 30))   .padding(.leading, 10)
                                                 .padding(.bottom, 20)
                                         }
 
