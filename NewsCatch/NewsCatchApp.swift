@@ -7,7 +7,6 @@
 
 import SwiftUI
 import FirebaseCore
-
 @main
 struct NewsCatchApp: App {
     init() {

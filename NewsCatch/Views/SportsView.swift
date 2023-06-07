@@ -25,8 +25,7 @@ struct SportsView: View {
                 }
                 .edgesIgnoringSafeArea(.top)
                 .frame(height: 110) // Adjust the height as needed
-                HStack{
-                                            
+                HStack {
                     Spacer()
                 }
                 .background(Color.gray)
@@ -36,7 +35,8 @@ struct SportsView: View {
                         VStack {
                             ForEach(viewModel.sportsArticles, id: \.heading) { article in
                                 NavigationLink(
-                                    destination: ArticleView(article: article),
+                                    destination: ArticleView(article: article)
+                                        .navigationBarHidden(true), // Hide the navigation bar in the destination view
                                     tag: article,
                                     selection: $selectedArticle
                                 ) {
@@ -87,15 +87,20 @@ struct SportsView: View {
 
                     Spacer()
                 }
+
                 .navigationBarTitle("", displayMode: .inline)
             }
             .onAppear {
                 viewModel.getArticlesFromDb()
             }
             .navigationBarTitle("", displayMode: .inline) // Set an empty title to keep the navigation bar visible
+
         }
     }
 }
+
+
+
 
 struct SportView_Previews: PreviewProvider {
     static var previews: some View {

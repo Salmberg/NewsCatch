@@ -271,6 +271,7 @@ struct MenuView: View {
                             .padding(.leading, 10)
                     }
                 }
+                
                 .buttonStyle(PlainButtonStyle())
                 
                 Button(action: {

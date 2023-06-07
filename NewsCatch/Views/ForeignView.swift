@@ -36,7 +36,8 @@ struct ForeignView: View {
                         VStack {
                             ForEach(viewModel.foreignArticles, id: \.heading) { article in
                                 NavigationLink(
-                                    destination: ArticleView(article: article),
+                                    destination: ArticleView(article: article)
+                                        .navigationBarHidden(true), // Hide the navigation bar in the destination view
                                     tag: article,
                                     selection: $selectedArticle
                                 ) {
@@ -90,8 +91,9 @@ struct ForeignView: View {
             .onAppear {
                 viewModel.getArticlesFromDb()
             }
-            .navigationBarTitle("", displayMode: .inline) // Set an empty title to keep the navigation bar visible
+            .navigationBarTitle("", displayMode: .inline)
         }
+        
     }
 }
 
