@@ -37,22 +37,34 @@ struct ProfileView: View {
                         
 
                         VStack(spacing: 10) {
-                            KFImage(imageURL)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 120)
-                                .cornerRadius(90)
-                                .shadow(color: Color.gray.opacity(0.5), radius: 4, x: 0, y: 2)
-                                .padding(20)
-                                .onTapGesture {
-                                    isAddArticle = true
-                                }
-                                .sheet(isPresented: $isAddArticle) {
-                                    ImagePickerView2(selectedImage: $selectedImage, imageURL: $imageURL)
-                                        .onDisappear {
-                                            uploadImage()
-                                        }
-                                }
+                            Button(action: {
+                                       isAddArticle = true
+                                   }) {
+                                       KFImage(imageURL)
+                                           .resizable()
+                                           .placeholder {
+                                               Image(systemName: "photo")
+                                                   .resizable()
+                                                   .aspectRatio(contentMode: .fit)
+                                                   .frame(height: 120)
+                                           }
+                                           .aspectRatio(contentMode: .fit)
+                                           .frame(height: 120)
+                                           .cornerRadius(90)
+                                           .shadow(color: Color.gray.opacity(0.5), radius: 4, x: 0, y: 2)
+                                           .padding(20)
+                                   }
+                                   .onTapGesture {
+                                       isAddArticle = true
+                                   }
+                                   .sheet(isPresented: $isAddArticle) {
+                                       ImagePickerView2(selectedImage: $selectedImage, imageURL: $imageURL)
+                                           .onDisappear {
+                                               uploadImage()
+                                           }
+                                   }
+                               
+                                
 
                             if let user = Auth.auth().currentUser {
                                 let email = user.email ?? ""
