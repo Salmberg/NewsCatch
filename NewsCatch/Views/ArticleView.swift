@@ -20,7 +20,6 @@ struct ArticleView: View {
     var body: some View {
         VStack {
             ScrollView {
-               
                 Text(article.heading)
                     .font(.custom("BebasNeue-Regular", size: 30))
                     .padding()

@@ -15,10 +15,13 @@ class AddArticleViewModel: ObservableObject {
     @Published var articles = [Article]()
     @Published var titleContent: String = "Enter Title..."
     @Published var textContent: String = "Enter your article text here..."
+    @Published var locationContent: String = "Stockholm"
     @Published var categoryContent: Category = Category.unspecified // Actual category
     @Published var categoryString: String = "Unspecified" // String for drop-down menu
     @Published var pictureURLL: String?
     @Published var username: String
+    @Published var latitude: Double = 0.0
+    @Published var longitude: Double = 0.0
     
     // Message for the posting alert pop-up
     let alertMessage = "Thank you for your submission. Your article will soon be inspected by an admin. If approved, it will be published for other users to see."
@@ -47,8 +50,8 @@ class AddArticleViewModel: ObservableObject {
     }
     
     func requestArticle() {
-
-        let newArticle = Article(heading: titleContent, content: textContent, writer: username, pictureURL: pictureURLL, category: categoryContent)
+        
+        let newArticle = Article(heading: titleContent, content: textContent, writer: username, pictureURL: pictureURLL, category: categoryContent, location: locationContent, latitude: latitude, longitude: longitude)
         
         // Upload to Firebase
         do {

@@ -11,9 +11,11 @@ import FirebaseStorage
 
 struct AddArticleView: View {
     @StateObject var viewModel = AddArticleViewModel()
+    @StateObject private var mapAPI = MapAPI()
     let lists = ArticleLists()
     // For alert-popup
     @State var showingAlert = false
+    @FocusState private var isFocused: Bool
     
     // For Category label
     @State var catLabel = "Unspecified"
@@ -87,10 +89,33 @@ struct AddArticleView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 200)
             }
-               
             
-            
-            
+            TextEditor(text: $viewModel.locationContent)
+                .padding(30)
+                .background(Color(red: 240/255, green: 240/255, blue: 245/255))
+                .frame(height: 100)
+                .foregroundColor(viewModel.locationContent == "Enter Location..." ? .gray : .black)
+                .onTapGesture {
+                    if viewModel.locationContent == "Enter Location..." {
+                        viewModel.locationContent = ""
+                    }
+                }
+                .focused($isFocused)
+                .onChange(of: isFocused) { isFocused in
+                    if isFocused == false{
+                        mapAPI.getLocation(adress: viewModel.locationContent, delta: 0.5)
+                        mapAPI.getLocation(adress: viewModel.locationContent, delta: 0.5)
+                        mapAPI.getLocation(adress: viewModel.locationContent, delta: 0.5)
+                        print("AddArticle")
+                        print(mapAPI.latitude)
+                        print(mapAPI.longitude)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            viewModel.latitude = mapAPI.latitude
+                            viewModel.longitude = mapAPI.longitude
+                        }
+                    }
+                }
+
             Button("Publish") {
                 if let image = selectedImage {
                     // Upload the image

@@ -19,8 +19,11 @@ struct Article: Codable, Identifiable, Hashable {
     var pictureURL: String? // Temporarily commented out to conform to "codable"
     var date: Date // Add a property to store the creation date and time
     var writer: String //Username of the user who made this article
+    var location: String  //Holds the location where the article takes place
     var popularity: Int //How many times the article has been saved by users
-    
+    var latitude: Double
+    var longitude: Double
+      
     
     
     static let dateFormatter: DateFormatter = {
@@ -38,7 +41,7 @@ struct Article: Codable, Identifiable, Hashable {
     }
 
     
-    init(heading: String, content: String, writer: String, pictureURL: String?, category: Category?) {
+    init(heading: String, content: String, writer: String, pictureURL: String?, category: Category?, location: String, latitude: Double, longitude: Double) {
         self.heading = heading
         self.content = content
         self.category = category ?? Category.unspecified //Unspecified if given nothing
@@ -46,7 +49,11 @@ struct Article: Codable, Identifiable, Hashable {
         self.date = Date() // Set the current date and time during initialization
         self.pictureURL = pictureURL
         self.writer = writer
+        self.location = location
         self.popularity = 0
+        self.latitude = latitude
+        self.longitude = longitude
+        
     }
 }
 
@@ -59,8 +66,10 @@ extension Article {
         let content = data["content"] as? String
         let writer = data["writer"] as? String
         let category = data["category"] as? Category
-        
-        self.init(heading: heading, content: content ?? "", writer: writer ?? "", pictureURL: nil, category: category)
+        let location = data["location"] as? String
+        let latitude = data["latitude"] as? Double
+        let longitude = data["longitude"] as? Double
+        self.init(heading: heading, content: content ?? "", writer: writer ?? "", pictureURL: nil, category: category, location: location ?? "", latitude: latitude ?? 0.0, longitude: longitude ?? 0.0)
     }
 }
 
