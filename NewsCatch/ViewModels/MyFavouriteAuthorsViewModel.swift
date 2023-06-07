@@ -21,6 +21,9 @@ class MyFavouriteAuthorViewModel: ObservableObject{
             return
         }
         
+        MyAuthors.removeAll()
+        
+        
         let favouriteAuthorsCollection = db.collection("authors")
             .document(uid)
             .collection("favouriteWriters")
@@ -82,6 +85,8 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                     let savedArticlesQuery = favouriteAuthorsCollection
                         .whereField("email", isEqualTo: self.users[0].email)
                         
+                    if(self.users.count > 1){return} //hopefully fix double adding bug
+                    
                         savedArticlesQuery.getDocuments { snapshot, error in
                             if let error = error {
                                 print("Error retrieving saved articles: \(error)")
@@ -104,6 +109,7 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                                     ]
                                     
                                     
+                                    
                                     favouriteAuthorsCollection.addDocument(data: data) { error in
                                         if let error = error {
                                             print("Error saving author: \(error)")
@@ -111,6 +117,9 @@ class MyFavouriteAuthorViewModel: ObservableObject{
                                             print("Author saved successfully!")
                                         }
                                     }
+                                    
+                                    
+                                    
                                 }
                             }
                     
@@ -120,6 +129,35 @@ class MyFavouriteAuthorViewModel: ObservableObject{
         
             }
         }
+    
+    func removeAuthor(username: String){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        self.MyAuthors.removeAll()
+        
+        self.db.collection("authors").document(uid).collection("favouriteWriters").whereField("username", isEqualTo: username).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    self.db.collection("authors")
+                        .document(uid)
+                        .collection("favouriteWriters").document(document.documentID).delete { error in
+                        if let error = error {
+                            print("Error deleting author: \(error)")
+                        } else {
+                            print("Author deleted successfully")
+                            self.MyAuthors.removeAll()
+                            self.getMyFavouriteAuthors()
+                        }
+                    }
+                }
+            }
+    }
+        
+        
+    }
+    
         
     }
 
