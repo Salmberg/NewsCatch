@@ -30,6 +30,9 @@ class MapAPI: ObservableObject{
     @Published var region: MKCoordinateRegion
     @Published var coordinates = []
     @Published var locations: [ArticleLocation] = []
+    @Published var latitude: Double = 0.0
+    @Published var longitude: Double = 0.0
+    
     
     init(){
         self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 57.7087, longitude:11.9751), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
@@ -65,6 +68,10 @@ class MapAPI: ObservableObject{
                 
                 self.coordinates = [lat, lon]
                 self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude:lon), span: MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta))
+                print(self.latitude)
+                print(self.longitude)
+                self.latitude = lat
+                self.longitude = lon
                 
                 let new_location = ArticleLocation(name: name ?? "Marker", coordinate: CLLocationCoordinate2D(latitude: lat, longitude: lon))
                 self.locations.append(new_location)

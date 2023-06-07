@@ -16,9 +16,10 @@ struct MapView: View {
     
     var body: some View {
         NavigationView{
-            ForEach(articles) { article in
-                Map(coordinateRegion: $manager.region, annotationItems: mapAPI.locations) { location in
-                    MapAnnotation(coordinate: location.coordinate){
+           //ForEach(articles) { article in
+                Map(coordinateRegion: $manager.region, annotationItems: articles) { location in
+                    MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                        /*
                         NavigationLink(destination: ArticleView(article:article)
                         ) {
                             VStack{
@@ -29,16 +30,20 @@ struct MapView: View {
                                     .foregroundColor(.red)
                             }
                         }
+                         */
+                         
                     }
-                }
-                .onAppear{
-                    mapAPI.getLocation(adress: article.location, delta: 0.1)
-                }
-            }
+               // }
+               //.onAppear{
+                //    mapAPI.getLocation(adress: article.location, delta: 0.1)
+               // }
+            
            
         }
         .navigationTitle("Artiklar via karta")
     }
         
 }
+
+
 

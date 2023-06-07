@@ -21,7 +21,9 @@ struct Article: Codable, Identifiable, Hashable {
     var writer: String //Username of the user who made this article
     var location: String  //Holds the location where the article takes place
     var popularity: Int //How many times the article has been saved by users
-    
+    var latitude: Double
+    var longitude: Double
+      
     
     
     static let dateFormatter: DateFormatter = {
@@ -39,7 +41,7 @@ struct Article: Codable, Identifiable, Hashable {
     }
 
     
-    init(heading: String, content: String, writer: String, pictureURL: String?, category: Category?, location: String) {
+    init(heading: String, content: String, writer: String, pictureURL: String?, category: Category?, location: String, latitude: Double, longitude: Double) {
         self.heading = heading
         self.content = content
         self.category = category ?? Category.unspecified //Unspecified if given nothing
@@ -49,6 +51,9 @@ struct Article: Codable, Identifiable, Hashable {
         self.writer = writer
         self.location = location
         self.popularity = 0
+        self.latitude = latitude
+        self.longitude = longitude
+        
     }
 }
 
@@ -62,8 +67,9 @@ extension Article {
         let writer = data["writer"] as? String
         let category = data["category"] as? Category
         let location = data["location"] as? String
- 
-        self.init(heading: heading, content: content ?? "", writer: writer ?? "", pictureURL: nil, category: category, location: location ?? "")
+        let latitude = data["latitude"] as? Double
+        let longitude = data["longitude"] as? Double
+        self.init(heading: heading, content: content ?? "", writer: writer ?? "", pictureURL: nil, category: category, location: location ?? "", latitude: latitude ?? 0.0, longitude: longitude ?? 0.0)
     }
 }
 
