@@ -16,44 +16,19 @@ struct MapView: View {
     
     var body: some View {
         NavigationView{
-           //ForEach(articles) { article in
-                Map(coordinateRegion: $manager.region, annotationItems: articles) { location in
-                    
-                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)){
-                        NavigationLink(destination: ArticleView(article: location.self)
-                        ) {
-                            VStack{
-                                Circle()
-                                    .fill(.red)
-                                    .frame(width: 44,height: 44)
-                                Text(location.location)
-                                    .foregroundColor(.red)
-                            }
+            Map(coordinateRegion: $manager.region, annotationItems: articles) { location in
+                MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)){
+                    NavigationLink(destination: ArticleView(article: location.self)) {
+                        VStack{
+                            Circle()
+                                .fill(.red)
+                                .frame(width: 44,height: 44)
+                            Text(location.location)
+                                .foregroundColor(.red)
                         }
                     }
-                    
-        
-                        
-                        /*
-                        NavigationLink(destination: ArticleView(article:article)
-                        ) {
-                            VStack{
-                                Circle()
-                                    .fill(.red)
-                                    .frame(width: 44,height: 44)
-                                Text(location.name)
-                                    .foregroundColor(.red)
-                            }
-                        }
-                         */
-                         
-                    }
-               // }
-               //.onAppear{
-                //    mapAPI.getLocation(adress: article.location, delta: 0.1)
-               // }
-            
-           
+            }
+
         }
         .navigationTitle("Artiklar via karta")
     }

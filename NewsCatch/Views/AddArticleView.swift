@@ -105,10 +105,11 @@ struct AddArticleView: View {
                     if isFocused == false{
                         mapAPI.getLocation(adress: viewModel.locationContent, delta: 0.5)
                         mapAPI.getLocation(adress: viewModel.locationContent, delta: 0.5)
+                        mapAPI.getLocation(adress: viewModel.locationContent, delta: 0.5)
                         print("AddArticle")
                         print(mapAPI.latitude)
                         print(mapAPI.longitude)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             viewModel.latitude = mapAPI.latitude
                             viewModel.longitude = mapAPI.longitude
                         }
