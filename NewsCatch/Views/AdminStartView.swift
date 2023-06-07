@@ -5,12 +5,18 @@
 //  Created by Youssef Azroun on 2023-0-5.
 //
 
-
 import SwiftUI
+import FirebaseAuth
+import Firebase
+import FirebaseStorage
 
 struct AdminStartView: View {
-@State private var showDeleteArticles = false
+    @State private var showDeleteArticles = false
+    var user = Auth.auth().currentUser
+    let db = Firestore.firestore()
 
+
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -27,12 +33,11 @@ struct AdminStartView: View {
                         .clipped()
                         .shadow(color: .white, radius: 10, x: 0, y: 0)
                         .padding([.top, .leading, .trailing], 50)
-                        .transformEffect(/*@START_MENU_TOKEN@*/.identity/*@END_MENU_TOKEN@*/)
+                        .transformEffect(.identity)
                     
                     Text("Admin")
                         .foregroundColor(.white)
-                        .padding(.leading, 300)
-                        .padding(.top, -50)
+                        .font(.title)
                         .bold()
                     Spacer()
                     
@@ -57,6 +62,21 @@ struct AdminStartView: View {
                     }
                     
                     Spacer()
+                    
+                    Button(action: {
+                        print("Sign-out button clicked")
+                        do {
+                            try Auth.auth().signOut()
+                        } catch {
+                            print("Failed to sign out: \(error.localizedDescription)")
+                        }
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
+                    }
+                    .padding(.bottom, 100)
+
                 }
                 .fullScreenCover(isPresented: $showDeleteArticles) {
                     AdminDeleteArticles()
@@ -65,6 +85,7 @@ struct AdminStartView: View {
         }
     }
 }
+
 
 struct AdminStartView_Previews: PreviewProvider {
     static var previews: some View {
