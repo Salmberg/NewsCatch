@@ -27,6 +27,7 @@ struct MapView: View {
                                 .foregroundColor(.red)
                         }
                     }
+                }
             }
 
         }
