@@ -20,6 +20,9 @@ struct ProfileView: View {
     @State var selectedImage: UIImage? = nil
     @State var imageURL: URL? = nil
     @State private var userModel = User(id: "", name: "", username: "", email: "", joined: 0, imageURL: nil)
+    @State private var isShowingImagePicker = false
+    
+    
 
     var body: some View {
         NavigationView {
@@ -35,7 +38,7 @@ struct ProfileView: View {
                         VStack(spacing: 10) {
             
                             Button(action: {
-                                       isAddArticle = true
+                                isShowingImagePicker = true
                                    }) {
                                        KFImage(imageURL)
                                            .resizable()
@@ -54,10 +57,10 @@ struct ProfileView: View {
                                            .padding(.top, 70)
                                    }
                                    .onTapGesture {
-                                       isAddArticle = true
+                                       isShowingImagePicker = true
                                    }
-                                   .sheet(isPresented: $isAddArticle) {
-                                       ImagePickerView2(selectedImage: $selectedImage, imageURL: $imageURL)
+                                   .sheet(isPresented: $isShowingImagePicker) {
+                                       ImagePickerModel(selectedImage: $selectedImage)
                                            .onDisappear {
                                                uploadImage()
                                            }
