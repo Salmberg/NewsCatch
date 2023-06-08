@@ -14,6 +14,7 @@ struct AdminStartView: View {
     @State private var showDeleteArticles = false
     var user = Auth.auth().currentUser
     let db = Firestore.firestore()
+    @Environment(\.presentationMode) var presentationMode
 
 
     
@@ -64,18 +65,19 @@ struct AdminStartView: View {
                     Spacer()
                     
                     Button(action: {
-                        print("Sign-out button clicked")
-                        do {
-                            try Auth.auth().signOut()
-                        } catch {
-                            print("Failed to sign out: \(error.localizedDescription)")
-                        }
-                    }) {
-                        Image(systemName: "square.and.arrow.up")
-                            .font(.system(size: 20))
-                            .foregroundColor(.black)
-                    }
-                    .padding(.bottom, 100)
+                                            print("Sign-out button clicked")
+                                            do {
+                                                try Auth.auth().signOut()
+                                                presentationMode.wrappedValue.dismiss() // Dismiss the view after logout
+                                            } catch {
+                                                print("Failed to sign out: \(error.localizedDescription)")
+                                            }
+                                        }) {
+                                            Image(systemName: "square.and.arrow.up")
+                                                .font(.system(size: 20))
+                                                .foregroundColor(.black)
+                                        }
+                                        .padding(.bottom, 100)
 
                 }
                 .fullScreenCover(isPresented: $showDeleteArticles) {
