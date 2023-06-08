@@ -31,7 +31,11 @@ struct AddArticleView: View {
         VStack {
             TextEditor(text: $viewModel.titleContent)
                 .padding(30)
-                .background(Color(red: 240/255, green: 240/255, blue: 245/255))
+                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.black)
+                                        .shadow(color: .black, radius: 2, x: 0, y: 2)
+                                )
                 .frame(height: 100)
                 .foregroundColor(viewModel.titleContent == "Enter Title..." ? .gray : .black)
                 .onTapGesture {
@@ -42,7 +46,11 @@ struct AddArticleView: View {
             
             TextEditor(text: $viewModel.textContent)
                 .padding(30)
-                .background(Color(red: 240/255, green: 240/255, blue: 245/255))
+                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.white)
+                                        .shadow(color: .black, radius: 2, x: 0, y: 2)
+                                )
                 .foregroundColor(viewModel.textContent == "Enter your article text here..." ? .gray : .black)
                 .onTapGesture {
                     if viewModel.textContent == "Enter your article text here..." {
@@ -70,17 +78,33 @@ struct AddArticleView: View {
                     Text("Amusement")
                 }
             } label: {
-                Image(systemName: "newspaper.circle.fill")
-                Text(catLabel)
+                HStack {
+                                   Image(systemName: "newspaper.circle.fill")
+                                       .foregroundColor(.white)
+                                   Text(catLabel)
+                                      
+                                       .foregroundColor(.white)
+                                       .padding()
+                                       .background(Color.black)
+                                       .border(Color.white, width: 1)
+                                       .cornerRadius(10)
+                               }
             }
             .padding([.bottom, .trailing], 25)
+            
+//                            .background(Color.gray.opacity(0.1))
+                            .cornerRadius(10)
             
             Button(action: {
                 isShowingImagePicker = true
             }) {
                 Text("Add Image")
             }
-            .padding(.bottom, 30)
+            .foregroundColor(.white)
+            .padding()
+            .background(Color.black)
+            .border(Color.white, width: 1)
+            .cornerRadius(10)
 
             
             if let selectedImage = selectedImage {
@@ -92,7 +116,11 @@ struct AddArticleView: View {
             
             TextEditor(text: $viewModel.locationContent)
                 .padding(30)
-                .background(Color(red: 240/255, green: 240/255, blue: 245/255))
+                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.white)
+                                        .shadow(color: .black, radius: 2, x: 0, y: 2)
+                                )
                 .frame(height: 100)
                 .foregroundColor(viewModel.locationContent == "Enter Location..." ? .gray : .black)
                 .onTapGesture {
@@ -126,6 +154,11 @@ struct AddArticleView: View {
                     showingAlert = true
                 }
             }
+            .foregroundColor(.white)
+            .padding()
+            .background(Color.black)
+            .border(Color.white, width: 1)
+            .cornerRadius(10)
             .alert(isPresented: $showingAlert) {
                 Alert(
                     title: Text("Thank you for your submission"),
@@ -136,7 +169,7 @@ struct AddArticleView: View {
                 )
             }
         }
-        .background(Color(red: 240/255, green: 240/255, blue: 245/255))
+        .background(Color.black)
         .sheet(isPresented: $isShowingImagePicker, onDismiss: loadImage) {
             ImagePickerModel(selectedImage: $selectedImage)
         }
@@ -173,5 +206,10 @@ struct AddArticleView: View {
         }
         
         // Perform any necessary operations with the selected image here
+    }
+}
+struct AddArticleView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddArticleView()
     }
 }

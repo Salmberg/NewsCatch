@@ -43,10 +43,11 @@ struct ProfileView: View {
                                        KFImage(imageURL)
                                            .resizable()
                                            .placeholder {
-                                               Image(systemName: "photo")
+                                               Image(systemName: "person.crop.circle")
                                                    .resizable()
                                                    .aspectRatio(contentMode: .fit)
                                                    .frame(height: 120)
+                                                   .foregroundColor(.black)
                                                
                                            }
                                            .aspectRatio(contentMode: .fit)
@@ -138,8 +139,12 @@ struct ProfileView: View {
                                                         .bold()
                                                         .foregroundColor(.white)
                                                         .padding()
-                                                        .background(Color.blue)
+                                                        .background(Color.black)
                                                         .cornerRadius(10)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color.white, lineWidth: 1)
+                                                        )
                                                 }
                                                 .buttonStyle(PlainButtonStyle())
                                             }
@@ -148,7 +153,7 @@ struct ProfileView: View {
                                         }
                                         Spacer()
                                     }
-                                    .background(Color(red: 31/255, green: 59/255, blue: 77/255))
+                                    .background(.black)
                                     .cornerRadius(15)
                                     .frame(width: UIScreen.main.bounds.width * 0.98)
                                 }
@@ -176,6 +181,8 @@ struct ProfileView: View {
                                                     .frame(width: 100, height: 100)
                                                     .cornerRadius(10)
                                                     .padding()
+                                                    
+
                                                 Image("viking")
                                                     .resizable()
                                                     .frame(width: 100, height: 100)
@@ -183,24 +190,28 @@ struct ProfileView: View {
                                                     .padding()
                                             }
                                             Button(action: {
-                                                
                                             }) {
-                                                NavigationLink(destination:MyFavouriteArticlesView()) {
+                                                NavigationLink(destination: MyFavouriteArticlesView()) {
                                                     Text("Se alla")
                                                         .font(.title2)
                                                         .bold()
                                                         .foregroundColor(.white)
                                                         .padding()
-                                                        .background(Color.blue)
+                                                        .background(Color.black)
                                                         .cornerRadius(10)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color.white, lineWidth: 1)
+                                                        )
                                                 }
                                                 .buttonStyle(PlainButtonStyle())
                                             }
 
+
                                         }
                                         Spacer()
                                     }
-                                    .background(Color(red: 31/255, green: 59/255, blue: 77/255))
+                                    .background(.black)
                                     .cornerRadius(15)
                                     .frame(width: UIScreen.main.bounds.width * 0.98)
                                 }
@@ -224,15 +235,19 @@ struct ProfileView: View {
                                                     Image(systemName: "person.crop.circle.fill")
                                                         .font(.system(size: 80))
                                                         .padding(20)
+                                                        .foregroundColor(.white)
                                                     Text("Skribent 1")
                                                         .font(.system(size: 15))
+                                                        .foregroundColor(.white)
                                                 }
                                                 VStack {
                                                     Image(systemName: "person.crop.circle.fill")
                                                         .font(.system(size: 80))
                                                         .padding(20)
+                                                        .foregroundColor(.white)
                                                     Text("Skribent 2")
                                                         .font(.system(size: 15))
+                                                        .foregroundColor(.white)
                                                 }
                                             }
                                             Button(action: {
@@ -244,8 +259,12 @@ struct ProfileView: View {
                                                         .bold()
                                                         .foregroundColor(.white)
                                                         .padding()
-                                                        .background(Color.blue)
+                                                        .background(Color.black)
                                                         .cornerRadius(10)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color.white, lineWidth: 1)
+                                                        )
                                                 }
                                                 .buttonStyle(PlainButtonStyle())
                                             }
@@ -254,7 +273,7 @@ struct ProfileView: View {
                                         }
                                         Spacer()
                                     }
-                                    .background(Color(red: 31/255, green: 59/255, blue: 77/255))
+                                    .background(.black)
                                     .cornerRadius(15)
                                     .frame(width: UIScreen.main.bounds.width * 0.98)
                                 }
@@ -326,7 +345,7 @@ struct ProfileView: View {
                         .padding(.bottom, 70)
                         .padding(.leading, 30)
                         .padding(.trailing, 20)
-                        .background(Color(red: 31/255, green: 59/255, blue: 77/255))
+                        .background(.black)
                         .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 100)
                     }
                 }
