@@ -18,7 +18,9 @@ struct MapView: View {
         NavigationView{
             Map(coordinateRegion: $manager.region, annotationItems: articles) { location in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)){
-                    NavigationLink(destination: ArticleView(article: location.self)) {
+                    NavigationLink(destination: ArticleView(article: location.self)
+                        .navigationBarHidden(true))
+                    {
                         VStack{
                             Circle()
                                 .fill(.red)
